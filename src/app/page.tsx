@@ -22,7 +22,6 @@ export default function Home() {
           cause: "部品の遅延",
           note: "部品メーカーの生産遅延が原因で、納期に間に合わない見込みです。",
         }}
-        isOpen={true}
       />
     </main>
   );
