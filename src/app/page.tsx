@@ -2,19 +2,20 @@
 import type { Case } from "@/types/case";
 import { Card } from "@/components/cases/Card";
 import clsx from "clsx";
-import { NoteIcon } from "@/components/icons/NoteIcon";
+import { SearchInput } from "@/components/toolbar/SearchInput";
 
 export default function Home() {
   return (
-    <main className={clsx("bg-[var(--color-bg)]", "min-h-screen", "p-8")}>
+    <main className={clsx("bg-[var(--color-bg)]", "min-h-screen", "p-8", "flex", "flex-col", "items-center","gap-8")}>
+      <SearchInput className={clsx("mb-8")} />
       <Card
-        CaseItem={{
+        caseItem={{
           id: "1",
           itemName: "商品A",
           itemCode: "A-001",
           dueDate: "2024-07-01",
           replyDate: "2024-06-25",
-          delayDays: 3,
+          delayDays: -999,
           orderCode: "ORD-12345",
           deadline: "",
           quantity: 100,

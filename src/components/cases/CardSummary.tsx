@@ -7,12 +7,12 @@ import { CardHeader } from "@/components/cases/CardHeader";
 import { OpenButton } from "@/components/cases/OpenButton";
 
 type Props = {
-  CaseItem: Case;
+  caseItem: Case;
   isOpen: boolean;
   onClick: () => void;
 };
 
-export const CardSummary = ({ CaseItem, isOpen, onClick }: Props) => {
+export const CardSummary = ({ caseItem, isOpen, onClick }: Props) => {
   return (
     <div
       className={clsx(
@@ -24,12 +24,12 @@ export const CardSummary = ({ CaseItem, isOpen, onClick }: Props) => {
         "rounded-lg",
       )}
     >
-      <DelayBadge delayDays={CaseItem.delayDays} />
+      <DelayBadge delayDays={caseItem.delayDays} />
       <CardHeader
-        itemName={CaseItem.itemName}
-        itemCode={CaseItem.itemCode}
-        dueDate={CaseItem.dueDate}
-        replyDate={CaseItem.replyDate}
+        itemName={caseItem.itemName}
+        itemCode={caseItem.itemCode}
+        dueDate={caseItem.dueDate}
+        replyDate={caseItem.replyDate}
       />
       <OpenButton isOpen={isOpen} onClick={onClick} />
     </div>

@@ -1,14 +1,11 @@
 "use client";
 
-import type { Case } from "@/types/case";
 import { formatDate } from "@/lib/utils/formatDate";
 import clsx from "clsx";
-import { useState } from "react";
 
 import { AmountIcon } from "@/components/icons/AmountIcon";
 import { DeadlineIcon } from "@/components/icons/DeadlineIcon";
 import { FolderIcon } from "@/components/icons/FolderIcon";
-import { NoteIcon } from "@/components/icons/NoteIcon";
 import { ReceiptIcon } from "@/components/icons/ReceiptIcon";
 import { WarehouseIcon } from "@/components/icons/WarehouseIcon";
 
@@ -19,6 +16,21 @@ type Props = {
   deadline: string; //限界納期
   cause: string; //起因名
 };
+type DetailRowProps = {
+  icon: React.ReactNode;
+  label: string;
+  value: React.ReactNode;
+};
+
+const DetailRow = ({ icon, label, value }: DetailRowProps) => {
+  return (
+    <>
+      <div className="flex items-center">{icon}</div>
+      <p className="flex items-center text-sm">{label}</p>
+      <p className="flex items-center text-sm">{value}</p>
+    </>
+  );
+};
 
 export const CardDetail = ({
   orderCode,
@@ -27,65 +39,57 @@ export const CardDetail = ({
   deadline,
   cause,
 }: Props) => {
+  const detailRows = [
+    {
+      icon: <ReceiptIcon className="size-[20px]" />,
+      label: "注文番号",
+      value: orderCode,
+    },
+    {
+      icon: <AmountIcon className="size-[20px]" />,
+      label: "数量",
+      value: (
+        <>
+          {quantity}
+          <span className="ml-1 text-xs">pc</span>
+        </>
+      ),
+    },
+    {
+      icon: <WarehouseIcon className="size-[20px]" />,
+      label: "納品先",
+      value: warehouse,
+    },
+    {
+      icon: <DeadlineIcon className="size-[20px]" />,
+      label: "限界",
+      value: formatDate(deadline),
+    },
+    {
+      icon: <FolderIcon className="size-[20px]" />,
+      label: "起因名",
+      value: cause,
+    },
+  ];
+
   return (
     <div
       className={clsx(
         "grid",
         "grid-cols-[auto_1fr_4fr]",
-        "grid-rows-5",
         "gap-2",
         "p-4",
         "mx-4",
       )}
     >
-      <div className="flex items-center">
-        <ReceiptIcon className="size-[20px]" />
-      </div>
-      <div>
-        <p className="flex items-center text-sm">注文番号</p>
-      </div>
-      <div>
-        <p className="flex items-center text-sm">{orderCode}</p>
-      </div>
-      <div className="flex items-center">
-        <AmountIcon className="size-[20px]" />
-      </div>
-      <div>
-        <p className="flex items-center text-sm">数量</p>
-      </div>
-      <div>
-        <p className="flex items-center text-sm">
-          {quantity}
-          <span className="ml-1 text-xs">pc</span>
-        </p>
-      </div>
-      <div className="flex items-center">
-        <WarehouseIcon className="size-[20px]" />
-      </div>
-      <div>
-        <p className="flex items-center text-sm">納品先</p>
-      </div>
-      <div>
-        <p className="flex items-center text-sm">{warehouse}</p>
-      </div>
-      <div className="flex items-center">
-        <DeadlineIcon className="size-[20px]" />
-      </div>
-      <div>
-        <p className="flex items-center text-sm">限界</p>
-      </div>
-      <div>
-        <p className="flex items-center text-sm">{formatDate(deadline)}</p>
-      </div>
-      <div className="flex items-center">
-        <FolderIcon className="size-[20px]" />
-      </div>
-      <div>
-        <p className="flex items-center text-sm">起因名</p>
-      </div>
-      <div>
-        <p className="flex items-center text-sm">{cause}</p>
-      </div>
+      {detailRows.map((row) => (
+        <DetailRow
+          key={row.label}
+          icon={row.icon}
+          label={row.label}   
+          value={row.value}
+        />
+      ))}
     </div>
   );
 };

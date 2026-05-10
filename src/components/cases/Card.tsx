@@ -8,10 +8,10 @@ import { CardDetail } from "@/components/cases/CardDetail";
 import { NoteSec } from "@/components/cases/NoteSec";
 
 type Props = {
-  CaseItem: Case;
+  caseItem: Case;
 };
 
-export const Card = ({ CaseItem }: Props) => {
+export const Card = ({ caseItem }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -20,26 +20,41 @@ export const Card = ({ CaseItem }: Props) => {
         "w-fit",
         "grid",
         "grid-rows-[auto_auto_auto]",
-        "p-4",
+        "p-2",
         "rounded-lg",
         "bg-[var(--color-bg-sub)]",
+        "shadow-md",
+        "transition-shadow",
+        "hover:shadow-lg",
+        "duration-300",
       )}
     >
       <CardSummary
-        Cases={CaseItem}
+        caseItem={caseItem}
         isOpen={isOpen}
         onClick={() => setIsOpen((prev) => !prev)}
       />
-      {isOpen && (
-        <CardDetail
-          orderCode={CaseItem.orderCode}
-          quantity={CaseItem.quantity}
-          warehouse={CaseItem.warehouse}
-          deadline={CaseItem.deadline}
-          cause={CaseItem.cause}
-        />
-      )}
-      {isOpen && <NoteSec note={CaseItem.note} />}
+      <div
+        className={clsx(
+          "grid",
+          "overflow-hidden",
+          "transition-[grid-template-rows,opacity]",
+          "duration-300",
+          "ease-out",
+          isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0",
+        )}
+      >
+        <div className="min-h-0">
+          <CardDetail
+            orderCode={caseItem.orderCode}
+            quantity={caseItem.quantity}
+            warehouse={caseItem.warehouse}
+            deadline={caseItem.deadline}
+            cause={caseItem.cause}
+          />
+          <NoteSec note={caseItem.note} />
+        </div>
+      </div>
     </div>
   );
 };
