@@ -3,7 +3,8 @@ import type { Case } from "@/types/case";
 import { Card } from "@/components/cases/Card";
 import clsx from "clsx";
 import { SearchInput } from "@/components/toolbar/SearchInput";
-const [searchText, setSearchText] = useState("");
+import { useState } from "react";
+import { doesCaseMatchSearch } from "@/lib/utils/search";
 
 const mockCases: Case[] = [
   {
@@ -37,7 +38,7 @@ const mockCases: Case[] = [
   {
     id: "3",
     itemName: "商品C",
-    itemCode: "C-203",
+    itemCode: "C-0701",
     dueDate: "2024-07-15",
     replyDate: "2024-07-10",
     delayDays: 3,
@@ -51,6 +52,12 @@ const mockCases: Case[] = [
 ];
 
 export default function Home() {
+  const [searchText, setSearchText] = useState("");
+
+  const filteredCases = mockCases.filter((caseItem) => {
+    return doesCaseMatchSearch(caseItem, searchText);
+  });
+
   return (
     <main
       className={clsx(
@@ -65,7 +72,7 @@ export default function Home() {
     >
       <SearchInput searchText={searchText} onSearchTextChange={setSearchText} />
       <div className="flex w-full max-w-[800px] flex-col gap-4">
-        {mockCases.map((caseItem) => (
+        {filteredCases.map((caseItem) => (
           <Card key={caseItem.id} caseItem={caseItem} />
         ))}
       </div>

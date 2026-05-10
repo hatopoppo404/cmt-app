@@ -4,11 +4,11 @@ import { SearchIcon } from "@/components/icons/SearchIcon";
 import clsx from "clsx";
 
 type Props = {
-  value?: string;
-  onChange?: (value: string) => void;
+  searchText?: string;
+  onSearchTextChange?: (value: string) => void;
 };
 
-export const SearchInput = ({ value, onChange }: Props) => {
+export const SearchInput = ({ searchText, onSearchTextChange }: Props) => {
   return (
     <div
       className={clsx(
@@ -29,8 +29,8 @@ export const SearchInput = ({ value, onChange }: Props) => {
       <input
         type="text"
         placeholder="キーワードで検索"
-        value={value}
-        onChange={(e) => onChange && onChange(e.target.value)}
+        value={searchText}
+        onChange={(e) => onSearchTextChange && onSearchTextChange(e.target.value)}
         className={clsx(
           "flex-1",
           "outline-none",
