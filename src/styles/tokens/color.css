@@ -27,6 +27,7 @@
   --purple-700: #0c1021;
 
   --white: #f8f6f1;
+  --white-sub: #f4ecd8;
   --black: #002929;
 
   --gray-100: #cac6bf;
@@ -39,7 +40,7 @@
   --color-bg: var(--white);
   --color-bg-inverse: var(--black);
 
-  --color-bg-sub: var(--gray-100);
+  --color-bg-sub: var(--white-sub);
   --color-bg-sub-inverse: var(--gray-700);
 
   /* text */

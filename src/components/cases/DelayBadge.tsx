@@ -50,7 +50,6 @@ export const DelayBadge = ({ delayDays }: DelayBadgeProps) => {
       <div className={clsx("col-span-2 flex items-center justify-center")}>
         <span className="text-xl font-bold">{days}</span>
       </div>
-      
     </div>
   );
 };

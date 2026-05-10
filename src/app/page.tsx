@@ -1,19 +1,29 @@
 "use client";
-import { DelayBadge } from "../components/cases/DelayBadge";
-import { CardHeader } from "../components/cases/CardHeader";
-import { OpenButton } from "../components/cases/OpenButton";
+import type { Case } from "@/types/case";
+import { Card } from "@/components/cases/Card";
+import clsx from "clsx";
+import { NoteIcon } from "@/components/icons/NoteIcon";
 
 export default function Home() {
   return (
-    <main className="flex flex-row gap-4 p-8">
-      <DelayBadge delayDays={-2} />
-      <CardHeader
-        itemName="COVER,FRONT(CDA)"
-        itemCode="3B10-645521-11"
-        dueDate="2023-10-01"
-        replyDate="2023-10-08"
+    <main className={clsx("bg-[var(--color-bg)]", "min-h-screen", "p-8")}>
+      <Card
+        CaseItem={{
+          id: "1",
+          itemName: "商品A",
+          itemCode: "A-001",
+          dueDate: "2024-07-01",
+          replyDate: "2024-06-25",
+          delayDays: 3,
+          orderCode: "ORD-12345",
+          deadline: "",
+          quantity: 100,
+          warehouse: "東京倉庫",
+          cause: "部品の遅延",
+          note: "部品メーカーの生産遅延が原因で、納期に間に合わない見込みです。",
+        }}
+        isOpen={true}
       />
-      <OpenButton />
     </main>
   );
 }

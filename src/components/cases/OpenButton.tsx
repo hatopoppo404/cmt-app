@@ -3,19 +3,16 @@ import type { Case } from "@/types/case";
 import { formatDate } from "@/lib/utils/formatDate";
 import { ArrowIcon } from "@/components/icons/ArrowIcon";
 import clsx from "clsx";
-import { useState } from "react";
 
 type OpenButtonProps = {
+  isOpen: boolean;
   onClick: () => void;
 };
 
-export const OpenButton = () => {
-  const [isOpen, setIsOpen] = useState(false);
+export const OpenButton = ({ isOpen, onClick }: OpenButtonProps) => {
   return (
     <button
-      onClick={() => {
-        setIsOpen((prev) => !prev);
-      }}
+      onClick={onClick}
       className={clsx(
         "flex",
         "items-center",
