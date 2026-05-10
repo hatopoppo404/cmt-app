@@ -1,0 +1,27 @@
+:root {
+    /* raw shadow tokens */
+    --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.05);
+
+    --shadow-2:
+        0 2px 4px rgba(0, 0, 0, 0.06),
+        0 4px 8px rgba(0, 0, 0, 0.04);
+
+    --shadow-3:
+        0 4px 8px rgba(0, 0, 0, 0.08),
+        0 8px 16px rgba(0, 0, 0, 0.06);
+
+    --shadow-4:
+        0 8px 16px rgba(0, 0, 0, 0.10),
+        0 16px 32px rgba(0, 0, 0, 0.08);
+
+
+    /* semantic shadow tokens */
+    --shadow-rest: var(--shadow-1);
+    --shadow-hover: var(--shadow-2);
+    --shadow-raised: var(--shadow-3);
+    --shadow-floating: var(--shadow-4);
+}
+
+[data-theme="dark"] {
+    --shadow-raised: 0 0 0 1px rgba(255, 255, 255, 0.05);
+}

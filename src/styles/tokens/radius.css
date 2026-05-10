@@ -1,0 +1,22 @@
+:root {
+
+    /* raw */
+    --radius-none: 0;
+    --radius-sm: 4px;
+    --radius-md: 8px;
+
+    --radius-lg: 12px;
+
+    --radius-xl: 24px;
+    --radius-2xl: 40px;
+    --radius-3xl: 60px;
+
+    --radius-pill: 9999px;
+
+    /* semantic radius tokens */
+    --radius-interactive: var(--radius-md);
+    --radius-card: var(--radius-xl);
+    --radius-modal: var(--radius-xl);
+    --radius-wrapper: var(--radius-2xl);
+    --radius-container: var(--radius-3xl);
+}

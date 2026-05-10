@@ -1,0 +1,102 @@
+:root {
+    /* raw */
+    /* -3,-1,0,+1 */
+    --red-100: #f4d1d4;
+    --red-400: #d65661;
+    --red-500: #b32c38;
+    --red-700: #771c24;
+
+    --blue-100: #ceebf2;
+    --blue-400: #54b9d3;
+    --blue-500: #2d93ad;
+    --blue-700: #1d6071;
+
+    --green-100: #dbe5d5;
+    --green-400: #afc6a3;
+    --green-500: #88ab75;
+    --green-700: #61814f;
+
+    --yellow-100: #f8da9c;
+    --yellow-400: #fdbd3f;
+    --yellow-500: #f0a202;
+    --yellow-700: #b67f10;
+
+    --purple-100: #8a9ad5;
+    --purple-400: #344892;
+    --purple-500: #202c59;
+    --purple-700: #0c1021;
+
+    --white: #f8f6f1;
+    --black: #002929;
+
+    --gray-100: #cac6bf;
+    --gray-500: #909494;
+    --gray-700: #616d6d;
+
+    /* semantic */
+
+    /* background */
+    --color-bg: var(--white);
+    --color-bg-inverse: var(--black);
+
+    --color-bg-sub: var(--gray-100);
+    --color-bg-sub-inverse: var(--gray-700);
+
+    /* text */
+    --color-text: var(--gray-700);
+    --color-text-inverse: var(--gray-100);
+
+    --color-text-strong: var(--black);
+    --color-text-strong-inverse: var(--white);
+
+    --color-text-muted: var(--gray-500);
+
+    /* border */
+    --color-border: var(--gray-500);
+
+    /* primary */
+    --color-primary: var(--yellow-500);
+    --color-primary-hover: var(--yellow-700);
+    --color-primary-active: var(--yellow-700);
+
+    /* secondary */
+    --color-secondary: var(--yellow-100);
+    --color-secondary-hover: var(--yellow-400);
+    --color-secondary-active: var(--yellow-400);
+
+    /* state */
+    --color-success: var(--green-500);
+    --color-error: var(--red-500);
+    --color-warning: var(--yellow-500);
+}
+
+[data-theme="dark"] {
+    /* background */
+    --color-bg: var(--black);
+    --color-bg-inverse: var(--white);
+
+    --color-bg-sub: var(--gray-700);
+    --color-bg-sub-inverse: var(--gray-100);
+
+    /* text */
+    --color-text: var(--gray-100);
+    --color-text-inverse: var(--gray-700);
+
+    --color-text-strong: var(--white);
+    --color-text-strong-inverse: var(--black);
+
+    --color-text-muted: var(--gray-500);
+
+    /* border */
+    --color-border: var(--gray-500);
+
+    /* primary */
+    --color-primary: var(--purple-400);
+    --color-primary-hover: var(--purple-100);
+    --color-primary-active: var(--purple-100);
+
+    /* state */
+    --color-success: var(--green-400);
+    --color-error: var(--red-400);
+    --color-warning: var(--yellow-400);
+}
