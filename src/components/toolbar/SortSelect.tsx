@@ -20,6 +20,7 @@ export const SortSelect = (
     const [appliedSortKey, setAppliedSortKey] = useState<SortKey>("none");
     const options = [
         { value: "none", label: "並び替えなし", },
+        { value: "registered", label: "登録順", },
         { value: "delayDays", label: "遅延日数", },
         { value: "dueDate", label: "希望納期", },
         { value: "replyDate", label: "回答納期", },
