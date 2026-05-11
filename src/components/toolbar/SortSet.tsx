@@ -1,37 +1,51 @@
 "use client";
 
-import clsx from "clsx";
-import { useState } from "react";
-
-import type { SortKey } from "@/types/sortKey";
+import type { SortKey } from "@/lib/sort/sortOptions";
 import { SortSelect } from "@/components/toolbar/SortSelect";
 import { SortButton } from "@/components/toolbar/SortButton";
+import clsx from "clsx";
+
 
 type Preps = {
-
+    sortKey: SortKey | null;
+    onSortKeyChange: (value: SortKey | null) => void;
+    onApplySort: () => void;
 };
 
-export const SortSet = ({ }: Preps) => {
+export const SortSet = ({
+    sortKey,
+    onSortKeyChange,
+    onApplySort,
+}: Preps) => {
     return (
-        <div className={clsx(
-            "pl-2",
-            "pr-2",
-            "rounded-full",
+        <form
+            onSubmit={(e)=>{
+                e.preventDefault();
+                onApplySort();
+            }}
+            className={clsx(
+                "pl-2",
+                "pr-2",
+                "rounded-full",
 
-            "bg-[var(--color-bg-sub)]",
-            "flex",
-            "items-center",
-            "gap-4",
+                "bg-[var(--color-bg-sub)]",
+                "flex",
+                "items-center",
+                "gap-4",
 
-            "transition-transform",
-            "hover:scale-101",
-            "active:scale-100",
-            "duration-200",
-        )}>
-            <SortSelect keys="none" className={clsx(
-                "opacity-0",
-            )}/>
-            <SortButton onClick={() => { }} />
-        </div>
+                "transition-transform",
+                "hover:scale-101",
+                "active:scale-100",
+                "duration-200",
+            )}
+        >
+
+            <SortSelect
+                sortKey={sortKey}
+                onSortKeyChange={onSortKeyChange}
+            />
+
+            <SortButton />
+        </form>
     );
 };

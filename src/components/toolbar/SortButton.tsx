@@ -3,14 +3,10 @@
 import { SortAZIcon } from "@/components/icons/SortAZIcon";
 import clsx from "clsx";
 
-type ButtonProps = {
-    onClick: () => void;
-};
-
-export const SortButton = ({ onClick }: ButtonProps) => {
+export const SortButton = () => {
     return (
         <button
-            onClick={onClick}
+            type="submit"
             className={clsx(
                 "flex",
                 "items-center",

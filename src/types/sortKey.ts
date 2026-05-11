@@ -1,6 +1,5 @@
 export type SortKey =
-    | "none"
-    | "registered"
+    | "id"
     | "delayDays"
     | "dueDate"
     | "replyDate"

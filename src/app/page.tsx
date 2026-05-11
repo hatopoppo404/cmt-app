@@ -1,6 +1,7 @@
 "use client";
 import type { Case } from "@/types/case";
-import type { SortKey } from "@/types/sortKey";
+import type { SortKey } from "@/lib/sort/sortOptions";
+import { sortCases } from "@/lib/sort/sortCases";
 import { Card } from "@/components/cases/Card";
 import clsx from "clsx";
 import { SearchInput } from "@/components/toolbar/SearchInput";
@@ -18,7 +19,7 @@ const mockCases: Case[] = [
     replyDate: "2024-06-25",
     delayDays: -9,
     orderCode: "ORD-12345",
-    deadline: "2024-06-28",
+    deadline: "2024-08-28",
     quantity: 100,
     warehouse: "東京倉庫",
     cause: "部品の遅延",
@@ -56,10 +57,16 @@ const mockCases: Case[] = [
 
 export default function Home() {
   const [searchText, setSearchText] = useState("");
+  const [sortKey, setSortKey] = useState<SortKey | null>(null);
+  const [appliedSortKey, setAppliedSortKey] = useState<SortKey | null>(null);
 
   const filteredCases = mockCases.filter((caseItem) => {
     return doesCaseMatchSearch(caseItem, searchText);
   });
+  const sortedCases = sortCases(
+    filteredCases,
+    appliedSortKey,
+  );
 
   return (
     <main
@@ -76,10 +83,14 @@ export default function Home() {
     >
       <div className="flex gap-6">
         <SearchInput searchText={searchText} onSearchTextChange={setSearchText} />
-        <SortSet />
+        <SortSet
+          sortKey={sortKey}
+          onSortKeyChange={setSortKey}
+          onApplySort={() => setAppliedSortKey(sortKey)}
+        />
       </div>
       <div className="flex w-full max-w-[800px] flex-col gap-4">
-        {filteredCases.map((caseItem) => (
+        {sortedCases.map((caseItem) => (
           <Card key={caseItem.id} caseItem={caseItem} />
         ))}
       </div>
