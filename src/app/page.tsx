@@ -94,7 +94,10 @@ export default function Home() {
         />
       </div>
       <div className="flex w-full max-w-[800px] flex-col gap-4">
-        <CaseList cases={sortedCases} />
+        <CaseList
+          cases={sortedCases}
+          onCasesChange={setCases}
+        />
       </div>
     </main>
   );

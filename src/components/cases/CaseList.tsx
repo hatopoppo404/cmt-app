@@ -5,24 +5,52 @@ import { DndContext } from "@dnd-kit/core";
 import {
     SortableContext,
     verticalListSortingStrategy,
+    arrayMove,
 } from "@dnd-kit/sortable";
 import { useState } from "react";
 
 type Props = {
     cases: Case[];
+    onCasesChange: (
+        cases: Case[],
+    ) => void;
 };
 
-export const CaseList = ({ cases }: Props) => {
+export const CaseList = ({
+    cases,
+    onCasesChange,
+}: Props) => {
     const [activeId, setActiveId] = useState<string | null>(null);
     return (
         <DndContext
             onDragStart={(e) => {
                 setActiveId(String(e.active.id));
             }}
-            onDragEnd={()=>{
+            onDragEnd={(event) => {
                 setActiveId(null);
+
+                const {
+                    active,
+                    over,
+                } = event;
+                if (!over) return;
+                if (active.id === over.id) return;
+                const oldIndex = cases.findIndex(
+                    (caseItem) =>
+                        caseItem.id === active.id,
+                );
+                const newIndex = cases.findIndex(
+                    (caseItem) =>
+                        caseItem.id === over.id,
+                );
+                const reoderedCases = arrayMove(
+                    cases,
+                    oldIndex,
+                    newIndex,
+                );
+                onCasesChange(reoderedCases);
             }}
-            onDragCancel={()=>{
+            onDragCancel={() => {
                 setActiveId(null);
             }}
         >
