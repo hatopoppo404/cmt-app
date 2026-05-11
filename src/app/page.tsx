@@ -1,10 +1,13 @@
 "use client";
 import type { Case } from "@/types/case";
+import type { SortKey } from "@/types/sortKey";
 import { Card } from "@/components/cases/Card";
 import clsx from "clsx";
 import { SearchInput } from "@/components/toolbar/SearchInput";
+import { SortSelect } from "@/components/toolbar/SortSelect";
 import { useState } from "react";
 import { doesCaseMatchSearch } from "@/lib/utils/search";
+
 
 const mockCases: Case[] = [
   {
@@ -71,6 +74,7 @@ export default function Home() {
       )}
     >
       <SearchInput searchText={searchText} onSearchTextChange={setSearchText} />
+      <SortSelect keys="none"/>
       <div className="flex w-full max-w-[800px] flex-col gap-4">
         {filteredCases.map((caseItem) => (
           <Card key={caseItem.id} caseItem={caseItem} />

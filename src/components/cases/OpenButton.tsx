@@ -20,7 +20,7 @@ export const OpenButton = ({ isOpen, onClick }: OpenButtonProps) => {
         "font-bold",
         "text-[var(--color-gray-500)]",
 
-        "bg-[var(--color-gray-100)]",
+        "bg-[var(--color-bg)]",
         "p-2",
         "rounded-md",
 
