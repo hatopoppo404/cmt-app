@@ -74,7 +74,9 @@ export default function Home() {
       )}
     >
       <SearchInput searchText={searchText} onSearchTextChange={setSearchText} />
-      <SortSelect keys="none"/>
+      <SortSelect
+        // keys="none"
+      />
       <div className="flex w-full max-w-[800px] flex-col gap-4">
         {filteredCases.map((caseItem) => (
           <Card key={caseItem.id} caseItem={caseItem} />

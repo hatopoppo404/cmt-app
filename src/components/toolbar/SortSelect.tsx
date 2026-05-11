@@ -9,9 +9,11 @@ type Props = {
     keys: SortKey;
 };
 
-export const SortSelect = ({
-    keys,
-}: Props) => {
+export const SortSelect = (
+    //     {
+    //     keys,
+    // }: Props
+) => {
     const [sortKey, setSortKey] = useState<SortKey>("none");
     const [appliedSortKey, setAppliedSortKey] = useState<SortKey>("none");
     const options = [
@@ -33,8 +35,8 @@ export const SortSelect = ({
                 "appearance-none",
                 "select-none",
                 "cursor-pointer",
+                "bg-[var(--color-bg-sub)]",
                 "focus:outline-none",
-                "focus:border-#2d2d2d",
             )}
             value={sortKey}
             onChange={(e) => setSortKey(e.target.value as SortKey)}
