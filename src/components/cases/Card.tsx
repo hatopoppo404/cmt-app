@@ -6,6 +6,7 @@ import { useState } from "react";
 import { CardSummary } from "@/components/cases/CardSummary";
 import { CardDetail } from "@/components/cases/CardDetail";
 import { NoteSec } from "@/components/cases/NoteSec";
+import { text } from "stream/consumers";
 
 type Props = {
   caseItem: Case;
@@ -27,6 +28,8 @@ export const Card = ({ caseItem }: Props) => {
         "transition-shadow",
         "hover:shadow-lg",
         "duration-300",
+
+        "text-(--color-text)",
       )}
     >
       <CardSummary

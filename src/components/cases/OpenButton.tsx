@@ -31,7 +31,8 @@ export const OpenButton = ({ isOpen, onClick }: OpenButtonProps) => {
         className={clsx(
           "size-[24px]",
           "transition-transform",
-          isOpen && "scale-y-[-1]",
+          "duration-500",
+          isOpen && "rotate-180",
         )}
       />
     </button>

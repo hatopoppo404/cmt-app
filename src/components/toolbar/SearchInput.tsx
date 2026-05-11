@@ -60,6 +60,7 @@ export const SearchButton = () => {
         "hover:scale-105",
         "active:scale-95",
         "duration-200",
+        "aspect-square",
       )}
     >
       <SearchIcon className="size-[24px]" />

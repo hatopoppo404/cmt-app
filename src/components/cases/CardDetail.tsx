@@ -79,14 +79,14 @@ export const CardDetail = ({
         "grid-cols-[auto_1fr_4fr]",
         "gap-2",
         "p-4",
-        "mx-4",
+        "ml-4",
       )}
     >
       {detailRows.map((row) => (
         <DetailRow
           key={row.label}
           icon={row.icon}
-          label={row.label}   
+          label={row.label}
           value={row.value}
         />
       ))}

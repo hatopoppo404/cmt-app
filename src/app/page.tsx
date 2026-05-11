@@ -4,7 +4,7 @@ import type { SortKey } from "@/types/sortKey";
 import { Card } from "@/components/cases/Card";
 import clsx from "clsx";
 import { SearchInput } from "@/components/toolbar/SearchInput";
-import { SortSelect } from "@/components/toolbar/SortSelect";
+import { SortSet } from "@/components/toolbar/SortSet";
 import { useState } from "react";
 import { doesCaseMatchSearch } from "@/lib/utils/search";
 
@@ -65,6 +65,7 @@ export default function Home() {
     <main
       className={clsx(
         "bg-[var(--color-bg)]",
+        "bg-[var(--color-gray-500)]",
         "min-h-screen",
         "p-8",
         "flex",
@@ -73,10 +74,10 @@ export default function Home() {
         "gap-8",
       )}
     >
-      <SearchInput searchText={searchText} onSearchTextChange={setSearchText} />
-      <SortSelect
-        // keys="none"
-      />
+      <div className="flex gap-6">
+        <SearchInput searchText={searchText} onSearchTextChange={setSearchText} />
+        <SortSet />
+      </div>
       <div className="flex w-full max-w-[800px] flex-col gap-4">
         {filteredCases.map((caseItem) => (
           <Card key={caseItem.id} caseItem={caseItem} />
