@@ -17,7 +17,10 @@ export const mockCases: Case[] = [
         note: "部品メーカーの生産遅延が原因で、納期に間に合わない見込みです。",
         sortOrder: 0,
         createdAt: "2026-05-01",
-        updatedAt: "2026-05-01"
+        updatedAt: "2026-05-01",
+        status: "active",
+        archivedAt: null,
+        deletedAt: null
     },
     {
         id: "2",
@@ -34,7 +37,10 @@ export const mockCases: Case[] = [
         note: "台風の影響で輸送便に遅れが発生しています。",
         sortOrder: 1,
         createdAt: "2026-05-01",
-        updatedAt: "2026-05-11"
+        updatedAt: "2026-05-11",
+        status: "active",
+        archivedAt: null,
+        deletedAt: null
     },
     {
         id: "3",
@@ -51,6 +57,9 @@ export const mockCases: Case[] = [
         note: "現在のところ大きな問題はなく、予定通り進行しています。",
         sortOrder: 2,
         createdAt: "2026-05-01",
-        updatedAt: "2026-05-09"
+        updatedAt: "2026-05-09",
+        status: "active",
+        archivedAt: null,
+        deletedAt: null
     },
 ];

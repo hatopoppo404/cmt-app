@@ -13,12 +13,19 @@ import { mockCases } from "@/features/cases/data/mockCases";
 
 
 export default function Home() {
-  const [cases, setCases] = useState<Case[]>(mockCases);
+
+  const [cases, setCases] = useState<Case[]>(() => {
+    return [...mockCases].sort((a, b) => a.sortOrder - b.sortOrder);
+  });
+
   const [searchText, setSearchText] = useState("");
   const [sortKey, setSortKey] = useState<SortKey | null>(null);
   const [appliedSortKey, setAppliedSortKey] = useState<SortKey | null>(null);
 
-  const filteredCases = cases.filter((caseItem) => {
+  const visibleCases = cases.filter((caseItem) => {
+    return caseItem.status === "active" && caseItem.deletedAt === null;
+  });
+  const filteredCases = visibleCases.filter((caseItem) => {
     return doesCaseMatchSearch(caseItem, searchText);
   });
   const sortedCases = sortCases(
