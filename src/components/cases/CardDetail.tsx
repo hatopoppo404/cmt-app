@@ -78,8 +78,9 @@ export const CardDetail = ({
         "grid",
         "grid-cols-[auto_1fr_4fr]",
         "gap-2",
+        "w-100%",
         "p-4",
-        "ml-4",
+        "mx-4",
       )}
     >
       {detailRows.map((row) => (

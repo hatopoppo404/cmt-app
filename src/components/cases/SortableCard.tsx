@@ -3,6 +3,7 @@
 import type { Case } from "@/types/case";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { DragHandle } from "@/components/cases/DragHandle";
 
 import { Card } from "./Card";
 import clsx from "clsx";
@@ -40,14 +41,18 @@ export const SortableCard = ({
             ref={setNodeRef}
             style={style}
             {...attributes}
-            {...listeners}
             className={clsx(
                 "relative",
                 "transition-opacity",
-                isActive && "z-999",
+                isActive && "z-999 opacity-0",
                 isOtherDragging && "opacity-70",
+                "w-fit",
             )}
         >
+            <DragHandle
+                attributes={attributes}
+                listeners={listeners}
+            />
             <Card caseItem={caseItem} />
         </div>
     );

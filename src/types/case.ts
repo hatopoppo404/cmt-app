@@ -1,5 +1,9 @@
 export type Case = {
   id: string; //ID
+  sortOrder: number;
+  createdAt: string;
+  updatedAt: string;
+
   delayDays: number; //遅延日数
   itemName: string; //品目英名
   itemCode: string; //品目コード

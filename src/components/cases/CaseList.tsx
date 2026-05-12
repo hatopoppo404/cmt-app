@@ -1,7 +1,10 @@
 import type { Case } from "@/types/case";
 import { Card } from "@/components/cases/Card";
 import { SortableCard } from "./SortableCard";
-import { DndContext } from "@dnd-kit/core";
+import {
+    DndContext,
+    DragOverlay,
+} from "@dnd-kit/core";
 import {
     SortableContext,
     verticalListSortingStrategy,
@@ -21,6 +24,9 @@ export const CaseList = ({
     onCasesChange,
 }: Props) => {
     const [activeId, setActiveId] = useState<string | null>(null);
+    const activeCase = cases.find(
+        (caseItem) => caseItem.id === activeId,
+    );
     return (
         <DndContext
             onDragStart={(e) => {
@@ -43,12 +49,16 @@ export const CaseList = ({
                     (caseItem) =>
                         caseItem.id === over.id,
                 );
-                const reoderedCases = arrayMove(
+                const reorderedCases = arrayMove(
                     cases,
                     oldIndex,
                     newIndex,
-                );
-                onCasesChange(reoderedCases);
+                ).map((caseItem, index) => ({
+                    ...caseItem,
+                    sortOrder: index,
+                    updatedAt: new Date().toISOString(),
+                }));
+                onCasesChange(reorderedCases);
             }}
             onDragCancel={() => {
                 setActiveId(null);
@@ -72,6 +82,12 @@ export const CaseList = ({
                     ))}
                 </div>
             </SortableContext>
+            <DragOverlay>
+                {activeCase ? (
+                    <div className="scale-105 shadow-2xl">
+                        <Card caseItem={activeCase} />
+                    </div>) : null}
+            </DragOverlay>
         </DndContext>
     );
 };

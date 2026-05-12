@@ -24,7 +24,7 @@ export const NoteSec = ({ note }: Props) => {
 
         "bg-[var(--white)]",
         "rounded-md",
-        "w-[360px]",
+        "w-100%",
       )}
     >
       <div className="flex items-center">

@@ -22,6 +22,7 @@ export const CardSummary = ({ caseItem, isOpen, onClick }: Props) => {
         "gap-4",
         "p-4",
         "rounded-lg",
+        "pt-3",
       )}
     >
       <DelayBadge delayDays={caseItem.delayDays} />

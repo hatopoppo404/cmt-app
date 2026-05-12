@@ -7,7 +7,7 @@ type SortOption = {
 
 export const sortOptions = [
     {
-        value: "id",
+        value: "sortOrder",
         label: "登録順",
     },
     {

@@ -7,6 +7,7 @@ import { CardSummary } from "@/components/cases/CardSummary";
 import { CardDetail } from "@/components/cases/CardDetail";
 import { NoteSec } from "@/components/cases/NoteSec";
 import { text } from "stream/consumers";
+import { m } from "framer-motion";
 
 type Props = {
   caseItem: Case;
@@ -18,10 +19,9 @@ export const Card = ({ caseItem }: Props) => {
   return (
     <div
       className={clsx(
-        "w-fit",
+        "w-[400px]",
         "grid",
         "grid-rows-[auto_auto_auto]",
-        "p-2",
         "rounded-lg",
         "bg-[var(--color-bg-sub)]",
         "shadow-md",
