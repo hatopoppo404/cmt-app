@@ -3,9 +3,9 @@ import type { Case } from "@/types/case";
 import clsx from "clsx";
 import { useState } from "react";
 
-import { CardSummary } from "@/components/cases/CardSummary";
-import { CardDetail } from "@/components/cases/CardDetail";
-import { NoteSec } from "@/components/cases/NoteSec";
+import { CardSummary } from "@/features/cases/components/CardSummary";
+import { CardDetail } from "@/features/cases/components/CardDetail";
+import { NoteSec } from "@/features/cases/components/NoteSec";
 import { text } from "stream/consumers";
 import { m } from "framer-motion";
 

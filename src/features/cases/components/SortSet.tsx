@@ -1,8 +1,8 @@
 "use client";
 
-import type { SortKey } from "@/lib/sort/sortOptions";
-import { SortSelect } from "@/components/toolbar/SortSelect";
-import { SortButton } from "@/components/toolbar/SortButton";
+import type { SortKey } from "@/features/cases/sort/sortOptions";
+import { SortSelect } from "@/features/cases/components/SortSelect";
+import { SortButton } from "@/features/cases/components/SortButton";
 import clsx from "clsx";
 
 
@@ -19,7 +19,7 @@ export const SortSet = ({
 }: Preps) => {
     return (
         <form
-            onSubmit={(e)=>{
+            onSubmit={(e) => {
                 e.preventDefault();
                 onApplySort();
             }}

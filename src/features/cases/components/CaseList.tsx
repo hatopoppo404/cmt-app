@@ -1,5 +1,5 @@
 import type { Case } from "@/types/case";
-import { Card } from "@/components/cases/Card";
+import { Card } from "@/features/cases/components/Card";
 import { SortableCard } from "./SortableCard";
 import {
     DndContext,

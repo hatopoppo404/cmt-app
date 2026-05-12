@@ -1,5 +1,5 @@
 import type { Case } from "@/types/case";
-import type { SortKey } from "@/lib/sort/sortOptions";
+import type { SortKey } from "@/features/cases/sort/sortOptions";
 
 export const sortCases = (
     cases: Case[],

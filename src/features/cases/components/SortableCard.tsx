@@ -3,7 +3,7 @@
 import type { Case } from "@/types/case";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { DragHandle } from "@/components/cases/DragHandle";
+import { DragHandle } from "@/features/cases/components/DragHandle";
 
 import { Card } from "./Card";
 import clsx from "clsx";

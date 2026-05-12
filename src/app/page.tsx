@@ -1,14 +1,14 @@
 "use client";
 import type { Case } from "@/types/case";
-import type { SortKey } from "@/lib/sort/sortOptions";
-import { sortCases } from "@/lib/sort/sortCases";
-import { Card } from "@/components/cases/Card";
+import type { SortKey } from "@/features/cases/sort/sortOptions";
+import { sortCases } from "@/features/cases/utils/sortCases";
+import { Card } from "@/features/cases/components/Card";
 import clsx from "clsx";
-import { SearchInput } from "@/components/toolbar/SearchInput";
-import { SortSet } from "@/components/toolbar/SortSet";
+import { SearchInput } from "@/features/cases/components/SearchInput";
+import { SortSet } from "@/features/cases/components/SortSet";
 import { useState } from "react";
-import { doesCaseMatchSearch } from "@/lib/utils/search";
-import { CaseList } from "@/components/cases/CaseList";
+import { doesCaseMatchSearch } from "@/features/cases/utils/search";
+import { CaseList } from "@/features/cases/components/CaseList";
 import { mockCases } from "@/features/cases/data/mockCases";
 
 

@@ -2,9 +2,9 @@
 import type { Case } from "@/types/case";
 import clsx from "clsx";
 
-import { DelayBadge } from "@/components/cases/DelayBadge";
-import { CardHeader } from "@/components/cases/CardHeader";
-import { OpenButton } from "@/components/cases/OpenButton";
+import { DelayBadge } from "@/features/cases/components/DelayBadge";
+import { CardHeader } from "@/features/cases/components/CardHeader";
+import { OpenButton } from "@/features/cases/components/OpenButton";
 
 type Props = {
   caseItem: Case;

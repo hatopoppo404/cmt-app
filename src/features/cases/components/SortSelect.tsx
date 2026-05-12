@@ -4,7 +4,7 @@ import { ArrowIcon } from "@/components/icons/ArrowIcon";
 import {
     sortOptions,
     type SortKey
-} from "@/lib/sort/sortOptions";
+} from "@/features/cases/sort/sortOptions";
 import clsx from "clsx";
 
 type Props = {
