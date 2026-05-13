@@ -28,7 +28,7 @@ export const SortButton = () => {
         >
             <SortAZIcon
                 className={clsx(
-                    "size-[20px]",
+                    "size-[18px]",
                 )}
             />
         </button>

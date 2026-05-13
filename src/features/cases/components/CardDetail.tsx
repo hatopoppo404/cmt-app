@@ -3,19 +3,13 @@
 import { formatDate } from "@/lib/utils/formatDate";
 import clsx from "clsx";
 
+import type { Case } from "@/types/case";
 import { AmountIcon } from "@/components/icons/AmountIcon";
 import { DeadlineIcon } from "@/components/icons/DeadlineIcon";
 import { FolderIcon } from "@/components/icons/FolderIcon";
 import { ReceiptIcon } from "@/components/icons/ReceiptIcon";
 import { WarehouseIcon } from "@/components/icons/WarehouseIcon";
 
-type Props = {
-  orderCode: string; //注文番号
-  quantity: number; //数量
-  warehouse: string; //納品先
-  deadline: string; //限界納期
-  cause: string; //起因名
-};
 type DetailRowProps = {
   icon: React.ReactNode;
   label: string;
@@ -32,6 +26,18 @@ const DetailRow = ({ icon, label, value }: DetailRowProps) => {
   );
 };
 
+
+type Props = {
+  orderCode: string; //注文番号
+  quantity: number; //数量
+  warehouse: string; //納品先
+  deadline: string; //限界納期
+  cause: string; //起因名
+  onUpdate: (
+    id: string,
+    updates: Partial<Case>,
+  ) => void;
+};
 export const CardDetail = ({
   orderCode,
   quantity,

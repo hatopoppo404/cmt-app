@@ -67,6 +67,7 @@ export const Card = ({
             warehouse={caseItem.warehouse}
             deadline={caseItem.deadline}
             cause={caseItem.cause}
+            onUpdate={onUpdate}
           />
           <NoteSec note={caseItem.note} />
           <button

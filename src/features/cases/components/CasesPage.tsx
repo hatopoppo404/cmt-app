@@ -156,10 +156,13 @@ export const CasesPage = () => {
                             rounded-lg
                             cursor-pointer
                             text-(--color-text)
+                            shadow-md
+
                             transition-transform
                             duration-200
                             hover:scale-105
                             active:scale-95
+                            hover:shadow-lg
                         "
                     >
                         +

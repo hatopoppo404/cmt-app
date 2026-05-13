@@ -21,9 +21,19 @@ export const DelayBadge = ({ delayDays }: DelayBadgeProps) => {
       color: "bg-[var(--color-success)]",
       text: "安全",
     },
+    new: {
+      color: "bg-[var(--blue-500)]",
+      text: "新規",
+    },
   };
 
-  const status = days <= -2 ? "danger" : days <= 1 ? "warning" : "safe";
+  const status = (() => {
+    if (days === 9999) return "new";
+    if (days <= -2) return "danger";
+    if (days <= 1) return "warning";
+    if (days > 1) return "safe";
+    return "new";
+  })()
 
   const badge = statusMap[status];
   return (

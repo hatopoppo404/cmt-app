@@ -1,28 +1,32 @@
 "use client";
 
+import clsx from "clsx";
 import { useState } from "react";
+import { normalizeQuentity } from "../utils/normalizeQuentity";
 
 type Props = {
-    value: string;
-    onSave: (value: string) => void;
+    value: number;
+    onSave: (value: number) => void;
     className?: string;
 };
 
-export const EditableText = ({
+export const EditableQuentity = ({
     value,
     onSave,
     className,
 }: Props) => {
     const [isEditing, setIsEditing] = useState(false);
-    const [draftValue, setDraftValue] = useState(value);
+    const [draftValue, setDraftValue] = useState(value.toString(),);
 
     const save = () => {
+
+        const normalizedValue = normalizeQuentity(draftValue,);
+        if (normalizedValue === null) return;
         setIsEditing(false);
-        if (draftValue === value) return;
+        if (normalizedValue === value) return;
 
-        onSave(draftValue);
+        onSave(normalizedValue);
     };
-
     if (isEditing) {
         return (
             <input
@@ -34,7 +38,7 @@ export const EditableText = ({
                 onKeyDown={(event) => {
                     if (event.key === "Enter") save();
                     if (event.key === "Escape") {
-                        setDraftValue(value);
+                        setDraftValue(value.toString(),);
                         setIsEditing(false);
                     }
                 }}
@@ -42,16 +46,18 @@ export const EditableText = ({
             />
         );
     }
-
     return (
         <span
             onDoubleClick={() => {
-                setDraftValue(value);
+                setDraftValue(value.toString(),);
                 setIsEditing(true);
             }}
-            className={className}
+            className={clsx(
+                "cursor-text",
+                className,
+            )}
         >
-            {value || "未入力"}
+            {value}
         </span>
     );
 };

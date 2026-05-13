@@ -25,9 +25,10 @@ export const SortSet = ({
             }}
             className={clsx(
                 "pl-2",
-                "pr-2",
+                "pr-1.5",
                 "rounded-full",
                 "h-fit",
+                "shadow-md",
 
                 "bg-[var(--color-bg-sub)]",
                 "flex",
@@ -36,6 +37,7 @@ export const SortSet = ({
 
                 "transition-transform",
                 "hover:scale-101",
+                "hover:shadow-lg",
                 "active:scale-100",
                 "duration-200",
             )}

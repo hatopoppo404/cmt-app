@@ -21,11 +21,13 @@ export const SearchInput = ({ searchText, onSearchTextChange }: Props) => {
         "rounded-full",
         "h-fit",
         "bg-[var(--color-bg-sub)]",
+        "shadow-md",
 
         "transition-transform",
         "duration-200",
-        "focus-within:scale-105",
+        "focus-within:scale-101",
         "hover:scale-101",
+        "hover:shadow-lg",
       )}
     >
       <input
