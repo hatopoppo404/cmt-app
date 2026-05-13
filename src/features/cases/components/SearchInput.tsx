@@ -19,6 +19,7 @@ export const SearchInput = ({ searchText, onSearchTextChange }: Props) => {
         "pr-2",
         "py-2",
         "rounded-full",
+        "h-fit",
         "bg-[var(--color-bg-sub)]",
 
         "transition-transform",

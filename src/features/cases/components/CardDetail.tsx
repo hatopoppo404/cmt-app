@@ -26,8 +26,8 @@ const DetailRow = ({ icon, label, value }: DetailRowProps) => {
   return (
     <>
       <div className="flex items-center">{icon}</div>
-      <p className="flex items-center text-sm">{label}</p>
-      <p className="flex items-center text-sm">{value}</p>
+      <p className="flex items-center text-sm border-b-1 border-dashed border-(--color-gray-300)">{label}</p>
+      <p className="flex items-center text-sm border-b-1 border-dashed border-(--color-gray-300)">{value}</p>
     </>
   );
 };

@@ -15,19 +15,6 @@ import { CasesPage } from "@/features/cases/components/CasesPage";
 
 export default function Home() {
   return (
-    <main
-      className={clsx(
-        "bg-[var(--color-bg)]",
-        "bg-[var(--color-gray-500)]",
-        "min-h-screen",
-        "p-8",
-        "flex",
-        "flex-col",
-        "items-center",
-        "gap-8",
-      )}
-    >
       <CasesPage />
-    </main>
   );
 }

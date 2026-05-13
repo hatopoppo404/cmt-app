@@ -20,6 +20,7 @@ export const NoteSec = ({ note }: Props) => {
         "grid-rows-[auto_auto]",
         "gap-2",
         "p-4",
+        "pb-5",
         "m-4",
 
         "bg-[var(--white)]",
@@ -34,7 +35,7 @@ export const NoteSec = ({ note }: Props) => {
         <p className="flex items-center text-sm">備考</p>
       </div>
       <div className="col-span-2">
-        <p className="flex items-center text-sm">{note}</p>
+        <p className="flex items-center text-sm min-h-[1.5em]">{note}</p>
       </div>
     </div>
   );

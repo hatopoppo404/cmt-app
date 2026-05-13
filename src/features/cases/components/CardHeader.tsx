@@ -18,23 +18,23 @@ export const CardHeader = ({
 }: CardHeaderProps) => {
   return (
     <div>
-      <div className="flex flex-col gap-1">
-        <p className="text-sm">{itemName}</p>
-        <h3 className="text-xl font-bold">{itemCode}</h3>
-        <div className="flex flex-row gap-3 text-sm">
+      <div className="flex flex-col gap-0.5 py-1">
+        <p className="text-sm min-h-[1em]">{itemName}</p>
+        <h3 className="text-xl/5 font-bold min-h-[1em]">{itemCode}</h3>
+        <div className="flex flex-row gap-3 text-sm mt-2">
           <div className="flex flex-row items-center gap-1">
             <div className="flex flex-row items-center">
               <ReplyDateIcon className="size-[20px]" />
               <p>回答</p>
             </div>
-            <p>{formatDate(replyDate)}</p>
+            <p className="w-[2.5em]">{formatDate(replyDate)}</p>
           </div>
           <div className="flex flex-row items-center gap-1">
             <div className="flex flex-row items-center">
               <DueDateIcon className="size-[20px]" />
               <p>希望</p>
             </div>
-            <p>{formatDate(dueDate)}</p>
+            <p className="w-[2.5em]">{formatDate(dueDate)}</p>
           </div>
         </div>
       </div>

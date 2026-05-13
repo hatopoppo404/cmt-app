@@ -27,6 +27,7 @@ export const SortSet = ({
                 "pl-2",
                 "pr-2",
                 "rounded-full",
+                "h-fit",
 
                 "bg-[var(--color-bg-sub)]",
                 "flex",
