@@ -4,6 +4,7 @@ import { ReplyDateIcon } from "@/components/icons/ReplyDateIcon";
 import { DueDateIcon } from "@/components/icons/DueDateIcon";
 import clsx from "clsx";
 import { EditableText } from "./EditableText";
+import { normalizeItemCode } from "@/features/cases/utils/normalizeItemCode";
 
 type CardHeaderProps = {
   itemName: string;
@@ -40,7 +41,7 @@ export const CardHeader = ({
           value={itemCode}
           onSave={(nextValue) =>
             onUpdate(caseId, {
-              itemCode: nextValue,
+              itemCode: normalizeItemCode(nextValue),
             })
           }
           className="text-xl/5 font-bold min-h-[1em] w-full"
