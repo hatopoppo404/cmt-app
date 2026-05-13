@@ -11,11 +11,20 @@ import clsx from "clsx";
 type Props = {
     caseItem: Case;
     activeId: string | null;
+    onArchive: (
+        id: string,
+    ) => void;
+    onUpdate: (
+        id: string,
+        updates: Partial<Case>,
+    ) => void;
 };
 
 export const SortableCard = ({
     caseItem,
     activeId,
+    onArchive,
+    onUpdate,
 }: Props) => {
     const {
         attributes,
@@ -53,7 +62,11 @@ export const SortableCard = ({
                 attributes={attributes}
                 listeners={listeners}
             />
-            <Card caseItem={caseItem} />
+            <Card
+                caseItem={caseItem}
+                onArchive={onArchive}
+                onUpdate={onUpdate}
+            />
         </div>
     );
 };

@@ -20,8 +20,6 @@ export const NoteSec = ({ note }: Props) => {
         "grid-rows-[auto_auto]",
         "gap-2",
         "p-4",
-        "pb-5",
-        "m-4",
 
         "bg-[var(--white)]",
         "rounded-md",

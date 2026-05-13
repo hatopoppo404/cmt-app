@@ -30,7 +30,11 @@ export const CasesPage = () => {
     const [appliedSortKey, setAppliedSortKey] = useState<SortKey | null>(null);
 
     const visibleCases = cases.filter((caseItem) => {
-        return caseItem.status === "active" && caseItem.deletedAt === null;
+        return (
+            caseItem.status === "active"
+            &&
+            caseItem.deletedAt === null
+        );
     });
     const filteredCases = visibleCases.filter((caseItem) => {
         return doesCaseMatchSearch(caseItem, searchText);
@@ -58,6 +62,47 @@ export const CasesPage = () => {
             return reorderdCases;
         });
     };
+    // カードアーカイブ
+    const handleArchiveCase = (id: string) => {
+        const now = new Date().toISOString();
+        setCases((prev) => {
+            return prev.map((caseItem) => {
+                if (
+                    caseItem.id !== id
+                ) {
+                    return caseItem;
+                }
+                return {
+                    ...caseItem,
+                    status: "archived",
+                    archivedAt: now,
+                    updatedAt: now,
+                };
+            });
+        });
+    };
+
+    // 編集
+    const handleUpdatesCase = (
+        id: string,
+        updates: Partial<Case>,
+    ) => {
+        const now = new Date().toISOString();
+        setCases(
+            (prev) => prev.map(
+                (caseItem) =>
+                    caseItem.id === id
+                        ? {
+                            ...caseItem,
+                            ...updates,
+                            updatedAt: now,
+                        }
+                        : caseItem,
+
+            ),
+        );
+    };
+
     return (
         <div className="
             flex 
@@ -111,6 +156,10 @@ export const CasesPage = () => {
                             rounded-lg
                             cursor-pointer
                             text-(--color-text)
+                            transition-transform
+                            duration-200
+                            hover:scale-105
+                            active:scale-95
                         "
                     >
                         +
@@ -127,6 +176,8 @@ export const CasesPage = () => {
                 <CaseList
                     cases={sortedCases}
                     onCasesChange={setCases}
+                    onArchive={handleArchiveCase}
+                    onUpdate={handleUpdatesCase}
                 />
             </div>
         </div >

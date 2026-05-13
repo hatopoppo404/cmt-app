@@ -25,6 +25,7 @@ export const SearchInput = ({ searchText, onSearchTextChange }: Props) => {
         "transition-transform",
         "duration-200",
         "focus-within:scale-105",
+        "hover:scale-101",
       )}
     >
       <input

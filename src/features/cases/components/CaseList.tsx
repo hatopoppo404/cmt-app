@@ -17,11 +17,20 @@ type Props = {
     onCasesChange: (
         cases: Case[],
     ) => void;
+    onArchive: (
+        id: string,
+    ) => void;
+    onUpdate: (
+        id: string,
+        updates: Partial<Case>,
+    ) => void;
 };
 
 export const CaseList = ({
     cases,
     onCasesChange,
+    onArchive,
+    onUpdate,
 }: Props) => {
     const [activeId, setActiveId] = useState<string | null>(null);
     const activeCase = cases.find(
@@ -78,6 +87,8 @@ export const CaseList = ({
                             key={caseItem.id}
                             caseItem={caseItem}
                             activeId={activeId}
+                            onArchive={onArchive}
+                            onUpdate={onUpdate}
                         />
                     ))}
                 </div>
@@ -85,7 +96,11 @@ export const CaseList = ({
             <DragOverlay>
                 {activeCase ? (
                     <div className="scale-105 shadow-2xl">
-                        <Card caseItem={activeCase} />
+                        <Card 
+                            caseItem={activeCase} 
+                            onArchive={onArchive}
+                            onUpdate={onUpdate}
+                        />
                     </div>) : null}
             </DragOverlay>
         </DndContext>
