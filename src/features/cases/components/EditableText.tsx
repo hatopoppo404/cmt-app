@@ -49,6 +49,7 @@ export const EditableText = ({
                 setDraftValue(value);
                 setIsEditing(true);
             }}
+            className={className}
         >
             {value || "未入力"}
         </span>

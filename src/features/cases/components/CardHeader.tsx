@@ -3,24 +3,48 @@ import { formatDate } from "@/lib/utils/formatDate";
 import { ReplyDateIcon } from "@/components/icons/ReplyDateIcon";
 import { DueDateIcon } from "@/components/icons/DueDateIcon";
 import clsx from "clsx";
+import { EditableText } from "./EditableText";
 
 type CardHeaderProps = {
   itemName: string;
   itemCode: string;
   dueDate: string;
   replyDate: string;
+  caseId: string;
+  onUpdate: (
+    id: string,
+    updates: Partial<Case>,
+  ) => void;
 };
 export const CardHeader = ({
   itemName,
   itemCode,
   dueDate,
   replyDate,
+  caseId,
+  onUpdate,
 }: CardHeaderProps) => {
   return (
     <div>
       <div className="flex flex-col gap-0.5 py-1">
-        <p className="text-sm min-h-[1em]">{itemName}</p>
-        <h3 className="text-xl/5 font-bold min-h-[1em]">{itemCode}</h3>
+        <EditableText
+          value={itemName}
+          onSave={(nextValue) =>
+            onUpdate(caseId, {
+              itemName: nextValue,
+            })
+          }
+          className="text-sm min-h-[1em] w-full"
+        />
+        <EditableText
+          value={itemCode}
+          onSave={(nextValue) =>
+            onUpdate(caseId, {
+              itemCode: nextValue,
+            })
+          }
+          className="text-xl/5 font-bold min-h-[1em] w-full"
+        />
         <div className="flex flex-row gap-3 text-sm mt-2">
           <div className="flex flex-row items-center gap-1">
             <div className="flex flex-row items-center">

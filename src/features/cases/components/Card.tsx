@@ -48,6 +48,7 @@ export const Card = ({
         caseItem={caseItem}
         isOpen={isOpen}
         onClick={() => setIsOpen((prev) => !prev)}
+        onUpdate={onUpdate}
       />
       <div
         className={clsx(

@@ -10,9 +10,18 @@ type Props = {
   caseItem: Case;
   isOpen: boolean;
   onClick: () => void;
+  onUpdate: (
+    id: string,
+    updates: Partial<Case>,
+  ) => void;
 };
 
-export const CardSummary = ({ caseItem, isOpen, onClick }: Props) => {
+export const CardSummary = ({
+  caseItem,
+  isOpen,
+  onClick,
+  onUpdate,
+}: Props) => {
   return (
     <div
       className={clsx(
@@ -30,6 +39,8 @@ export const CardSummary = ({ caseItem, isOpen, onClick }: Props) => {
         itemCode={caseItem.itemCode}
         dueDate={caseItem.dueDate}
         replyDate={caseItem.replyDate}
+        caseId={caseItem.id}
+        onUpdate={onUpdate}
       />
       <OpenButton isOpen={isOpen} onClick={onClick} />
     </div>

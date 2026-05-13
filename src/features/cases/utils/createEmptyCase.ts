@@ -20,7 +20,7 @@ export const createEmptyCase = (sortOrder: number): Case => {
         orderCode: "MN1040000000000",
         quantity: 0,
         warehouse: "5100",
-        deadline: "2050-01-01",
+        deadline: "",
         cause: "プロジェクト名など",
         note: "調整状況などを記載する"
     };
