@@ -70,7 +70,11 @@ export const Card = ({
             onUpdate={onUpdate}
             caseId={caseItem.id}
           />
-          <NoteSec note={caseItem.note} />
+          <NoteSec
+            caseId={caseItem.id}
+            note={caseItem.note}
+            onUpdate={onUpdate}
+          />
           <button
             type="button"
             onClick={() => onArchive(caseItem.id)}

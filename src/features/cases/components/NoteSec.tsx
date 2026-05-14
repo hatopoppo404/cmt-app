@@ -6,12 +6,18 @@ import clsx from "clsx";
 import { useState } from "react";
 
 import { NoteIcon } from "@/components/icons/NoteIcon";
+import { Editabletextarea } from "./EditbleTextarea";
 
 type Props = {
+  caseId: string;
   note: string; //備考
+  onUpdate: (
+    id: string,
+    updates: Partial<Case>,
+  ) => void;
 };
 
-export const NoteSec = ({ note }: Props) => {
+export const NoteSec = ({ caseId, note, onUpdate, }: Props) => {
   return (
     <div
       className={clsx(
@@ -33,7 +39,17 @@ export const NoteSec = ({ note }: Props) => {
         <p className="flex items-center text-sm">備考</p>
       </div>
       <div className="col-span-2">
-        <p className="flex items-center text-sm min-h-[1.5em]">{note}</p>
+        <Editabletextarea
+          value={note}
+          onSave={(nextValue) =>
+            onUpdate(caseId, {
+              note: nextValue,
+            })
+          }
+          className={clsx(
+            "flex items-center text-sm min-h-[1.5em] w-full",
+          )}
+        />
       </div>
     </div>
   );
