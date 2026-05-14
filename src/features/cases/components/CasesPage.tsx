@@ -178,7 +178,7 @@ export const CasesPage = () => {
                     rounded-full
                     bg-(--color-bg-sub)
                     p-2
-                    text-sm
+                    text-[10px]
                     opacity-70
                 ">
                     <div
@@ -192,7 +192,7 @@ export const CasesPage = () => {
                             "shadow",
                             "transition-transform",
                             "duration-200",
-                            currentTab === "archived" && "translate-x-23",
+                            currentTab === "archived" && "translate-x-23 bg-(--color-blue-100)",
 
                         )}>
 
