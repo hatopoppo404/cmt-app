@@ -9,6 +9,7 @@ import { DeadlineIcon } from "@/components/icons/DeadlineIcon";
 import { FolderIcon } from "@/components/icons/FolderIcon";
 import { ReceiptIcon } from "@/components/icons/ReceiptIcon";
 import { WarehouseIcon } from "@/components/icons/WarehouseIcon";
+import { EditableQuentity } from "./EditableQuentity";
 
 type DetailRowProps = {
   icon: React.ReactNode;
@@ -33,6 +34,7 @@ type Props = {
   warehouse: string; //納品先
   deadline: string; //限界納期
   cause: string; //起因名
+  caseId: string;
   onUpdate: (
     id: string,
     updates: Partial<Case>,
@@ -44,6 +46,8 @@ export const CardDetail = ({
   warehouse,
   deadline,
   cause,
+  caseId,
+  onUpdate,
 }: Props) => {
   const detailRows = [
     {
@@ -56,7 +60,14 @@ export const CardDetail = ({
       label: "数量",
       value: (
         <>
-          {quantity}
+          <EditableQuentity
+            value={quantity}
+            onSave={(nextValue) =>
+              onUpdate(caseId, {
+                quantity: nextValue,
+              })
+            }
+          />
           <span className="ml-1 text-xs">pc</span>
         </>
       ),

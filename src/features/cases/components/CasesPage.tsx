@@ -16,6 +16,7 @@ import { CaseList } from "@/features/cases/components/CaseList";
 import { createEmptyCase } from "../utils/createEmptyCase";
 
 import { useState } from "react";
+import clsx from "clsx";
 
 
 export const CasesPage = () => {
@@ -29,9 +30,11 @@ export const CasesPage = () => {
     const [sortKey, setSortKey] = useState<SortKey | null>(null);
     const [appliedSortKey, setAppliedSortKey] = useState<SortKey | null>(null);
 
+    const [currentTab, setCurrentTab] = useState<"active" | "archived">("active"); // タブ切替
+
     const visibleCases = cases.filter((caseItem) => {
         return (
-            caseItem.status === "active"
+            caseItem.status === currentTab
             &&
             caseItem.deletedAt === null
         );
@@ -166,6 +169,65 @@ export const CasesPage = () => {
                         "
                     >
                         +
+                    </button>
+                </div>
+                <div className="
+                    relative 
+                    flex
+                    gap-2
+                    rounded-full
+                    bg-(--color-bg-sub)
+                    p-2
+                    text-sm
+                    opacity-70
+                ">
+                    <div
+                        className={clsx(
+                            "absolute",
+                            "top-2",
+                            "bottom-2",
+                            "w-23",
+                            "rounded-full",
+                            "bg-(--color-bg)",
+                            "shadow",
+                            "transition-transform",
+                            "duration-200",
+                            currentTab === "archived" && "translate-x-23",
+
+                        )}>
+
+                    </div>
+                    <button
+                        type="button"
+                        onClick={() => setCurrentTab("active",)}
+                        className={clsx(
+                            "relative",
+                            "z-10",
+                            "w-22",
+                            "py-2",
+                            "cursor-pointer",
+                            "opacity-40",
+                            "hover:opacity-100",
+                            "text-(--color-text)",
+                            currentTab === "active" && "opacity-100",
+                        )}>
+                        ACTIVE
+                    </button>
+                    <button
+                        type="button"
+                        onClick={() => setCurrentTab("archived",)}
+                        className={clsx(
+                            "relative",
+                            "z-10",
+                            "w-22",
+                            "py-2",
+                            "cursor-pointer",
+                            "opacity-40",
+                            "hover:opacity-100",
+                            "text-(--color-text)",
+                            currentTab === "archived" && "opacity-100",
+                        )}>
+                        ARCHIVED
                     </button>
                 </div>
             </div>

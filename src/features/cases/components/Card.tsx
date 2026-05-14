@@ -68,6 +68,7 @@ export const Card = ({
             deadline={caseItem.deadline}
             cause={caseItem.cause}
             onUpdate={onUpdate}
+            caseId={caseItem.id}
           />
           <NoteSec note={caseItem.note} />
           <button
