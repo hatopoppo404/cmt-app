@@ -5,6 +5,7 @@ import { DueDateIcon } from "@/components/icons/DueDateIcon";
 import clsx from "clsx";
 import { EditableText } from "./EditableText";
 import { normalizeItemCode } from "@/features/cases/utils/normalizeItemCode";
+import { EditableDate } from "./EditableDate";
 
 type CardHeaderProps = {
   itemName: string;
@@ -52,14 +53,28 @@ export const CardHeader = ({
               <ReplyDateIcon className="size-[20px]" />
               <p>回答</p>
             </div>
-            <p className="w-[2.5em]">{formatDate(replyDate)}</p>
+            <EditableDate
+              value={replyDate}
+              onSave={(nextValue) =>
+                onUpdate(caseId, {
+                  replyDate: nextValue,
+                })}
+              className="max-w-[4.5em]"
+            />
           </div>
           <div className="flex flex-row items-center gap-1">
             <div className="flex flex-row items-center">
               <DueDateIcon className="size-[20px]" />
               <p>希望</p>
             </div>
-            <p className="w-[2.5em]">{formatDate(dueDate)}</p>
+            <EditableDate
+              value={dueDate}
+              onSave={(nextValue) =>
+                onUpdate(caseId, {
+                  replyDate: nextValue,
+                })}
+              className="max-w-[4.5em]"
+            />
           </div>
         </div>
       </div>

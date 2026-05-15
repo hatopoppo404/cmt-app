@@ -10,6 +10,7 @@ import { FolderIcon } from "@/components/icons/FolderIcon";
 import { ReceiptIcon } from "@/components/icons/ReceiptIcon";
 import { WarehouseIcon } from "@/components/icons/WarehouseIcon";
 import { EditableQuentity } from "./EditableQuentity";
+import { EditableDate } from "./EditableDate";
 
 type DetailRowProps = {
   icon: React.ReactNode;
@@ -80,7 +81,16 @@ export const CardDetail = ({
     {
       icon: <DeadlineIcon className="size-[20px]" />,
       label: "限界",
-      value: formatDate(deadline),
+      value: (
+        <EditableDate
+          value={deadline}
+          onSave={(nextValue) =>
+            onUpdate(caseId, {
+              replyDate: nextValue,
+            })}
+          className="max-w-[4.5em]"
+        />
+      ),
     },
     {
       icon: <FolderIcon className="size-[20px]" />,

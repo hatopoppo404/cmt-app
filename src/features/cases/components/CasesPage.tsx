@@ -114,34 +114,27 @@ export const CasesPage = () => {
     };
 
     return (
-        <div className="
-            flex 
-            flex-col 
-            gap-4 
-            p-4
-            relative
-            flex-wrap
-        ">
-            <div className="
-                sticky
-                z-999
-                top-4
-                left-8
+        <div className="flex flex-col gap-4 p-4 relative flex-wrap">
+            <div className={clsx(
+                "sticky",
+                "z-999",
+                "top-4",
+                "left-8",
 
-                flex
-                flex-wrap
-                gap-6 
-                justify-center 
-                items-center
+                "flex",
+                "flex-wrap",
+                "gap-6",
+                "justify-center",
+                "items-center",
 
-                h-fit          
-            ">
-                <div className="
-                    flex 
-                    gap-6
-                    justify-center 
-                    h-fit
-                ">
+                "h-fit",
+            )}>
+                <div className={clsx(
+                    "flex",
+                    "gap-6",
+                    "justify-center",
+                    "h-fit",
+                )}>
                     <SearchInput
                         searchText={searchText}
                         onSearchTextChange={setSearchText}
@@ -152,44 +145,43 @@ export const CasesPage = () => {
                         onApplySort={() => setAppliedSortKey(sortKey)}
                     />
                 </div>
-                <div className="
-                    flex 
-                    gap-6 
-                    justify-center
-                ">
+                <div className={clsx(
+                    "flex",
+                    "gap-6",
+                    "justify-center",
+                )}>
                     <button
                         type="button"
                         onClick={handleAddCase}
-                        className="
-                            bg-(--color-bg-sub)
-                            px-2
-                            w-10
-                            h-10
-                            rounded-lg
-                            cursor-pointer
-                            text-(--color-text)
-                            shadow-md
-
-                            transition-transform
-                            duration-200
-                            hover:scale-105
-                            active:scale-95
-                            hover:shadow-lg
-                        "
+                        className={clsx(
+                            "bg-(--color-bg-sub)",
+                            "px-2",
+                            "w-10",
+                            "h-10",
+                            "rounded-lg",
+                            "cursor-pointer",
+                            "text-(--color-text)",
+                            "shadow-md",
+                            "transition-transform",
+                            "duration-200",
+                            "hover:scale-105",
+                            "active:scale-95",
+                            "hover:shadow-lg",
+                        )}
                     >
                         +
                     </button>
                 </div>
-                <div className="
-                    relative 
-                    flex
-                    gap-2
-                    rounded-full
-                    bg-(--color-bg-sub)
-                    p-2
-                    text-[10px]
-                    opacity-70
-                ">
+                <div className={clsx(
+                    "relative",
+                    "flex",
+                    "gap-2",
+                    "rounded-full",
+                    "bg-(--color-bg-sub)",
+                    "p-2",
+                    "text-[10px]",
+                    "opacity-70",
+                )}>
                     <div
                         className={clsx(
                             "absolute",
@@ -239,13 +231,13 @@ export const CasesPage = () => {
                         ARCHIVED
                     </button>
                 </div>
-            </div>
-            <div className="
-                flex 
-                max-w-[800px] 
-                gap-4 
-                justify-center
-            ">
+            </div >
+            <div className={clsx(
+                "flex",
+                "max-w-[800px]",
+                "gap-4",
+                "justify-center",
+            )}>
                 <CaseList
                     cases={sortedCases}
                     onCasesChange={setCases}

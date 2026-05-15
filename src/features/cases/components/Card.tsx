@@ -78,41 +78,41 @@ export const Card = ({
           <button
             type="button"
             onClick={() => onArchive(caseItem.id)}
-            className="
-            ml-auto
-            p-2
-            my-0
-            opacity-30
-            
-            hover:text-(--blue-500)
-            hover:opacity-100
-            cursor-pointer
+            className={clsx(
+              "ml-auto",
+              "p-2",
+              "my-0",
+              "opacity-30",
 
-            group
-            flex
-            items-center
-            gap-2
-            "
+              "hover:text-(--blue-500)",
+              "hover:opacity-100",
+              "cursor-pointer",
+
+              "group",
+              "flex",
+              "items-center",
+              "gap-2",
+            )}
+
           >
             <ArchiveIcon
-              className="
-                size-[20px]
-            "/>
-            <span className="
-              text-[0.7em]
-              p-0
+              className="size-[20px]" />
+            <span className={clsx(
+              "text-[0.7em]",
+              "p-0",
 
-              max-w-0
-              overflow-hidden
-              opacity-0
+              "max-w-0",
+              "overflow-hidden",
+              "opacity-0",
 
-              transition-all
-              duration-200
+              "transition-all",
+              "duration-200",
 
-              group-hover:max-w-fit
-              group-hover:opacity-100
-              group-hover:pr-1
-            ">
+              "group-hover:max-w-fit",
+              "group-hover:opacity-100",
+              "group-hover:pr-1",
+            )}
+            >
               Archive
             </span>
           </button>
