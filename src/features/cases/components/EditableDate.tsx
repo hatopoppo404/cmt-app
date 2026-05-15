@@ -34,7 +34,7 @@ export const EditableDate = ({
                 autoFocus
                 type="text"
                 value={draftValue}
-                onChange={(event) => setDraftValue(event.target.value)}
+                onChange={(event) => setDraftValue(formatDateForEdit(event.target.value))}
                 onBlur={save}
                 onKeyDown={(event) => {
                     if (event.key === "Enter") save();

@@ -121,11 +121,6 @@ export const CasesPage = () => {
 
     return (
         <div className="flex flex-col gap-4 p-4 relative flex-wrap">
-            <button
-                onClick={() => console.log(new Date())}
-            >
-                botann
-            </button>
             <div className={clsx(
                 "sticky",
                 "z-999",

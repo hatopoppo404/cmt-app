@@ -11,6 +11,7 @@ import { ReceiptIcon } from "@/components/icons/ReceiptIcon";
 import { WarehouseIcon } from "@/components/icons/WarehouseIcon";
 import { EditableQuentity } from "./EditableQuentity";
 import { EditableDate } from "./EditableDate";
+import { EditableText } from "./EditableText";
 
 type DetailRowProps = {
   icon: React.ReactNode;
@@ -54,7 +55,16 @@ export const CardDetail = ({
     {
       icon: <ReceiptIcon className="size-[20px]" />,
       label: "注文番号",
-      value: orderCode,
+      value: (
+        <EditableText
+          value={orderCode}
+          onSave={(nextValue) =>
+            onUpdate(caseId, {
+              deadline: nextValue,
+            })}
+          className="w-full"
+        />
+      ),
     },
     {
       icon: <AmountIcon className="size-[20px]" />,
@@ -76,7 +86,16 @@ export const CardDetail = ({
     {
       icon: <WarehouseIcon className="size-[20px]" />,
       label: "納品先",
-      value: warehouse,
+      value: (
+        <EditableText
+          value={warehouse}
+          onSave={(nextValue) =>
+            onUpdate(caseId, {
+              deadline: nextValue,
+            })}
+          className="w-full"
+        />
+      ),
     },
     {
       icon: <DeadlineIcon className="size-[20px]" />,
@@ -88,14 +107,23 @@ export const CardDetail = ({
             onUpdate(caseId, {
               deadline: nextValue,
             })}
-          className="max-w-[4.5em]"
+          className="w-full"
         />
       ),
     },
     {
       icon: <FolderIcon className="size-[20px]" />,
       label: "起因名",
-      value: cause,
+      value: (
+        <EditableText
+          value={cause}
+          onSave={(nextValue) =>
+            onUpdate(caseId, {
+              deadline: nextValue,
+            })}
+          className="w-full"
+        />
+      ),
     },
   ];
 

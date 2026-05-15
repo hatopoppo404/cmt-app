@@ -60,7 +60,7 @@ export const CardHeader = ({
                 onUpdate(caseId, {
                   replyDate: nextValue,
                 })}
-              className="max-w-[4.5em]"
+              className="max-w-[9em]"
             />
           </div>
           <div className="flex flex-row items-center gap-1">
@@ -74,7 +74,7 @@ export const CardHeader = ({
                 onUpdate(caseId, {
                   dueDate: nextValue,
                 })}
-              className="max-w-[4.5em]"
+              className="max-w-[9em]"
             />
           </div>
         </div>
