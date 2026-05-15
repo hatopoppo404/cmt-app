@@ -17,6 +17,7 @@ import { createEmptyCase } from "../utils/createEmptyCase";
 
 import { useState } from "react";
 import clsx from "clsx";
+import { calculateBusinessDelaDays } from "../utils/date";
 
 
 export const CasesPage = () => {
@@ -91,19 +92,25 @@ export const CasesPage = () => {
         updates: Partial<Case>,
     ) => {
         const now = new Date().toISOString();
-        setCases(
-            (prev) => prev.map(
-                (caseItem) =>
-                    caseItem.id === id
-                        ? {
-                            ...caseItem,
-                            ...updates,
-                            updatedAt: now,
-                        }
-                        : caseItem,
-
-            ),
-        );
+        setCases((prev) => {
+            return prev.map((caseItem) => {
+                if (caseItem.id !== id) return caseItem;
+                const updatedCase = {
+                    ...caseItem,
+                    ...updates,
+                    updatedAt: now,
+                };
+                const delayDays = calculateBusinessDelaDays({
+                    dueDate: updatedCase.dueDate,
+                    replyDate: updatedCase.replyDate,
+                    deadline: updatedCase.deadline,
+                });
+                return {
+                    ...updatedCase,
+                    delayDays,
+                };
+            });
+        });
     };
 
     return (
@@ -113,23 +120,25 @@ export const CasesPage = () => {
             gap-4 
             p-4
             relative
+            flex-wrap
         ">
             <div className="
-                fixed
+                sticky
                 z-999
                 top-4
                 left-8
 
-                flex 
+                flex
+                flex-wrap
                 gap-6 
                 justify-center 
                 items-center
 
-                h-fit                
+                h-fit          
             ">
                 <div className="
                     flex 
-                    gap-6 
+                    gap-6
                     justify-center 
                     h-fit
                 ">
@@ -236,7 +245,6 @@ export const CasesPage = () => {
                 max-w-[800px] 
                 gap-4 
                 justify-center
-                mt-20
             ">
                 <CaseList
                     cases={sortedCases}
