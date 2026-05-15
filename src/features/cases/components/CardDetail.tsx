@@ -86,7 +86,7 @@ export const CardDetail = ({
           value={deadline}
           onSave={(nextValue) =>
             onUpdate(caseId, {
-              replyDate: nextValue,
+              deadline: nextValue,
             })}
           className="max-w-[4.5em]"
         />

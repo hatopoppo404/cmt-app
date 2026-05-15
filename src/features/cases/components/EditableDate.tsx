@@ -20,11 +20,11 @@ export const EditableDate = ({
 
     const save = () => {
         const normalizedDate = normalizeDateInput(draftValue);
-        if (normalizedDate === null) {
-            setDraftValue(formatDateForEdit(value));
+        if (normalizedDate === null || normalizedDate === value) {
+            setDraftValue(formatDateForDisplay(value));
             setIsEditing(false);
+            return;
         }
-        if (normalizedDate === value) return;
         normalizedDate && onSave(normalizedDate);
     };
 

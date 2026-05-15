@@ -6,6 +6,7 @@ import clsx from "clsx";
 import { EditableText } from "./EditableText";
 import { normalizeItemCode } from "@/features/cases/utils/normalizeItemCode";
 import { EditableDate } from "./EditableDate";
+import { calculateBusinessDelaDays } from "@/features/cases/utils/date";
 
 type CardHeaderProps = {
   itemName: string;
@@ -71,7 +72,7 @@ export const CardHeader = ({
               value={dueDate}
               onSave={(nextValue) =>
                 onUpdate(caseId, {
-                  replyDate: nextValue,
+                  dueDate: nextValue,
                 })}
               className="max-w-[4.5em]"
             />

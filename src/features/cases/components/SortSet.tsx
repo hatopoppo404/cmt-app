@@ -26,6 +26,7 @@ export const SortSet = ({
             className={clsx(
                 "pl-2",
                 "pr-1.5",
+                "py-1",
                 "rounded-full",
                 "h-fit",
                 "shadow-md",

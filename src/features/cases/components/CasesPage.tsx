@@ -100,6 +100,11 @@ export const CasesPage = () => {
                     ...updates,
                     updatedAt: now,
                 };
+                console.log("updatedCase", updatedCase);
+                console.log(typeof updatedCase.dueDate, updatedCase.dueDate);
+                console.log(typeof updatedCase.replyDate, updatedCase.replyDate);
+                console.log(typeof updatedCase.deadline, updatedCase.deadline);
+
                 const delayDays = calculateBusinessDelaDays({
                     dueDate: updatedCase.dueDate,
                     replyDate: updatedCase.replyDate,
@@ -111,10 +116,16 @@ export const CasesPage = () => {
                 };
             });
         });
+
     };
 
     return (
         <div className="flex flex-col gap-4 p-4 relative flex-wrap">
+            <button
+                onClick={() => console.log(new Date())}
+            >
+                botann
+            </button>
             <div className={clsx(
                 "sticky",
                 "z-999",
