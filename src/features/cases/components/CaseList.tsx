@@ -81,7 +81,7 @@ export const CaseList = ({
                     verticalListSortingStrategy
                 }
             >
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-4 overflow-auto">
                     {cases.map((caseItem) => (
                         <SortableCard
                             key={caseItem.id}

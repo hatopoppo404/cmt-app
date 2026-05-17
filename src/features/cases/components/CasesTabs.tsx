@@ -17,6 +17,7 @@ export const CasesTabs = ({ currentTab, onTabChange }: Props) => {
         "p-2",
         "text-[10px]",
         "opacity-70",
+        "w-fit",
       )}
     >
       <div

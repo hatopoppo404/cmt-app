@@ -7,11 +7,10 @@ import { SearchInput } from "@/features/cases/components/SearchInput";
 import { doesCaseMatchSearch } from "@/features/cases/utils/search";
 
 import type { SortKey } from "@/features/cases/sort/sortOptions";
-import { SortSet } from "@/features/cases/components/SortSet";
 import { sortCases } from "@/features/cases/utils/sortCases";
-import { AddCaseButton } from "@/features/cases/components/AddCaseButton";
-import { CasesTabs } from "@/features/cases/components/CasesTabs";
 
+import { CasesSidebar } from "@/features/cases/components/CasesSidebar";
+import { AddCaseButton } from "@/features/cases/components/AddCaseButton";
 import { CaseList } from "@/features/cases/components/CaseList";
 
 import { createEmptyCase } from "../utils/createEmptyCase";
@@ -83,10 +82,6 @@ export const CasesPage = () => {
           ...updates,
           updatedAt: now,
         };
-        console.log("updatedCase", updatedCase);
-        console.log(typeof updatedCase.dueDate, updatedCase.dueDate);
-        console.log(typeof updatedCase.replyDate, updatedCase.replyDate);
-        console.log(typeof updatedCase.deadline, updatedCase.deadline);
 
         const delayDays = calculateBusinessDelaDays({
           dueDate: updatedCase.dueDate,
@@ -102,38 +97,40 @@ export const CasesPage = () => {
   };
 
   return (
-    <div className="relative flex flex-col flex-wrap gap-4 p-4">
+    <div
+      className={clsx(
+        "grid",
+        "grid-cols-[400px_1fr]",
+        "gap-2",
+        "px-8",
+        "py-4",
+        "h-screen",
+      )}
+    >
+      <CasesSidebar
+        searchText={searchText}
+        onSearchTextChange={setSearchText}
+        sortKey={sortKey}
+        onSortKeyChange={setSortKey}
+        onApplySort={() => setAppliedSortKey(sortKey)}
+        currentTab={currentTab}
+        onTabChange={setCurrentTab}
+      />
       <div
         className={clsx(
-          "sticky",
-          "z-999",
-          "top-4",
-          "left-8",
-
           "flex",
-          "flex-wrap",
-          "gap-6",
+          "flex-col",
+          "gap-4",
           "justify-center",
-          "items-center",
+          "mx-auto",
 
-          "h-fit",
+          "relative",
         )}
       >
-        <div className={clsx("flex", "gap-6", "justify-center", "h-fit")}>
-          <SearchInput
-            searchText={searchText}
-            onSearchTextChange={setSearchText}
-          />
-          <SortSet
-            sortKey={sortKey}
-            onSortKeyChange={setSortKey}
-            onApplySort={() => setAppliedSortKey(sortKey)}
-          />
+        <div className={clsx("sticky", "top-8", "z-998", )}>
+          <AddCaseButton onClick={handleAddCase} />
         </div>
-        <AddCaseButton onClick={handleAddCase} />
-        <CasesTabs currentTab={currentTab} onTabChange={setCurrentTab} />
-      </div>
-      <div className={clsx("flex", "max-w-[800px]", "gap-4", "justify-center", "w-full", "mx-auto")}>
+
         <CaseList
           cases={sortedCases}
           onCasesChange={setCases}
