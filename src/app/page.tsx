@@ -15,6 +15,8 @@ import { CasesPage } from "@/features/cases/components/CasesPage";
 
 export default function Home() {
   return (
+    <main className={clsx("p-4","relative")}>
       <CasesPage />
+    </main>
   );
 }
