@@ -27,7 +27,17 @@ export const CasesSidebar = ({
   onTabChange,
 }: Props) => {
   return (
-    <div className={clsx("flex", "flex-col", "space-between", "gap-6", "bg-(--color-bg-sub)",)}>
+    <aside
+      className={clsx(
+        "flex",
+        "flex-col",
+        "space-between",
+        "gap-6",
+
+        "h-screen",
+        "overflow-auto",
+      )}
+    >
       <SearchInput
         searchText={searchText}
         onSearchTextChange={onSearchTextChange}
@@ -40,6 +50,6 @@ export const CasesSidebar = ({
       <div>
         <CasesTabs currentTab={currentTab} onTabChange={onTabChange} />
       </div>
-    </div>
+    </aside>
   );
 };
