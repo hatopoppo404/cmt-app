@@ -31,22 +31,28 @@ export const CasesSidebar = ({
       className={clsx(
         "flex",
         "flex-col",
-        "space-between",
+        "justify-between",
         "gap-6",
-
-        "h-screen",
-        "overflow-auto",
+        "h-dvh",
+        "px-4",
+        "py-6",
       )}
     >
-      <SearchInput
-        searchText={searchText}
-        onSearchTextChange={onSearchTextChange}
-      />
-      <SortSet
-        sortKey={sortKey}
-        onSortKeyChange={onSortKeyChange}
-        onApplySort={onApplySort}
-      />
+      <div className={clsx(
+        "flex",
+        "flex-col",
+         "gap-6",
+       )}>
+        <SearchInput
+          searchText={searchText}
+          onSearchTextChange={onSearchTextChange}
+        />
+        <SortSet
+          sortKey={sortKey}
+          onSortKeyChange={onSortKeyChange}
+          onApplySort={onApplySort}
+        />
+      </div>
       <div>
         <CasesTabs currentTab={currentTab} onTabChange={onTabChange} />
       </div>

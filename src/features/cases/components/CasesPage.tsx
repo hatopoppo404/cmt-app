@@ -18,6 +18,7 @@ import { createEmptyCase } from "../utils/createEmptyCase";
 import { useState } from "react";
 import clsx from "clsx";
 import { calculateBusinessDelaDays } from "../utils/date";
+import { CasesMain } from "./CasesMain";
 
 export const CasesPage = () => {
   // カード表示
@@ -102,9 +103,7 @@ export const CasesPage = () => {
         "grid",
         "grid-cols-[400px_1fr]",
         "gap-2",
-        "px-8",
-        "py-4",
-        "h-screen",
+        "h-dvh",
       )}
     >
       <CasesSidebar
@@ -116,28 +115,13 @@ export const CasesPage = () => {
         currentTab={currentTab}
         onTabChange={setCurrentTab}
       />
-      <div
-        className={clsx(
-          "flex",
-          "flex-col",
-          "gap-4",
-          "justify-center",
-          "mx-auto",
-
-          "relative",
-        )}
-      >
-        <div className={clsx("sticky", "top-8", "z-998", )}>
-          <AddCaseButton onClick={handleAddCase} />
-        </div>
-
-        <CaseList
-          cases={sortedCases}
-          onCasesChange={setCases}
-          onArchive={handleArchiveCase}
-          onUpdate={handleUpdatesCase}
-        />
-      </div>
+      <CasesMain
+        cases={sortedCases}
+        onAddCase={handleAddCase}
+        onCasesChange={setCases}
+        onArchive={handleArchiveCase}
+        onUpdate={handleUpdatesCase}
+      />
     </div>
   );
 };

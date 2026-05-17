@@ -35,13 +35,15 @@ export const Card = ({
         "grid",
         "grid-rows-[auto_auto_auto]",
         "rounded-lg",
-        "bg-[var(--color-bg-sub)]",
+        "bg-(--color-bg-sub)",
         "shadow-md",
         "transition-shadow",
         "hover:shadow-lg",
         "duration-300",
 
         "text-(--color-text)",
+        "border-10",
+        "border-(--color-bg)",
       )}
     >
       <CardSummary

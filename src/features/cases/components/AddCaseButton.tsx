@@ -6,12 +6,14 @@ type Props = {
 
 export const AddCaseButton = ({ onClick }: Props) => {
   return (
-    <div className={clsx("flex", "gap-6", "justify-center")}>
+    <div className={clsx(
+        // "flex", "gap-6", "justify-center"
+        )}>
       <button
         type="button"
         onClick={onClick}
         className={clsx(
-          "bg-(--color-bg-sub)",
+          "bg-(--color-bg)",
           "px-2",
           "w-10",
           "h-10",
