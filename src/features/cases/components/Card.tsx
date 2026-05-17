@@ -31,7 +31,7 @@ export const Card = ({
   return (
     <div
       className={clsx(
-        "w-[400px]",
+        "w-[460px]",
         "grid",
         "grid-rows-[auto_auto_auto]",
         "rounded-lg",

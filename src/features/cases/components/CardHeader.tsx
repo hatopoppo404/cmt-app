@@ -48,8 +48,8 @@ export const CardHeader = ({
           }
           className="text-xl/5 font-bold min-h-[1em] w-full"
         />
-        <div className="flex flex-row gap-3 text-sm mt-2">
-          <div className="flex flex-row items-center gap-1">
+        <div className="flex flex-row gap-6 text-sm mt-2">
+          <div className="flex flex-row items-center gap-2">
             <div className="flex flex-row items-center">
               <ReplyDateIcon className="size-[20px]" />
               <p>回答</p>
@@ -60,7 +60,7 @@ export const CardHeader = ({
                 onUpdate(caseId, {
                   replyDate: nextValue,
                 })}
-              className="max-w-[9em]"
+              className="max-w-[6em]"
             />
           </div>
           <div className="flex flex-row items-center gap-1">
@@ -74,7 +74,7 @@ export const CardHeader = ({
                 onUpdate(caseId, {
                   dueDate: nextValue,
                 })}
-              className="max-w-[9em]"
+              className="max-w-[6em]"
             />
           </div>
         </div>

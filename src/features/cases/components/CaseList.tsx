@@ -95,7 +95,7 @@ export const CaseList = ({
             </SortableContext>
             <DragOverlay>
                 {activeCase ? (
-                    <div className="scale-105 shadow-2xl">
+                    <div className="scale-105 shadow-2xl overflow-auto">
                         <Card 
                             caseItem={activeCase} 
                             onArchive={onArchive}

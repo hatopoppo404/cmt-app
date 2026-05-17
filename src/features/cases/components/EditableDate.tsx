@@ -17,6 +17,10 @@ type Props = {
   onSave: (value: string) => void;
   className?: string;
 };
+type CalendarPosition = {
+  top: number;
+  left: number;
+};
 
 export const EditableDate = ({ value, onSave, className }: Props) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -24,8 +28,36 @@ export const EditableDate = ({ value, onSave, className }: Props) => {
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
   const calendarTriggerRef = useRef<HTMLButtonElement | null>(null);
-  const calendarPosition = calendarTriggerRef.current?.getBoundingClientRect();
+  const [calendarPosition, setCalendarPosition] =
+    useState<CalendarPosition | null>(null);
   const isCalendarInteractingRef = useRef(false);
+
+  const CALENDAR_WIDTH = 320;
+  const CALENDAR_HEIGHT = 360;
+  const CALENDAR_MARGIN = 40;
+  const getCalendarTop = (position: DOMRect) =>
+    position.bottom + CALENDAR_HEIGHT + CALENDAR_MARGIN > window.innerHeight
+      ? position.top - CALENDAR_HEIGHT - 8
+      : position.bottom + 8;
+  const getCalendarLeft = (position: DOMRect) =>
+    position.left + CALENDAR_WIDTH > window.innerWidth
+      ? window.innerWidth - CALENDAR_WIDTH - CALENDAR_MARGIN
+      : position.left;
+
+  const toggleCalendar = () => {
+    const rect = calendarTriggerRef.current?.getBoundingClientRect();
+    if (!rect) {
+      setIsCalendarOpen(false);
+      return;
+    }
+
+    setCalendarPosition({
+      top: getCalendarTop(rect),
+      left: getCalendarLeft(rect),
+    });
+
+    setIsCalendarOpen((prev) => !prev);
+  };
 
   const save = () => {
     const normalizedDate = normalizeDateInput(draftValue);
@@ -68,7 +100,7 @@ export const EditableDate = ({ value, onSave, className }: Props) => {
         <button
           ref={calendarTriggerRef}
           type="button"
-          onClick={() => setIsCalendarOpen((prev) => !prev)}
+          onClick={toggleCalendar}
           className={clsx("cursor-pointer")}
         >
           <ReplyDateIcon />
@@ -77,9 +109,6 @@ export const EditableDate = ({ value, onSave, className }: Props) => {
           calendarPosition &&
           createPortal(
             <div
-              //   onMouseDown={(event) => {
-              //     event.preventDefault();
-              //   }}
               onMouseDown={() => {
                 isCalendarInteractingRef.current = true;
               }}
@@ -94,7 +123,7 @@ export const EditableDate = ({ value, onSave, className }: Props) => {
                 "border-10 border-(--color-bg-sub)",
               )}
               style={{
-                top: calendarPosition.bottom + 4,
+                top: calendarPosition.top,
                 left: calendarPosition.left,
               }}
             >

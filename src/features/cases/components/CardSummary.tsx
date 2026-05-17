@@ -25,7 +25,7 @@ export const CardSummary = ({
   return (
     <div
       className={clsx(
-        "w-[400px]",
+        "w-full",
         "grid",
         "grid-cols-[auto_1fr_auto]",
         "gap-4",
