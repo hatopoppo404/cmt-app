@@ -3,15 +3,12 @@
 import type { Case } from "@/types/case";
 import { mockCases } from "@/features/cases/data/mockCases";
 
-import { SearchInput } from "@/features/cases/components/SearchInput";
 import { doesCaseMatchSearch } from "@/features/cases/utils/search";
 
 import type { SortKey } from "@/features/cases/sort/sortOptions";
 import { sortCases } from "@/features/cases/utils/sortCases";
 
 import { CasesSidebar } from "@/features/cases/components/CasesSidebar";
-import { AddCaseButton } from "@/features/cases/components/AddCaseButton";
-import { CaseList } from "@/features/cases/components/CaseList";
 
 import { createEmptyCase } from "../utils/createEmptyCase";
 

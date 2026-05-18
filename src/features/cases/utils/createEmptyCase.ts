@@ -14,14 +14,14 @@ export const createEmptyCase = (sortOrder: number): Case => {
 
         itemName: "ITEM NAME",
         itemCode: "1B10-123456-11",
-        replyDate: "2050-01-01",
-        dueDate: "2050-01-01",
+        replyDate: "",
+        dueDate: "",
         delayDays: 9999,
         orderCode: "MN1040000000000",
         quantity: 0,
-        warehouse: "5100",
+        warehouse: "",
         deadline: "",
-        cause: "プロジェクト名など",
-        note: "調整状況などを記載する"
+        cause: "",
+        note: ""
     };
 };
