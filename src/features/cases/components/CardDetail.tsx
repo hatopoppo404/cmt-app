@@ -60,7 +60,7 @@ export const CardDetail = ({
           value={orderCode}
           onSave={(nextValue) =>
             onUpdate(caseId, {
-              deadline: nextValue,
+              orderCode: nextValue,
             })}
           className="w-full"
         />
@@ -91,7 +91,7 @@ export const CardDetail = ({
           value={warehouse}
           onSave={(nextValue) =>
             onUpdate(caseId, {
-              deadline: nextValue,
+              warehouse: nextValue,
             })}
           className="w-full"
         />
@@ -119,7 +119,7 @@ export const CardDetail = ({
           value={cause}
           onSave={(nextValue) =>
             onUpdate(caseId, {
-              deadline: nextValue,
+              cause: nextValue,
             })}
           className="w-full"
         />

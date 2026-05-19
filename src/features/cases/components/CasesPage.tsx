@@ -16,6 +16,7 @@ import { useState } from "react";
 import clsx from "clsx";
 import { calculateBusinessDelaDays } from "../utils/date";
 import { CasesMain } from "./CasesMain";
+import { BulgeButton } from "./BulgeButton";
 
 export const CasesPage = () => {
   // カード表示
