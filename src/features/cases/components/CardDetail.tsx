@@ -23,12 +23,15 @@ const DetailRow = ({ icon, label, value }: DetailRowProps) => {
   return (
     <>
       <div className="flex items-center">{icon}</div>
-      <p className="flex items-center text-sm border-b-1 border-dashed border-(--color-gray-300)">{label}</p>
-      <p className="flex items-center text-sm border-b-1 border-dashed border-(--color-gray-300)">{value}</p>
+      <div className="flex items-center border-b-1 border-dashed border-(--color-gray-300) text-sm">
+        {label}
+      </div>
+      <div className="flex items-center border-b-1 border-dashed border-(--color-gray-300) text-sm">
+        {value}
+      </div>
     </>
   );
 };
-
 
 type Props = {
   orderCode: string; //注文番号
@@ -37,10 +40,7 @@ type Props = {
   deadline: string; //限界納期
   cause: string; //起因名
   caseId: string;
-  onUpdate: (
-    id: string,
-    updates: Partial<Case>,
-  ) => void;
+  onUpdate: (id: string, updates: Partial<Case>) => void;
 };
 export const CardDetail = ({
   orderCode,
@@ -61,7 +61,8 @@ export const CardDetail = ({
           onSave={(nextValue) =>
             onUpdate(caseId, {
               orderCode: nextValue,
-            })}
+            })
+          }
           className="w-full"
         />
       ),
@@ -92,7 +93,8 @@ export const CardDetail = ({
           onSave={(nextValue) =>
             onUpdate(caseId, {
               warehouse: nextValue,
-            })}
+            })
+          }
           className="w-full"
         />
       ),
@@ -106,7 +108,8 @@ export const CardDetail = ({
           onSave={(nextValue) =>
             onUpdate(caseId, {
               deadline: nextValue,
-            })}
+            })
+          }
           className="w-full"
         />
       ),
@@ -120,7 +123,8 @@ export const CardDetail = ({
           onSave={(nextValue) =>
             onUpdate(caseId, {
               cause: nextValue,
-            })}
+            })
+          }
           className="w-full"
         />
       ),

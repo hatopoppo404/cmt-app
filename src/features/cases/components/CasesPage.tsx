@@ -14,9 +14,8 @@ import { createEmptyCase } from "../utils/createEmptyCase";
 
 import { useState } from "react";
 import clsx from "clsx";
-import { calculateBusinessDelaDays } from "../utils/date";
+import { calculateBusinessDelayDays } from "../utils/date";
 import { CasesMain } from "./CasesMain";
-import { BulgeButton } from "./BulgeButton";
 
 export const CasesPage = () => {
   // カード表示
@@ -82,7 +81,7 @@ export const CasesPage = () => {
           updatedAt: now,
         };
 
-        const delayDays = calculateBusinessDelaDays({
+        const delayDays = calculateBusinessDelayDays({
           dueDate: updatedCase.dueDate,
           replyDate: updatedCase.replyDate,
           deadline: updatedCase.deadline,
@@ -99,9 +98,10 @@ export const CasesPage = () => {
     <div
       className={clsx(
         "grid",
-        "grid-cols-[400px_1fr]",
-        "gap-2",
+        "grid-cols-[320px_minmax(0,1fr)]",
+        "gap-6",
         "h-dvh",
+        "overflow-hidden",
       )}
     >
       <CasesSidebar
