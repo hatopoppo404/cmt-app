@@ -37,8 +37,10 @@
   /* semantic */
 
   /* background */
-  --color-bg: var(--white);
-  --color-bg-inverse: var(--black);
+  --color-bg-page: var(--white);
+  --color-bg-panel: var(--white);
+  --color-bg-card: var(--white);
+  --color-bg-input: var(--white);
 
   --color-bg-sub: var(--white-sub);
   --color-bg-sub-inverse: var(--gray-700);
@@ -69,6 +71,13 @@
   --color-success: var(--green-500);
   --color-error: var(--red-500);
   --color-warning: var(--yellow-500);
+
+  --color-action-primary: var(--white);
+  --color-action-primary-hover: var(--white-sub);
+  --color-action-primary-active: var(--blue-100);
+  --color-action-secondary: var(--gray-100);
+  --color-action-secondary-hover: var(--gray-500);
+  --color-action-danger: var(--red-500);
 }
 
 [data-theme="dark"] {

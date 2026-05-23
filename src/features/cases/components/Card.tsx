@@ -12,30 +12,21 @@ import { ArchiveIcon } from "lucide-react";
 
 type Props = {
   caseItem: Case;
-  onArchive: (
-    id: string,
-  ) => void;
-  onUpdate: (
-    id: string,
-    updates: Partial<Case>,
-  ) => void;
+  onArchive: (id: string) => void;
+  onUpdate: (id: string, updates: Partial<Case>) => void;
 };
 
-export const Card = ({
-  caseItem,
-  onArchive,
-  onUpdate,
-}: Props) => {
+export const Card = ({ caseItem, onArchive, onUpdate }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div
       className={clsx(
-        "w-[460px]",
+        "w-[520px]",
         "grid",
         "grid-rows-[auto_auto_auto]",
         "rounded-lg",
-        "bg-(--color-bg-sub)",
+        "bg-(--color-bg-card)",
         "shadow-md",
         "transition-shadow",
         "hover:shadow-lg",
@@ -43,7 +34,7 @@ export const Card = ({
 
         "text-(--color-text)",
         "border-10",
-        "border-(--color-bg)",
+        "border-(--color-border)",
       )}
     >
       <CardSummary
@@ -62,13 +53,14 @@ export const Card = ({
           isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0",
         )}
       >
-        <div className="min-h-0  px-4">
+        <div className="min-h-0 px-4">
           <CardDetail
             orderCode={caseItem.orderCode}
             quantity={caseItem.quantity}
             warehouse={caseItem.warehouse}
             deadline={caseItem.deadline}
             cause={caseItem.cause}
+            supplier={caseItem.supplier}
             onUpdate={onUpdate}
             caseId={caseItem.id}
           />
@@ -95,25 +87,24 @@ export const Card = ({
               "items-center",
               "gap-2",
             )}
-
           >
-            <ArchiveIcon
-              className="size-[20px]" />
-            <span className={clsx(
-              "text-[0.7em]",
-              "p-0",
+            <ArchiveIcon className="size-[20px]" />
+            <span
+              className={clsx(
+                "text-[0.7em]",
+                "p-0",
 
-              "max-w-0",
-              "overflow-hidden",
-              "opacity-0",
+                "max-w-0",
+                "overflow-hidden",
+                "opacity-0",
 
-              "transition-all",
-              "duration-200",
+                "transition-all",
+                "duration-200",
 
-              "group-hover:max-w-fit",
-              "group-hover:opacity-100",
-              "group-hover:pr-1",
-            )}
+                "group-hover:max-w-fit",
+                "group-hover:opacity-100",
+                "group-hover:pr-1",
+              )}
             >
               Archive
             </span>

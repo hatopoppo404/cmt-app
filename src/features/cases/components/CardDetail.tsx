@@ -4,6 +4,7 @@ import { formatDate } from "@/lib/utils/formatDate";
 import clsx from "clsx";
 
 import type { Case } from "@/types/case";
+import { FactoryIcon } from "@/components/icons/factoryIcon";
 import { AmountIcon } from "@/components/icons/AmountIcon";
 import { DeadlineIcon } from "@/components/icons/DeadlineIcon";
 import { FolderIcon } from "@/components/icons/FolderIcon";
@@ -12,6 +13,8 @@ import { WarehouseIcon } from "@/components/icons/WarehouseIcon";
 import { EditableQuentity } from "./EditableQuentity";
 import { EditableDate } from "./EditableDate";
 import { EditableText } from "./EditableText";
+import { SupplierCombobox } from "./SupplierCombobox";
+import { supplierOptions } from "../data/supplierOptions";
 
 type DetailRowProps = {
   icon: React.ReactNode;
@@ -39,6 +42,7 @@ type Props = {
   warehouse: string; //納品先
   deadline: string; //限界納期
   cause: string; //起因名
+  supplier: string; //仕入先
   caseId: string;
   onUpdate: (id: string, updates: Partial<Case>) => void;
 };
@@ -48,10 +52,27 @@ export const CardDetail = ({
   warehouse,
   deadline,
   cause,
+  supplier,
   caseId,
   onUpdate,
 }: Props) => {
   const detailRows = [
+    {
+      icon: <FactoryIcon className="size-[20px]" />,
+      label: "仕入先",
+      value: (
+        <SupplierCombobox
+          value={supplier}
+          options={supplierOptions}
+          onSave={(nextValue) =>
+            onUpdate(caseId, {
+              supplier: nextValue,
+            })
+          }
+          className="w-full"
+        />
+      ),
+    },
     {
       icon: <ReceiptIcon className="size-[20px]" />,
       label: "注文番号",
