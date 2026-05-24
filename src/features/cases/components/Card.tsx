@@ -34,7 +34,7 @@ export const Card = ({ caseItem, onArchive, onUpdate }: Props) => {
 
         "text-(--color-text)",
         "border-10",
-        "border-(--color-border)",
+        "border-(--color-border-card)",
       )}
     >
       <CardSummary

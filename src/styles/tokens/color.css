@@ -39,7 +39,7 @@
   /* background */
   --color-bg-page: var(--white);
   --color-bg-panel: var(--white);
-  --color-bg-card: var(--white);
+  --color-bg-card: var(--white-sub);
   --color-bg-input: var(--white);
 
   --color-bg-sub: var(--white-sub);
@@ -56,6 +56,7 @@
 
   /* border */
   --color-border: var(--gray-500);
+  --color-border-card: var(--white);
 
   /* primary */
   --color-primary: var(--yellow-500);
