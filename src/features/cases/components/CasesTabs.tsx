@@ -1,5 +1,39 @@
 import clsx from "clsx";
 
+type TabButtonProps = {
+  label: string;
+  value: "active" | "archived";
+  currentTab: "active" | "archived";
+  onTabChange: (tab: "active" | "archived") => void;
+};
+const TabButton = ({
+  label,
+  value,
+  currentTab,
+  onTabChange,
+}: TabButtonProps) => {
+  const isActive = currentTab === value;
+
+  return (
+    <button
+      type="button"
+      onClick={() => onTabChange(value)}
+      className={clsx(
+        "relative",
+        "z-10",
+        "w-22",
+        "py-2",
+        "cursor-pointer",
+        isActive
+          ? ["opacity-100", "text-(--color-text-activetab)"]
+          : ["opacity-70", "text-(--color-text-muted)", "hover:opacity-100"],
+      )}
+    >
+      {label}
+    </button>
+  );
+};
+
 type Props = {
   currentTab: "active" | "archived";
   onTabChange: (tab: "active" | "archived") => void;
@@ -13,10 +47,9 @@ export const CasesTabs = ({ currentTab, onTabChange }: Props) => {
         "flex",
         "gap-2",
         "rounded-full",
-        "bg-(--color-bg-sub)",
+        "bg-(--color-bg-casestabs)",
         "p-2",
         "text-[10px]",
-        "opacity-70",
         "w-fit",
       )}
     >
@@ -27,47 +60,26 @@ export const CasesTabs = ({ currentTab, onTabChange }: Props) => {
           "bottom-2",
           "w-23",
           "rounded-full",
-          "bg-(--color-bg)",
+          "bg-(--color-bg-activetab)",
           "shadow",
           "transition-transform",
           "duration-200",
-          currentTab === "archived" && "translate-x-23 bg-(--color-blue-100)",
+          "ease-[cubic-bezier(0.34,1.4,0.64,1)]",
+          currentTab === "archived" && "translate-x-23",
         )}
       ></div>
-      <button
-        type="button"
-        onClick={() => onTabChange("active")}
-        className={clsx(
-          "relative",
-          "z-10",
-          "w-22",
-          "py-2",
-          "cursor-pointer",
-          "opacity-40",
-          "hover:opacity-100",
-          "text-(--color-text)",
-          currentTab === "active" && "opacity-100",
-        )}
-      >
-        ACTIVE
-      </button>
-      <button
-        type="button"
-        onClick={() => onTabChange("archived")}
-        className={clsx(
-          "relative",
-          "z-10",
-          "w-22",
-          "py-2",
-          "cursor-pointer",
-          "opacity-40",
-          "hover:opacity-100",
-          "text-(--color-text)",
-          currentTab === "archived" && "opacity-100",
-        )}
-      >
-        ARCHIVED
-      </button>
+      <TabButton
+        label="ACTIVE"
+        value="active"
+        currentTab={currentTab}
+        onTabChange={onTabChange}
+      />
+      <TabButton
+        label="ARCHIVED"
+        value="archived"
+        currentTab={currentTab}
+        onTabChange={onTabChange}
+      />
     </div>
   );
 };

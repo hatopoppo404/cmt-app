@@ -38,16 +38,24 @@
 
   /* background */
   --color-bg-page: var(--white);
+  --color-bg-casesmain: var(--white);
+  --color-bg-casestabs: var(--white-sub);
   --color-bg-panel: var(--white);
   --color-bg-card: var(--white-sub);
+  --color-bg-note: var(--white);
   --color-bg-input: var(--white);
-
+  --color-bg-activetab: var(--color-primary);
+  --color-bg-editable-area: var(--white);
+  --color-bg-openbutton: var(--white);
+  --color-bg-iconbutton: var(--color-gray-300);
   --color-bg-sub: var(--white-sub);
   --color-bg-sub-inverse: var(--gray-700);
 
   /* text */
   --color-text: var(--gray-700);
   --color-text-inverse: var(--gray-100);
+
+  --color-text-activetab: var(--white);
 
   --color-text-strong: var(--black);
   --color-text-strong-inverse: var(--white);
@@ -56,22 +64,24 @@
 
   /* border */
   --color-border: var(--gray-500);
+  --color-border-dashed: var(--gray-100);
   --color-border-card: var(--white);
 
   /* primary */
-  --color-primary: var(--yellow-500);
-  --color-primary-hover: var(--yellow-700);
-  --color-primary-active: var(--yellow-700);
+  --color-primary: var(--purple-500);
+  --color-primary-hover: var(--purple-700);
+  --color-primary-active: var(--purple-700);
 
   /* secondary */
-  --color-secondary: var(--yellow-100);
-  --color-secondary-hover: var(--yellow-400);
-  --color-secondary-active: var(--yellow-400);
+  --color-secondary: var(--purple-100);
+  --color-secondary-hover: var(--purple-400);
+  --color-secondary-active: var(--purple-400);
 
   /* state */
-  --color-success: var(--green-500);
-  --color-error: var(--red-500);
-  --color-warning: var(--yellow-500);
+  --color-status-success: var(--green-500);
+  --color-status-error: var(--red-500);
+  --color-status-warning: var(--yellow-500);
+  --color-status-new: var(--blue-500);
 
   --color-action-primary: var(--white);
   --color-action-primary-hover: var(--white-sub);

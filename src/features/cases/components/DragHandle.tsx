@@ -21,8 +21,7 @@ export const DragHandle = ({ attributes, listeners }: Props) => {
         "w-30",
         "h-1",
         "outline",
-        "border-1",
-        "border-(--color-border)",
+        "border-(--border-default)",
         "bg-(--color-border)",
         "opacity-10",
         "mx-4",
@@ -31,7 +30,7 @@ export const DragHandle = ({ attributes, listeners }: Props) => {
         "cursor-grab",
         "absolute",
         "right-1/3",
-        "top-2",
+        "top-4",
       )}
     ></button>
   );

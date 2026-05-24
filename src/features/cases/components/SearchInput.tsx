@@ -20,7 +20,7 @@ export const SearchInput = ({ searchText, onSearchTextChange }: Props) => {
         "py-2",
         "rounded-full",
         "h-fit",
-        "bg-[var(--color-bg-sub)]",
+        "bg-(--color-bg-input)",
         "shadow-md",
 
         "transition-transform",
@@ -34,12 +34,14 @@ export const SearchInput = ({ searchText, onSearchTextChange }: Props) => {
         type="text"
         placeholder="キーワードで検索"
         value={searchText}
-        onChange={(e) => onSearchTextChange && onSearchTextChange(e.target.value)}
+        onChange={(e) =>
+          onSearchTextChange && onSearchTextChange(e.target.value)
+        }
         className={clsx(
           "flex-1",
           "outline-none",
           "text-sm",
-          "text-[var(--color-gray-500)]",
+          "text-(--color-text)",
         )}
       />
       <SearchButton />
@@ -55,10 +57,10 @@ export const SearchButton = () => {
         "items-center",
         "gap-2",
         "rounded-full",
-        "bg-[var(--color-bg)]",
+        "bg-(--color-bg-iconbutton)",
         "p-2",
         "text-md",
-        "text-[var(--color-text)]",
+        "text-(--color-text)",
         "hover:cursor-pointer",
         "transition-transform",
         "hover:scale-105",

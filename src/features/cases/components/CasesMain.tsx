@@ -24,7 +24,7 @@ export const CasesMain = ({
   return (
     <main
       className={clsx(
-        "bg-(--color-bg-sub)",
+        "bg-(--color-bg-casesmain)",
         "rounded-l-2xl",
         "p-4",
         "overflow-y-auto",

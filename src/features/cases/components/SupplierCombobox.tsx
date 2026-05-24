@@ -72,7 +72,11 @@ export const SupplierCombobox = ({
           }
         }}
         className={clsx(
-            className,
+          "w-full",
+          "rounded-md",
+          "bg-(--color-bg-editable-area)",
+          "p-1",
+          className,
         )}
       />
       {isOpen && filteredOptions.length > 0 && (

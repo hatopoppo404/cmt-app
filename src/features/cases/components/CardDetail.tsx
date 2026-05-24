@@ -26,12 +26,8 @@ const DetailRow = ({ icon, label, value }: DetailRowProps) => {
   return (
     <>
       <div className="flex items-center">{icon}</div>
-      <div className="flex items-center border-b-1 border-dashed border-(--color-gray-300) text-sm">
-        {label}
-      </div>
-      <div className="flex items-center border-b-1 border-dashed border-(--color-gray-300) text-sm">
-        {value}
-      </div>
+      <div className="list-row flex items-center text-sm">{label}</div>
+      <div className="list-row flex items-center text-sm">{value}</div>
     </>
   );
 };

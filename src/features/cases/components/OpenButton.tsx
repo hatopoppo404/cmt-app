@@ -18,9 +18,8 @@ export const OpenButton = ({ isOpen, onClick }: OpenButtonProps) => {
         "items-center",
         "gap-1",
         "font-bold",
-        "text-[var(--color-gray-500)]",
-
-        "bg-[var(--color-bg)]",
+        "text-(--color-text)",
+        "bg-(--color-bg-openbutton)",
         "p-2",
         "rounded-md",
 

@@ -95,7 +95,7 @@ export const EditableDate = ({ value, onSave, className }: Props) => {
               setIsEditing(false);
             }
           }}
-          className={clsx("", className)}
+          className={clsx("bg-(--color-bg-editable-area) rounded-md p-1", className)}
         />
         <button
           ref={calendarTriggerRef}
@@ -119,7 +119,7 @@ export const EditableDate = ({ value, onSave, className }: Props) => {
               }}
               className={clsx(
                 "fixed z-[999]",
-                "rounded-2xl bg-(--color-bg) p-4 shadow-lg",
+                "rounded-2xl bg-(--color-bg-editable-area) p-4 shadow-lg",
                 "border-10 border-(--color-bg-sub)",
               )}
               style={{
@@ -148,7 +148,7 @@ export const EditableDate = ({ value, onSave, className }: Props) => {
                   setIsEditing(false);
                 }}
                 classNames={{
-                  root: "text-sm text-(--color-text) bg-(--color-bg)",
+                  root: "text-sm text-(--color-text) bg-(--color-bg-editable-area)",
                   month_caption: "pb-4 text-lg font-bold",
                   weekday: "mx-4 align-center",
                   day: "m-1 rounded-md hover:bg-(--color-bg-sub)",
@@ -160,7 +160,8 @@ export const EditableDate = ({ value, onSave, className }: Props) => {
                         w-10
                         cursor-pointer
                     `,
-                  selected: "bg-[var(--color-primary)] text-(--color-white)",
+                  selected:
+                    "bg-[var(--color-primary)] text-(--color-text-activetab)",
                 }}
               />
             </div>,

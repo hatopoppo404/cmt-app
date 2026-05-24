@@ -10,19 +10,19 @@ export const DelayBadge = ({ delayDays }: DelayBadgeProps) => {
   const days = delayDays;
   const statusMap = {
     danger: {
-      color: "bg-[var(--color-error)]",
+      color: "bg-[var(--color-status-error)]",
       text: "危険",
     },
     warning: {
-      color: "bg-[var(--color-warning)]",
+      color: "bg-[var(--color-status-warning)]",
       text: "注意",
     },
     safe: {
-      color: "bg-[var(--color-success)]",
+      color: "bg-[var(--color-status-success)]",
       text: "安全",
     },
     new: {
-      color: "bg-[var(--blue-500)]",
+      color: "bg-[var(--color-status-new)]",
       text: "新規",
     },
   };
@@ -33,7 +33,7 @@ export const DelayBadge = ({ delayDays }: DelayBadgeProps) => {
     if (days <= 1) return "warning";
     if (days > 1) return "safe";
     return "new";
-  })()
+  })();
 
   const badge = statusMap[status];
   return (
