@@ -2,6 +2,7 @@
 
 import type { Case } from "@/types/case";
 import { mockCases } from "@/features/cases/data/mockCases";
+import { saveCases } from "../utils/casesStrage";
 
 import { doesCaseMatchSearch } from "@/features/cases/utils/search";
 
@@ -12,7 +13,7 @@ import { CasesSidebar } from "@/features/cases/components/CasesSidebar";
 
 import { createEmptyCase } from "../utils/createEmptyCase";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import clsx from "clsx";
 import { calculateBusinessDelayDays } from "../utils/date";
 import { CasesMain } from "./CasesMain";
@@ -22,6 +23,10 @@ export const CasesPage = () => {
   const [cases, setCases] = useState<Case[]>(() => {
     return [...mockCases].sort((a, b) => a.sortOrder - b.sortOrder);
   });
+  
+  useEffect(() => {
+    saveCases(cases);
+  }, [cases]);
 
   const [searchText, setSearchText] = useState("");
   const [sortKey, setSortKey] = useState<SortKey | null>(null);
