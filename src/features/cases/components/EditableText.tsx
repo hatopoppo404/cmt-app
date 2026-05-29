@@ -35,7 +35,7 @@ export const EditableText = ({ value, onSave, className }: Props) => {
           }
         }}
         className={clsx(
-          "rounded-md bg-(--color-bg-editable-area) p-1",
+          "rounded-md bg-(--color-bg-input) p-1",
           className,
         )}
       />

@@ -42,12 +42,10 @@
   --color-bg-casestabs: var(--white-sub);
   --color-bg-panel: var(--white);
   --color-bg-card: var(--white-sub);
-  --color-bg-note: var(--white);
   --color-bg-input: var(--white);
   --color-bg-activetab: var(--color-primary);
-  --color-bg-editable-area: var(--white);
   --color-bg-openbutton: var(--white);
-  --color-bg-iconbutton: var(--color-gray-300);
+  --color-bg-iconbutton: var(--color-primary);
   --color-bg-sub: var(--white-sub);
   --color-bg-sub-inverse: var(--gray-700);
 
@@ -55,15 +53,13 @@
   --color-text: var(--gray-700);
   --color-text-inverse: var(--gray-100);
 
-  --color-text-activetab: var(--white);
-
   --color-text-strong: var(--black);
   --color-text-strong-inverse: var(--white);
 
   --color-text-muted: var(--gray-500);
 
   /* border */
-  --color-border: var(--gray-500);
+  --color-border: var(--gray-100);
   --color-border-dashed: var(--gray-100);
   --color-border-card: var(--white);
 

@@ -29,7 +29,7 @@ export const Editabletextarea = ({ value, onSave, className }: Props) => {
         onBlur={save}
         className={clsx(
           "h-20",
-          "rounded-md bg-(--color-bg-editable-area) p-1",
+          "rounded-md bg-(--color-bg-input) p-1",
           className,
         )}
       />

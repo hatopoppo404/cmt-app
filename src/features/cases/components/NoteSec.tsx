@@ -27,7 +27,7 @@ export const NoteSec = ({ caseId, note, onUpdate, }: Props) => {
         "gap-2",
         "p-4",
 
-        "bg-(--color-bg-note)",
+        "bg-(--color-bg-input)",
         "rounded-md",
         "w-100%",
       )}

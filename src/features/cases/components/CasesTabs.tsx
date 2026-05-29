@@ -25,7 +25,7 @@ const TabButton = ({
         "py-2",
         "cursor-pointer",
         isActive
-          ? ["opacity-100", "text-(--color-text-activetab)"]
+          ? ["opacity-100", "text-(--color-text-inverse)"]
           : ["opacity-70", "text-(--color-text-muted)", "hover:opacity-100"],
       )}
     >

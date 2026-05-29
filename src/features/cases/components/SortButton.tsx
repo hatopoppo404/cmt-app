@@ -12,12 +12,14 @@ export const SortButton = () => {
           "items-center",
           "gap-1",
           "font-bold",
-          "text-(--color-text-muted)",
+          "text-(--color-text-inverse)",
 
           "bg-(--color-bg-iconbutton)",
           "p-3",
           "rounded-full",
           "aspect-square",
+
+          "border-(--border-default)",
 
           "cursor-pointer",
           "transition-transform",

@@ -23,6 +23,8 @@ export const SearchInput = ({ searchText, onSearchTextChange }: Props) => {
         "bg-(--color-bg-input)",
         "shadow-md",
 
+        "border-default",
+
         "transition-transform",
         "duration-200",
         "focus-within:scale-101",
@@ -60,7 +62,7 @@ export const SearchButton = () => {
         "bg-(--color-bg-iconbutton)",
         "p-2",
         "text-md",
-        "text-(--color-text)",
+        "text-(--color-text-inverse)",
         "hover:cursor-pointer",
         "transition-transform",
         "hover:scale-105",

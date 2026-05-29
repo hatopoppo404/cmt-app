@@ -6,7 +6,7 @@ import clsx from "clsx";
 import { EditableText } from "./EditableText";
 import { normalizeItemCode } from "@/features/cases/utils/normalizeItemCode";
 import { EditableDate } from "./EditableDate";
-import { calculateBusinessDelaDays } from "@/features/cases/utils/date";
+import { calculateBusinessDelayDays } from "@/features/cases/utils/date";
 
 type CardHeaderProps = {
   itemName: string;

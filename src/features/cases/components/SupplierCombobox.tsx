@@ -74,7 +74,7 @@ export const SupplierCombobox = ({
         className={clsx(
           "w-full",
           "rounded-md",
-          "bg-(--color-bg-editable-area)",
+          "bg-(--color-bg-input)",
           "p-1",
           className,
         )}
