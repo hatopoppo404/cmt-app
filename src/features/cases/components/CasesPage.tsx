@@ -23,7 +23,7 @@ export const CasesPage = () => {
   const [cases, setCases] = useState<Case[]>(() => {
     return [...mockCases].sort((a, b) => a.sortOrder - b.sortOrder);
   });
-  
+
   useEffect(() => {
     saveCases(cases);
   }, [cases]);

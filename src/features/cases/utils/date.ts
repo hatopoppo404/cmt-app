@@ -126,8 +126,6 @@ export const calculateBusinessDelayDays = ({
 
   const start = toDate(replyDate);
   const end = toDate(baseDate);
-  console.log("start", start);
-  console.log("end", end);
 
   if (start === null || end === null) return -99999;
 
