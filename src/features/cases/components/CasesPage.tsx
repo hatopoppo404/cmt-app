@@ -2,7 +2,7 @@
 
 import type { Case } from "@/types/case";
 import { mockCases } from "@/features/cases/data/mockCases";
-import { saveCases } from "../utils/casesStrage";
+import { saveCases, loadCases } from "../utils/casesStrage";
 
 import { doesCaseMatchSearch } from "@/features/cases/utils/search";
 
@@ -23,10 +23,22 @@ export const CasesPage = () => {
   const [cases, setCases] = useState<Case[]>(() => {
     return [...mockCases].sort((a, b) => a.sortOrder - b.sortOrder);
   });
+  const [isCasesLoaded, setIsCasesLoaded] = useState(false);
 
+  // 読み込み
   useEffect(() => {
+    const savedCases = loadCases();
+    if (savedCases) {
+      setCases(savedCases.sort((a, b) => a.sortOrder - b.sortOrder));
+    }
+    setIsCasesLoaded(true);
+  }, []);
+
+  // 保存
+  useEffect(() => {
+    if (!isCasesLoaded) return;
     saveCases(cases);
-  }, [cases]);
+  }, [cases, isCasesLoaded]);
 
   const [searchText, setSearchText] = useState("");
   const [sortKey, setSortKey] = useState<SortKey | null>(null);
