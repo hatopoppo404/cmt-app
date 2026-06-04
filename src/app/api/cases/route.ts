@@ -10,7 +10,7 @@ export async function POST(
 ){
     const cases = await request.json();
 
-    console.log(cases);
+    // console.log(cases);
     
     return NextResponse.json({
         success: true,
