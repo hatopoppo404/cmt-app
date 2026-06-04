@@ -2,7 +2,7 @@
 
 import type { Case } from "@/types/case";
 import { mockCases } from "@/features/cases/data/mockCases";
-import { saveCases, loadCases } from "../utils/casesStrage";
+import { getCases, saveCasesApi } from "@/features/cases/api/casesApi";
 
 import { doesCaseMatchSearch } from "@/features/cases/utils/search";
 
@@ -27,17 +27,22 @@ export const CasesPage = () => {
 
   // 読み込み
   useEffect(() => {
-    const savedCases = loadCases();
-    if (savedCases) {
-      setCases(savedCases.sort((a, b) => a.sortOrder - b.sortOrder));
-    }
-    setIsCasesLoaded(true);
+    const initializeCases = async () => {
+      const savedCases = await getCases();
+
+      if (savedCases) {
+        setCases(savedCases.sort((a, b) => a.sortOrder - b.sortOrder));
+      }
+      setIsCasesLoaded(true);
+    };
+
+    initializeCases();
   }, []);
 
   // 保存
   useEffect(() => {
     if (!isCasesLoaded) return;
-    saveCases(cases);
+    saveCasesApi(cases);
   }, [cases, isCasesLoaded]);
 
   const [searchText, setSearchText] = useState("");
