@@ -9,5 +9,35 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
+}
+
+enum CaseStatus {
+  active
+  archived
+}
+
+model Case {
+  id        String     @id
+  status    CaseStatus @default(active)
+  sortOrder Int
+
+  createdAt  DateTime
+  updatedAt  DateTime
+  archivedAt DateTime?
+  deletedAt  DateTime?
+
+  itemCode String
+  itemName String?
+
+  supplier  String?
+  replyDate String?
+  dueDate   String?
+  delayDays Int?
+  orderCode String?
+  quantity  Int?
+  warehouse String?
+  deadline  String?
+  cause     String?
+  note      String?
 }
