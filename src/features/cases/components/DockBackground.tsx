@@ -5,7 +5,7 @@ type Props = {
   isOpen: boolean;
 };
 
-const DockBackground = ({ isOpen }: Props) => {
+export const DockBackground = ({ isOpen }: Props) => {
   return (
     <div
       className={clsx(
@@ -13,7 +13,7 @@ const DockBackground = ({ isOpen }: Props) => {
         "inset-0",
         "z-0",
         "rounded-[32px]",
-        "",
+        "w-full",
         "duration-300",
         "bg-(--color-bg-dock)",
         isOpen ? "h-[200px]" : "h-[20px]",

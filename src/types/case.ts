@@ -1,6 +1,8 @@
+export type CaseStatus = "active" | "archived";
+
 export type Case = {
   id: string; //ID
-  status: "active" | "archived";
+  status: CaseStatus;
   sortOrder: number;
   createdAt: string;
   updatedAt: string;

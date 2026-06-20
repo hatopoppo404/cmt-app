@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import clsx from "clsx";
 
-import type { Case } from "@/types/case";
+import type { Case, CaseStatus } from "@/types/case";
 import { getCases, saveCasesApi } from "@/features/cases/api/casesApi";
 
 import { doesCaseMatchSearch } from "@/features/cases/utils/search";
@@ -10,7 +10,6 @@ import type { SortKey } from "@/features/cases/sort/sortOptions";
 import { sortCases } from "@/features/cases/utils/sortCases";
 
 import { CasesTopDock } from "@/features/cases/components/CasesTopDock";
-
 import { createEmptyCase } from "../utils/createEmptyCase";
 import { calculateBusinessDelayDays } from "../utils/date";
 import { CasesMain } from "./CasesMain";
@@ -44,7 +43,7 @@ export const CasesPage = () => {
   const [sortKey, setSortKey] = useState<SortKey | null>(null);
   const [appliedSortKey, setAppliedSortKey] = useState<SortKey | null>(null);
 
-  const [currentTab, setCurrentTab] = useState<"active" | "archived">("active"); // タブ切替
+  const [currentTab, setCurrentTab] = useState<CaseStatus>("active"); // タブ切替
 
   const visibleCases = cases.filter((caseItem) => {
     return caseItem.status === currentTab && caseItem.deletedAt === null;

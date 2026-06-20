@@ -7,6 +7,7 @@ import { SortSet } from "./SortSet";
 import { CasesTabs } from "./CasesTabs";
 
 import type { SortKey } from "../sort/sortOptions";
+import type { CaseStatus } from "@/types/case";
 
 type Props = {
   searchText: string;
@@ -14,8 +15,8 @@ type Props = {
   sortKey: SortKey | null;
   onSortKeyChange: (value: SortKey | null) => void;
   onApplySort: () => void;
-  currentTab: "active" | "archived";
-  onTabChange: (tab: "active" | "archived") => void;
+  currentTab: CaseStatus;
+  onTabChange: (tab: CaseStatus) => void;
 };
 
 export const CasesTopDock = ({

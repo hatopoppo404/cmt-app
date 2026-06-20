@@ -1,10 +1,11 @@
 import clsx from "clsx";
+import { CaseStatus } from "@/types/case";
 
 type TabButtonProps = {
   label: string;
-  value: "active" | "archived";
-  currentTab: "active" | "archived";
-  onTabChange: (tab: "active" | "archived") => void;
+  value: CaseStatus;
+  currentTab: CaseStatus;
+  onTabChange: (tab: CaseStatus) => void;
 };
 const TabButton = ({
   label,
@@ -35,8 +36,8 @@ const TabButton = ({
 };
 
 type Props = {
-  currentTab: "active" | "archived";
-  onTabChange: (tab: "active" | "archived") => void;
+  currentTab: CaseStatus;
+  onTabChange: (tab: CaseStatus) => void;
 };
 
 export const CasesTabs = ({ currentTab, onTabChange }: Props) => {
