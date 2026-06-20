@@ -1,5 +1,4 @@
 import type { Case } from "@/types/case";
-import { saveCases, loadCases } from "../utils/casesStrage";
 
 export const getCases = async (): Promise<Case[] | null> => {
   const response = await fetch(
