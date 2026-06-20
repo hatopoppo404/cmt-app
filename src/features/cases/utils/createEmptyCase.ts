@@ -14,6 +14,7 @@ export const createEmptyCase = (sortOrder: number): Case => {
 
         itemName: "ITEM NAME",
         itemCode: "1B10-123456-11",
+        supplier: "SUPPLIER NAME",
         replyDate: "",
         dueDate: "",
         delayDays: 9999,
