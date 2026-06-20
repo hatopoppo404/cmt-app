@@ -2,12 +2,10 @@
 import { useState } from "react";
 import clsx from "clsx";
 
-import { SearchInput } from "./SearchInput";
-import { SortSet } from "./SortSet";
-import { CasesTabs } from "./CasesTabs";
-
 import type { SortKey } from "../sort/sortOptions";
 import type { CaseStatus } from "@/types/case";
+import { DockBackground } from "./DockBackground";
+import { DockControls } from "./DockControls";
 
 type Props = {
   searchText: string;
@@ -32,28 +30,25 @@ export const CasesTopDock = ({
   return (
     <aside
       className={clsx(
-        "grid",
-        "grid-cols-[minmax(0,1fr)_auto]",
-        "grid-rows-[auto_auto]",
-        "gap-4",
+        "relative",
+
+        "w-full",
+        "h-fit",
+        "px-4",
+        "py-4",
       )}
     >
-      <div className={clsx("col-span-2", "row-start-1")}>
-        <SearchInput
-          searchText={searchText}
-          onSearchTextChange={onSearchTextChange}
-        />
-      </div>
-      <div className={clsx("col-start-1", "row-start-2")}>
-        <CasesTabs currentTab={currentTab} onTabChange={onTabChange} />
-      </div>
-      <div className={clsx("col-start-2", "row-start-2")}>
-        <SortSet
-          sortKey={sortKey}
-          onSortKeyChange={onSortKeyChange}
-          onApplySort={onApplySort}
-        />
-      </div>
+      <DockBackground isOpen={open} />
+      <DockControls
+        isOpen={open}
+        searchText={searchText}
+        onSearchTextChange={onSearchTextChange}
+        sortKey={sortKey}
+        onSortKeyChange={onSortKeyChange}
+        onApplySort={onApplySort}
+        currentTab={currentTab}
+        onTabChange={onTabChange}
+      />
     </aside>
   );
 };
