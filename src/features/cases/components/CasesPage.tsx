@@ -1,28 +1,25 @@
 "use client";
+import { useEffect, useState } from "react";
+import clsx from "clsx";
 
 import type { Case } from "@/types/case";
-import { mockCases } from "@/features/cases/data/mockCases";
 import { getCases, saveCasesApi } from "@/features/cases/api/casesApi";
 
 import { doesCaseMatchSearch } from "@/features/cases/utils/search";
-
 import type { SortKey } from "@/features/cases/sort/sortOptions";
 import { sortCases } from "@/features/cases/utils/sortCases";
 
 import { CasesSidebar } from "@/features/cases/components/CasesSidebar";
 
 import { createEmptyCase } from "../utils/createEmptyCase";
-
-import { useEffect, useState } from "react";
-import clsx from "clsx";
 import { calculateBusinessDelayDays } from "../utils/date";
 import { CasesMain } from "./CasesMain";
 
+
+
 export const CasesPage = () => {
   // カード表示
-  const [cases, setCases] = useState<Case[]>(() => {
-    return [...mockCases].sort((a, b) => a.sortOrder - b.sortOrder);
-  });
+  const [cases, setCases] = useState<Case[]>([]);
   const [isCasesLoaded, setIsCasesLoaded] = useState(false);
 
   // 読み込み
