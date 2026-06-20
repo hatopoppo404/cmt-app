@@ -9,13 +9,11 @@ import { doesCaseMatchSearch } from "@/features/cases/utils/search";
 import type { SortKey } from "@/features/cases/sort/sortOptions";
 import { sortCases } from "@/features/cases/utils/sortCases";
 
-import { CasesSidebar } from "@/features/cases/components/CasesSidebar";
+import { CasesTopDock } from "@/features/cases/components/CasesTopDock";
 
 import { createEmptyCase } from "../utils/createEmptyCase";
 import { calculateBusinessDelayDays } from "../utils/date";
 import { CasesMain } from "./CasesMain";
-
-
 
 export const CasesPage = () => {
   // カード表示
@@ -116,14 +114,17 @@ export const CasesPage = () => {
   return (
     <div
       className={clsx(
-        "grid",
-        "grid-cols-[320px_minmax(0,1fr)]",
-        "gap-6",
-        "h-dvh",
-        "overflow-hidden",
+        "bg-(--color-bg-page)",
+        "min-h-dvh",
+
+        "flex",
+        "flex-col",
+        "items-center",
+        "justify-center",
+        "p-6",
       )}
     >
-      <CasesSidebar
+      <CasesTopDock
         searchText={searchText}
         onSearchTextChange={setSearchText}
         sortKey={sortKey}

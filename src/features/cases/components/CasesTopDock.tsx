@@ -1,11 +1,12 @@
-// import { CasesToolbar } from "@/components/CasesToolbar";
+"use client";
+import { useState } from "react";
+import clsx from "clsx";
+
 import { SearchInput } from "./SearchInput";
 import { SortSet } from "./SortSet";
 import { CasesTabs } from "./CasesTabs";
 
 import type { SortKey } from "../sort/sortOptions";
-
-import clsx from "clsx";
 
 type Props = {
   searchText: string;
@@ -17,7 +18,7 @@ type Props = {
   onTabChange: (tab: "active" | "archived") => void;
 };
 
-export const CasesSidebar = ({
+export const CasesTopDock = ({
   searchText,
   onSearchTextChange,
   sortKey,
@@ -26,35 +27,31 @@ export const CasesSidebar = ({
   currentTab,
   onTabChange,
 }: Props) => {
+  const [open, setOpen] = useState(false);
   return (
     <aside
       className={clsx(
-        "flex",
-        "flex-col",
-        "justify-between",
-        "gap-6",
-        "h-dvh",
-        "px-4",
-        "py-6",
+        "grid",
+        "grid-cols-[minmax(0,1fr)_auto]",
+        "grid-rows-[auto_auto]",
+        "gap-4",
       )}
     >
-      <div className={clsx(
-        "flex",
-        "flex-col",
-         "gap-6",
-       )}>
+      <div className={clsx("col-span-2", "row-start-1")}>
         <SearchInput
           searchText={searchText}
           onSearchTextChange={onSearchTextChange}
         />
+      </div>
+      <div className={clsx("col-start-1", "row-start-2")}>
+        <CasesTabs currentTab={currentTab} onTabChange={onTabChange} />
+      </div>
+      <div className={clsx("col-start-2", "row-start-2")}>
         <SortSet
           sortKey={sortKey}
           onSortKeyChange={onSortKeyChange}
           onApplySort={onApplySort}
         />
-      </div>
-      <div>
-        <CasesTabs currentTab={currentTab} onTabChange={onTabChange} />
       </div>
     </aside>
   );
