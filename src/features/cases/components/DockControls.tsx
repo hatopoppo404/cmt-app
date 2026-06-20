@@ -39,6 +39,8 @@ export const DockControls = ({
         "grid-cols-[minmax(0,1fr)_auto]",
         "grid-rows-[auto_auto]",
         "gap-4",
+        "transition-opacity",
+        isOpen ? "opacity-100" : "opacity-0",
       )}
     >
       <div className={clsx("col-span-2", "row-start-1")}>

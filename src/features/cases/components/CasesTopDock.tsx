@@ -6,6 +6,7 @@ import type { SortKey } from "../sort/sortOptions";
 import type { CaseStatus } from "@/types/case";
 import { DockBackground } from "./DockBackground";
 import { DockControls } from "./DockControls";
+import { DockToggleButton } from "./DockToggleButton";
 
 type Props = {
   searchText: string;
@@ -48,6 +49,10 @@ export const CasesTopDock = ({
         onApplySort={onApplySort}
         currentTab={currentTab}
         onTabChange={onTabChange}
+      />
+      <DockToggleButton
+        isOpen={open}
+        onToggle={() => setOpen((prev) => !prev)}
       />
     </aside>
   );

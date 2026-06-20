@@ -115,6 +115,7 @@ export const CasesPage = () => {
       className={clsx(
         "bg-(--color-bg-page)",
         "min-h-dvh",
+        "w-[700px]",
 
         "flex",
         "flex-col",

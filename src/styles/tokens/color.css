@@ -38,6 +38,7 @@
 
   /* background */
   --color-bg-page: var(--white);
+  --color-bg-dock: var(--gray-100);
   --color-bg-casesmain: var(--white);
   --color-bg-casestabs: var(--white-sub);
   --color-bg-panel: var(--white);
