@@ -116,12 +116,12 @@ export const CasesPage = () => {
         "bg-(--color-bg-page)",
         "min-h-dvh",
         "w-[700px]",
+        "mx-auto",
 
-        "flex",
-        "flex-col",
-        "items-center",
-        "justify-center",
+        "grid",
+        "grid-rows-[auto_1fr]",
         "p-6",
+        "h-[calc(100dvh-32px)]",
       )}
     >
       <CasesTopDock

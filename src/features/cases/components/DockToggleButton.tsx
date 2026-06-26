@@ -27,7 +27,7 @@ export const DockToggleButton = ({ isOpen, onToggle }: Props) => {
         "cursor-pointer",
         "right-6",
         "-translate-y-[0.1px]",
-        isOpen ? "top-[calc(100%)]" : "top-2",
+        isOpen ? "top-[calc(100%-60px)]" : "top-2 delay-200",
       )}
     >
       {isOpen ? <ArrowIcon className="rotate-180" /> : <SearchIcon />}

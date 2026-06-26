@@ -6,12 +6,7 @@ type Props = {
 
 export const AddCaseButton = ({ onClick }: Props) => {
   return (
-    <div
-      className={
-        clsx()
-        // "flex", "gap-6", "justify-center"
-      }
-    >
+    <div className={clsx("flex", "gap-6", "justify-center")}>
       <button
         type="button"
         onClick={onClick}
@@ -21,7 +16,7 @@ export const AddCaseButton = ({ onClick }: Props) => {
           "w-10",
           "h-10",
           "rounded-lg",
-          "cursor-pointer",
+          "!cursor-pointer",
           "text-(--color-text)",
           "shadow-md",
           "transition-transform",
@@ -29,9 +24,10 @@ export const AddCaseButton = ({ onClick }: Props) => {
           "hover:scale-105",
           "active:scale-95",
           "hover:shadow-lg",
+          "[&_*]:pointer-events-none",
         )}
       >
-        +
+        ＋
       </button>
     </div>
   );

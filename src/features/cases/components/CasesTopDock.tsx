@@ -31,12 +31,16 @@ export const CasesTopDock = ({
   return (
     <aside
       className={clsx(
-        "relative",
+        "sticky",
 
         "w-full",
-        "h-fit",
         "px-4",
         "py-4",
+
+        "transition-all",
+        "duration-300",
+
+        open ? "h-[240px]" : "h-[60px] overflow-hidden",
       )}
     >
       <DockBackground isOpen={open} />

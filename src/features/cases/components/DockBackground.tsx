@@ -16,7 +16,8 @@ export const DockBackground = ({ isOpen }: Props) => {
         "w-full",
         "duration-300",
         "bg-(--color-bg-dock)",
-        isOpen ? "h-[calc(100%+55px)]" : "h-[60px]",
+        "pointer-events-none",
+        isOpen ? "mb-10 h-[calc(100%)]" : "h-[60px] delay-200",
       )}
     />
   );
