@@ -138,7 +138,7 @@ export const CasesPage = () => {
   return (
     <div
       className={clsx(
-        "relative",
+        // "relative",
         "bg-(--color-bg-page)",
         "min-h-dvh",
         "w-[700px]",

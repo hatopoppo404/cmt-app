@@ -16,7 +16,7 @@ export const DemoResetButton = ({ onReset, isLoading }: Props) => {
         "absolute",
         "z-[9999]",
         "right-4",
-        "top-4",
+        "bottom-4",
 
         "border",
         "border-[var(--color-border)]",
