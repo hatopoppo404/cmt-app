@@ -3,7 +3,12 @@ import { useEffect, useState } from "react";
 import clsx from "clsx";
 
 import type { Case, CaseStatus } from "@/types/case";
-import { getCases, saveCasesApi } from "@/features/cases/api/casesApi";
+import {
+  getCases,
+  saveCasesApi,
+  resetDemoCasesApi,
+} from "@/features/cases/api/casesApi";
+import { DemoResetButton } from "./DemoResetButton";
 
 import { doesCaseMatchSearch } from "@/features/cases/utils/search";
 import type { SortKey } from "@/features/cases/sort/sortOptions";
@@ -115,9 +120,25 @@ export const CasesPage = () => {
   // 集計
   const summary = getCaseAlertSummary(cases);
 
+  //デモリセット
+  const [isResettingDemo, setIsResettingDemo] = useState(false);
+  const handleResetDemoCases = async () => {
+    try {
+      setIsResettingDemo(true);
+      await resetDemoCasesApi();
+      const loadedCases = await getCases();
+      setCases(loadedCases ?? []);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsResettingDemo(false);
+    }
+  };
+
   return (
     <div
       className={clsx(
+        "relative",
         "bg-(--color-bg-page)",
         "min-h-dvh",
         "w-[700px]",
@@ -130,6 +151,10 @@ export const CasesPage = () => {
         "h-[calc(100dvh-32px)]",
       )}
     >
+      <DemoResetButton
+        onReset={handleResetDemoCases}
+        isLoading={isResettingDemo}
+      />
       <CasesTopDock
         searchText={searchText}
         onSearchTextChange={setSearchText}

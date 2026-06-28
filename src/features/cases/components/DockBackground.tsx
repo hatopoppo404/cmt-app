@@ -11,7 +11,7 @@ export const DockBackground = ({ isOpen }: Props) => {
       className={clsx(
         "absolute",
         "inset-0",
-        "z-0",
+        "z-[0]",
         "rounded-[32px]",
         "w-full",
         "duration-300",
