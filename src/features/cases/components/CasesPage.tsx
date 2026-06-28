@@ -10,6 +10,7 @@ import type { SortKey } from "@/features/cases/sort/sortOptions";
 import { sortCases } from "@/features/cases/utils/sortCases";
 
 import { CasesTopDock } from "@/features/cases/components/CasesTopDock";
+import { CasesAlertSummary } from "@/features/cases/components/CasesAlertSummary";
 import { createEmptyCase } from "../utils/createEmptyCase";
 import { calculateBusinessDelayDays } from "../utils/date";
 import { CasesMain } from "./CasesMain";
@@ -120,6 +121,7 @@ export const CasesPage = () => {
 
         "grid",
         "grid-rows-[auto_1fr]",
+        "gap-6",
         "p-6",
         "h-[calc(100dvh-32px)]",
       )}
@@ -132,6 +134,14 @@ export const CasesPage = () => {
         onApplySort={() => setAppliedSortKey(sortKey)}
         currentTab={currentTab}
         onTabChange={setCurrentTab}
+      />
+      <CasesAlertSummary
+        highRiskCount={11}
+        urgentCount={12}
+        delayedCount={
+          visibleCases.filter((caseItem) => caseItem.delayDays > 0).length
+        }
+        activeCount={visibleCases.length}
       />
       <CasesMain
         cases={sortedCases}
