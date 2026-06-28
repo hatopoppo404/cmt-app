@@ -14,7 +14,7 @@ export const getCaseAlertSummary = (cases: Case[]): CaseAlertSummary => {
   });
 
   const delayedCases = activeCases.filter((caseItem) => {
-    return caseItem.delayDays > 0;
+    return caseItem.delayDays < 0;
   });
 
   const urgentCases = activeCases.filter((caseItem) => {
@@ -22,7 +22,7 @@ export const getCaseAlertSummary = (cases: Case[]): CaseAlertSummary => {
   });
 
   const highRiskCases = activeCases.filter((caseItem) => {
-    return caseItem.delayDays > 0 && isWithBusinessDays(caseItem.deadline, 3);
+    return caseItem.delayDays < 0 && isWithBusinessDays(caseItem.deadline, 3);
   });
 
   return {

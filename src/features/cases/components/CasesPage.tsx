@@ -124,7 +124,7 @@ export const CasesPage = () => {
         "mx-auto",
 
         "grid",
-        "grid-rows-[auto_1fr]",
+        "grid-rows-[auto_auto_1fr]",
         "gap-6",
         "p-6",
         "h-[calc(100dvh-32px)]",

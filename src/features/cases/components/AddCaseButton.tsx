@@ -11,13 +11,13 @@ export const AddCaseButton = ({ onClick }: Props) => {
         type="button"
         onClick={onClick}
         className={clsx(
-          "bg-(--color-action-primary)",
+          "bg-(--color-primary)",
           "px-2",
           "w-10",
           "h-10",
           "rounded-lg",
           "!cursor-pointer",
-          "text-(--color-text)",
+          "text-(--color-text-inverse)",
           "shadow-md",
           "transition-transform",
           "duration-200",
