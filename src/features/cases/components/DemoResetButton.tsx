@@ -10,6 +10,7 @@ export const DemoResetButton = ({ onReset, isLoading }: Props) => {
     <button
       type="button"
       onClick={onReset}
+      disabled={isLoading}
       className={clsx(
         "cursor-pointer",
         "absolute",
@@ -29,6 +30,8 @@ export const DemoResetButton = ({ onReset, isLoading }: Props) => {
 
         "hover:scale-102",
         "active:scale-95",
+        "disabled:pointer-events-none",
+        "disabled:opacity-60",
       )}
     >
       {isLoading ? "復元中..." : "デモデータを復元"}
