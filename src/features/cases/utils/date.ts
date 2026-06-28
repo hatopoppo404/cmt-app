@@ -143,3 +143,28 @@ export const calculateBusinessDelayDays = ({
 
   return count;
 };
+
+export const isWithBusinessDays = (date: string, days: number) => {
+  const targetDate = toDate(date);
+  if (!targetDate) return false;
+
+  const today = new Date();
+  const current = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate(),
+  );
+
+  let businessDaysCount = 0;
+  while (current.getTime() <= targetDate.getTime()) {
+    if (isBusinessDay(current)) {
+      businessDaysCount++;
+    }
+
+    if (businessDaysCount > days) return false;
+
+    current.setDate(current.getDate() + 1);
+  }
+
+  return true;
+};

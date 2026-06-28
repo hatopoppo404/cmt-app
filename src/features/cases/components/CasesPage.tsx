@@ -8,6 +8,7 @@ import { getCases, saveCasesApi } from "@/features/cases/api/casesApi";
 import { doesCaseMatchSearch } from "@/features/cases/utils/search";
 import type { SortKey } from "@/features/cases/sort/sortOptions";
 import { sortCases } from "@/features/cases/utils/sortCases";
+import { getCaseAlertSummary } from "@/features/cases/utils/getCaseAlertSummary";
 
 import { CasesTopDock } from "@/features/cases/components/CasesTopDock";
 import { CasesAlertSummary } from "@/features/cases/components/CasesAlertSummary";
@@ -111,6 +112,9 @@ export const CasesPage = () => {
     });
   };
 
+  // 集計
+  const summary = getCaseAlertSummary(cases);
+
   return (
     <div
       className={clsx(
@@ -136,12 +140,10 @@ export const CasesPage = () => {
         onTabChange={setCurrentTab}
       />
       <CasesAlertSummary
-        highRiskCount={11}
-        urgentCount={12}
-        delayedCount={
-          visibleCases.filter((caseItem) => caseItem.delayDays > 0).length
-        }
-        activeCount={visibleCases.length}
+        highRiskCount={summary.highRiskCount}
+        urgentCount={summary.urgentCount}
+        delayedCount={summary.delayedCount}
+        activeCount={summary.activeCount}
       />
       <CasesMain
         cases={sortedCases}
