@@ -39,6 +39,11 @@ export const getCases = async (): Promise<Case[] | null> => {
 };
 
 export const saveCasesApi = async (cases: Case[]): Promise<void> => {
+  if (isDemoMode) {
+    saveDemoCases(cases);
+    return;
+  }
+
   const response = await fetch("/api/cases", {
     method: "POST",
     headers: {
