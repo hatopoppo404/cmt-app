@@ -3,12 +3,15 @@
 import clsx from "clsx";
 import { SummaryStatCard } from "@/features/cases/components/SummaryStatCard";
 import { useState } from "react";
+import type { SummaryFilter } from "@/types/case";
 
 type Props = {
   highRiskCount: number;
   urgentCount: number;
   delayedCount: number;
   activeCount: number;
+  summaryFilter: SummaryFilter;
+  onSummaryFilterChange: (filter: Exclude<SummaryFilter, null>) => void;
 };
 
 export const CasesAlertSummary = ({
@@ -16,6 +19,8 @@ export const CasesAlertSummary = ({
   urgentCount,
   delayedCount,
   activeCount,
+  summaryFilter,
+  onSummaryFilterChange,
 }: Props) => {
   const [emphasizedCard, setEmphasizedCard] = useState("highRisk");
   return (
@@ -39,6 +44,7 @@ export const CasesAlertSummary = ({
             setEmphasizedCard("");
           } else {
             setEmphasizedCard("highRisk");
+            onSummaryFilterChange("highRisk");
           }
         }}
       />
@@ -51,6 +57,7 @@ export const CasesAlertSummary = ({
             setEmphasizedCard("");
           } else {
             setEmphasizedCard("urgent");
+            onSummaryFilterChange("urgent");
           }
         }}
       />
@@ -63,6 +70,7 @@ export const CasesAlertSummary = ({
             setEmphasizedCard("");
           } else {
             setEmphasizedCard("delayed");
+            onSummaryFilterChange("delayed");
           }
         }}
       />
@@ -75,6 +83,7 @@ export const CasesAlertSummary = ({
             setEmphasizedCard("");
           } else {
             setEmphasizedCard("active");
+            onSummaryFilterChange("active");
           }
         }}
       />

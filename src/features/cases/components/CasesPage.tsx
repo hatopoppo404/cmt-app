@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import clsx from "clsx";
 
-import type { Case, CaseStatus } from "@/types/case";
+import type { Case, CaseStatus, SummaryFilter } from "@/types/case";
 import {
   getCases,
   saveCasesApi,
@@ -18,7 +18,7 @@ import { getCaseAlertSummary } from "@/features/cases/utils/getCaseAlertSummary"
 import { CasesTopDock } from "@/features/cases/components/CasesTopDock";
 import { CasesAlertSummary } from "@/features/cases/components/CasesAlertSummary";
 import { createEmptyCase } from "../utils/createEmptyCase";
-import { calculateBusinessDelayDays } from "../utils/date";
+import { calculateBusinessDelayDays, isWithBusinessDays } from "../utils/date";
 import { CasesMain } from "./CasesMain";
 
 export const CasesPage = () => {
@@ -39,7 +39,33 @@ export const CasesPage = () => {
 
     initializeCases();
   }, []);
-
+  // 集計
+  const summary = getCaseAlertSummary(cases);
+  const [summaryFilter, setSummaryFilter] = useState<SummaryFilter>(null);
+  const handleSummaryFilterChange = (filter: Exclude<SummaryFilter, null>) => {
+    setSummaryFilter((currentFilter) =>
+      currentFilter === filter ? null : filter,
+    );
+  };
+  const macthesSummaryFilter = (caseItem: Case) => {
+    if (!summaryFilter) return true;
+    if (caseItem.status !== "active" || caseItem.deletedAt !== null)
+      return false;
+    switch (summaryFilter) {
+      case "active":
+        return true;
+      case "delayed":
+        return caseItem.delayDays < 0;
+      case "urgent":
+        return isWithBusinessDays(caseItem.deadline, 3);
+      case "highRisk":
+        return (
+          caseItem.delayDays < 0 && isWithBusinessDays(caseItem.deadline, 3)
+        );
+      default:
+        return true;
+    }
+  };
   // 保存
   useEffect(() => {
     if (!isCasesLoaded) return;
@@ -56,7 +82,10 @@ export const CasesPage = () => {
     return caseItem.status === currentTab && caseItem.deletedAt === null;
   });
   const filteredCases = visibleCases.filter((caseItem) => {
-    return doesCaseMatchSearch(caseItem, searchText);
+    return (
+      doesCaseMatchSearch(caseItem, searchText) &&
+      macthesSummaryFilter(caseItem)
+    );
   });
   const sortedCases = sortCases(filteredCases, appliedSortKey);
 
@@ -117,9 +146,6 @@ export const CasesPage = () => {
     });
   };
 
-  // 集計
-  const summary = getCaseAlertSummary(cases);
-
   //デモリセット
   const [isResettingDemo, setIsResettingDemo] = useState(false);
   const handleResetDemoCases = async () => {
@@ -169,6 +195,8 @@ export const CasesPage = () => {
         urgentCount={summary.urgentCount}
         delayedCount={summary.delayedCount}
         activeCount={summary.activeCount}
+        summaryFilter={summaryFilter}
+        onSummaryFilterChange={handleSummaryFilterChange}
       />
       <CasesMain
         cases={sortedCases}

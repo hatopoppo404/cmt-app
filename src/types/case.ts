@@ -22,3 +22,5 @@ export type Case = {
   cause: string; //起因名
   note: string; //備考
 };
+
+export type SummaryFilter = "highRisk" | "urgent" | "delayed" | "active" | null;
