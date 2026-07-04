@@ -1,6 +1,5 @@
 import { mockCases } from "@/features/cases/data/mockCases";
 import type { Case } from "@/types/case";
-import { mock } from "node:test";
 
 const APP_MODE = process.env.NEXT_PUBLIC_APP_MODE;
 const DEMO_STORAGE_KEY = "cmt-app-demo-cases";
