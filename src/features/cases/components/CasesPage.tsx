@@ -61,7 +61,7 @@ export const CasesPage = () => {
       currentFilter === filter ? null : filter,
     );
   };
-  const macthesSummaryFilter = (caseItem: Case) => {
+  const matchesSummaryFilter = (caseItem: Case) => {
     if (!summaryFilter) return true;
     if (caseItem.status !== "active" || caseItem.deletedAt !== null)
       return false;
@@ -83,7 +83,11 @@ export const CasesPage = () => {
   // 保存
   useEffect(() => {
     if (!isCasesLoaded) return;
-    saveCasesApi(cases);
+    try {
+      saveCasesApi(cases);
+    } catch (error) {
+      showToast("error", "データの保存に失敗しました");
+    }
   }, [cases, isCasesLoaded]);
 
   const [searchText, setSearchText] = useState("");
@@ -98,7 +102,7 @@ export const CasesPage = () => {
   const filteredCases = visibleCases.filter((caseItem) => {
     return (
       doesCaseMatchSearch(caseItem, searchText) &&
-      macthesSummaryFilter(caseItem)
+      matchesSummaryFilter(caseItem)
     );
   });
   const sortedCases = sortCases(filteredCases, appliedSortKey);
