@@ -80,6 +80,23 @@
   --color-status-warning: var(--yellow-500);
   --color-status-new: var(--blue-500);
 
+  /* toast */
+  --color-toast-success: color-mix(
+    in srgb,
+    var(--color-status-success) 50%,
+    transparent
+  );
+  --color-toast-error: color-mix(
+    in srgb,
+    var(--color-status-error) 50%,
+    transparent
+  );
+  --color-toast-info: color-mix(
+    in srgb,
+    var(--color-status-new) 50%,
+    transparent
+  );
+
   --color-action-primary: var(--white);
   --color-action-primary-hover: var(--white-sub);
   --color-action-primary-active: var(--blue-100);

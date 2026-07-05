@@ -27,13 +27,25 @@ export const CasesPage = () => {
   const [toast, setToast] = useState<{
     type: keyof typeof toastConfig;
     message: string;
+    isVisible: boolean;
   } | null>(null);
 
-  const showToast = (type: keyof typeof toastConfig, message: string) => {
-    setToast({ type, message });
+  const hideToast = () => {
+    setToast((prev) => prev && { ...prev, isVisible: false });
+
     setTimeout(() => {
       setToast(null);
+    }, 300);
+  };
+  const showToast = (type: keyof typeof toastConfig, message: string) => {
+    setToast({ type, message, isVisible: false });
+    setTimeout(() => {
+      setToast((prev) => prev && { ...prev, isVisible: true });
+    }, 0);
+    setTimeout(() => {
+      setToast((prev) => prev && { ...prev, isVisible: false });
     }, 10000);
+    hideToast();
   };
 
   // カード表示
@@ -83,13 +95,37 @@ export const CasesPage = () => {
   // 保存
   useEffect(() => {
     if (!isCasesLoaded) return;
-    try {
-      saveCasesApi(cases);
-    } catch (error) {
-      showToast("error", "データの保存に失敗しました");
-    }
+    const saveCases = async () => {
+      try {
+        await saveCasesApi(cases);
+      } catch (error) {
+        showToast("error", "データの保存に失敗しました");
+      }
+    };
+    saveCases();
   }, [cases, isCasesLoaded]);
 
+  useEffect(() => {
+    const handleKeyDown = async (event: KeyboardEvent) => {
+      const isSaveShortcut =
+        (event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "s";
+      if (!isSaveShortcut) return;
+      event.preventDefault();
+      try {
+        await saveCasesApi(cases);
+        showToast("success", "データを保存しました");
+      } catch (error) {
+        showToast("error", "データの保存に失敗しました");
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [cases]);
+
+  // 検索・ソート
   const [searchText, setSearchText] = useState("");
   const [sortKey, setSortKey] = useState<SortKey | null>(null);
   const [appliedSortKey, setAppliedSortKey] = useState<SortKey | null>(null);
@@ -174,10 +210,9 @@ export const CasesPage = () => {
       setCases(loadedCases ?? []);
       showToast("success", "デモデータを復元しました");
     } catch (error) {
-      console.error(error);
+      showToast("error", "デモデータの復元に失敗しました");
     } finally {
       setIsResettingDemo(false);
-      showToast("error", "デモデータの復元に失敗しました");
     }
   };
 
@@ -201,7 +236,8 @@ export const CasesPage = () => {
         <Toast
           type={toast.type}
           message={toast.message}
-          onClose={() => setToast(null)}
+          onClose={hideToast}
+          isVisible={toast.isVisible}
         />
       )}
       <DemoResetButton
