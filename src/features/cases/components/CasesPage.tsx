@@ -24,28 +24,36 @@ import { toastConfig, Toast } from "@/components/ui/Toast";
 
 export const CasesPage = () => {
   // トースト表示
-  const [toast, setToast] = useState<{
-    type: keyof typeof toastConfig;
-    message: string;
-    isVisible: boolean;
-  } | null>(null);
+  const [toasts, setToasts] = useState<
+    {
+      id: string;
+      type: keyof typeof toastConfig;
+      message: string;
+      isVisible: boolean;
+    }[]
+  >([]);
 
-  const hideToast = () => {
-    setToast((prev) => prev && { ...prev, isVisible: false });
-
+  const hideToast = (id: string) => {
+    setToasts((prev) =>
+      prev.map((toast) =>
+        toast.id === id ? { ...toast, isVisible: false } : toast,
+      ),
+    );
     setTimeout(() => {
-      setToast(null);
+      setToasts((prev) => prev.filter((toast) => toast.id !== id));
     }, 300);
   };
   const showToast = (type: keyof typeof toastConfig, message: string) => {
-    setToast({ type, message, isVisible: false });
+    const id = crypto.randomUUID();
+    setToasts((prev) => [...prev, { id, type, message, isVisible: false }]);
     setTimeout(() => {
-      setToast((prev) => prev && { ...prev, isVisible: true });
+      setToasts((prev) =>
+        prev.map((toast) =>
+          toast.id === id ? { ...toast, isVisible: true } : toast,
+        ),
+      );
     }, 0);
-    setTimeout(() => {
-      setToast((prev) => prev && { ...prev, isVisible: false });
-    }, 10000);
-    hideToast();
+    setTimeout(() => hideToast(id), 6000);
   };
 
   // カード表示
@@ -232,14 +240,30 @@ export const CasesPage = () => {
         "h-[calc(100dvh-32px)]",
       )}
     >
-      {toast && (
-        <Toast
-          type={toast.type}
-          message={toast.message}
-          onClose={hideToast}
-          isVisible={toast.isVisible}
-        />
-      )}
+      <div
+        className={clsx(
+          "fixed",
+          "top-4",
+          "left-1/2",
+          "-translate-x-1/2",
+          "z-[9999]",
+
+          "flex",
+          "flex-col",
+          "gap-2",
+        )}
+      >
+        {toasts.map((toast) => (
+          <Toast
+            key={toast.id}
+            id={toast.id}
+            type={toast.type}
+            message={toast.message}
+            onClose={() => hideToast(toast.id)}
+            isVisible={toast.isVisible}
+          />
+        ))}
+      </div>
       <DemoResetButton
         onReset={handleResetDemoCases}
         isLoading={isResettingDemo}
