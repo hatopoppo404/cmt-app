@@ -1,12 +1,11 @@
 "use client";
 import clsx from "clsx";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   formatDateForDisplay,
   formatDateForEdit,
   normalizeDateInput,
 } from "../utils/date";
-import { ReplyDateIcon } from "@/components/icons/ReplyDateIcon";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import { createPortal } from "react-dom";
@@ -27,7 +26,7 @@ export const EditableDate = ({ value, onSave, className }: Props) => {
   const [draftValue, setDraftValue] = useState(formatDateForEdit(value));
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
-  const calendarTriggerRef = useRef<HTMLButtonElement | null>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
   const [calendarPosition, setCalendarPosition] =
     useState<CalendarPosition | null>(null);
   const isCalendarInteractingRef = useRef(false);
@@ -44,8 +43,21 @@ export const EditableDate = ({ value, onSave, className }: Props) => {
       ? window.innerWidth - CALENDAR_WIDTH - CALENDAR_MARGIN
       : position.left;
 
-  const toggleCalendar = () => {
-    const rect = calendarTriggerRef.current?.getBoundingClientRect();
+  useEffect(() => {
+    if (!isEditing) return;
+
+    const timerId = window.setTimeout(() => {
+      openCalendar();
+    }, 10);
+
+    return () => {
+      window.clearTimeout(timerId);
+    };
+  }, [isEditing]);
+
+  const openCalendar = () => {
+    const rect = inputRef.current?.getBoundingClientRect();
+
     if (!rect) {
       setIsCalendarOpen(false);
       return;
@@ -56,7 +68,7 @@ export const EditableDate = ({ value, onSave, className }: Props) => {
       left: getCalendarLeft(rect),
     });
 
-    setIsCalendarOpen((prev) => !prev);
+    setIsCalendarOpen(true);
   };
 
   const save = () => {
@@ -82,6 +94,7 @@ export const EditableDate = ({ value, onSave, className }: Props) => {
         }}
       >
         <input
+          ref={inputRef}
           autoFocus
           type="text"
           value={draftValue}
@@ -95,16 +108,8 @@ export const EditableDate = ({ value, onSave, className }: Props) => {
               setIsEditing(false);
             }
           }}
-          className={clsx("bg-(--color-bg-input) rounded-md p-1", className)}
+          className={clsx("rounded-md bg-(--color-bg-input) p-1", className)}
         />
-        <button
-          ref={calendarTriggerRef}
-          type="button"
-          onClick={toggleCalendar}
-          className={clsx("cursor-pointer")}
-        >
-          <ReplyDateIcon />
-        </button>
         {isCalendarOpen &&
           calendarPosition &&
           createPortal(
