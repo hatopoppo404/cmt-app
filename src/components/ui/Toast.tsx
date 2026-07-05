@@ -5,15 +5,15 @@ import clsx from "clsx";
 
 export const toastConfig = {
   success: {
-    colorClass: "bg(--color-action-success)",
+    colorClass: "bg(--color-status-success)",
     Icon: CheckCircleIcon,
   },
   error: {
-    colorClass: "bg(--color-action-error)",
+    colorClass: "bg(--color-status-error)",
     Icon: ErrorIcon,
   },
   info: {
-    colorClass: "bg(--color-action-info)",
+    colorClass: "bg(--color-status-new)",
     Icon: InfoIcon,
   },
 };
