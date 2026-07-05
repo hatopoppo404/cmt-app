@@ -37,7 +37,7 @@ export const Toast = ({
 
   return (
     <div
-      key={id}
+      id={id}
       className={clsx(
         "flex",
         "flex-row",
