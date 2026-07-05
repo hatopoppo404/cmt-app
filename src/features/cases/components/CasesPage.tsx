@@ -20,8 +20,22 @@ import { CasesAlertSummary } from "@/features/cases/components/CasesAlertSummary
 import { createEmptyCase } from "../utils/createEmptyCase";
 import { calculateBusinessDelayDays, isWithBusinessDays } from "../utils/date";
 import { CasesMain } from "./CasesMain";
+import { toastConfig, Toast } from "@/components/ui/Toast";
 
 export const CasesPage = () => {
+  // トースト表示
+  const [toast, setToast] = useState<{
+    type: keyof typeof toastConfig;
+    message: string;
+  } | null>(null);
+
+  const showToast = (type: keyof typeof toastConfig, message: string) => {
+    setToast({ type, message });
+    setTimeout(() => {
+      setToast(null);
+    }, 10000);
+  };
+
   // カード表示
   const [cases, setCases] = useState<Case[]>([]);
   const [isCasesLoaded, setIsCasesLoaded] = useState(false);
@@ -154,10 +168,12 @@ export const CasesPage = () => {
       await resetDemoCasesApi();
       const loadedCases = await getCases();
       setCases(loadedCases ?? []);
+      showToast("success", "デモデータを復元しました");
     } catch (error) {
       console.error(error);
     } finally {
       setIsResettingDemo(false);
+      showToast("error", "デモデータの復元に失敗しました");
     }
   };
 
@@ -177,6 +193,13 @@ export const CasesPage = () => {
         "h-[calc(100dvh-32px)]",
       )}
     >
+      {toast && (
+        <Toast
+          type={toast.type}
+          message={toast.message}
+          onClose={() => setToast(null)}
+        />
+      )}
       <DemoResetButton
         onReset={handleResetDemoCases}
         isLoading={isResettingDemo}
