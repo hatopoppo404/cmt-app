@@ -2,12 +2,19 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 
-import type { Case, CaseStatus, SummaryFilter } from "@/types/case";
+import type {
+  Case,
+  CaseStatus,
+  SummaryFilter,
+  CaseActions,
+} from "@/types/case";
+
 import {
   getCases,
   saveCasesApi,
   resetDemoCasesApi,
 } from "@/features/cases/api/casesApi";
+
 import { DemoResetButton } from "./DemoResetButton";
 
 import { doesCaseMatchSearch } from "@/features/cases/utils/search";
@@ -123,33 +130,23 @@ export const CasesPage = () => {
     initializeCases();
   }, []);
 
-  // 集計
-  const summary = getCaseAlertSummary(cases);
-  const [summaryFilter, setSummaryFilter] = useState<SummaryFilter>(null);
-  const handleSummaryFilterChange = (filter: Exclude<SummaryFilter, null>) => {
-    setSummaryFilter((currentFilter) =>
-      currentFilter === filter ? null : filter,
+  // 検索・ソート
+  const [searchText, setSearchText] = useState("");
+  const [sortKey, setSortKey] = useState<SortKey | null>(null);
+  const [appliedSortKey, setAppliedSortKey] = useState<SortKey | null>(null);
+
+  const [currentTab, setCurrentTab] = useState<CaseStatus>("active"); // タブ切替
+
+  const visibleCases = cases.filter((caseItem) => {
+    return caseItem.status === currentTab && caseItem.deletedAt === null;
+  });
+  const filteredCases = visibleCases.filter((caseItem) => {
+    return (
+      doesCaseMatchSearch(caseItem, searchText) &&
+      matchesSummaryFilter(caseItem)
     );
-  };
-  const matchesSummaryFilter = (caseItem: Case) => {
-    if (!summaryFilter) return true;
-    if (caseItem.status !== "active" || caseItem.deletedAt !== null)
-      return false;
-    switch (summaryFilter) {
-      case "active":
-        return true;
-      case "delayed":
-        return caseItem.delayDays < 0;
-      case "urgent":
-        return isWithBusinessDays(caseItem.deadline, 3);
-      case "highRisk":
-        return (
-          caseItem.delayDays < 0 && isWithBusinessDays(caseItem.deadline, 3)
-        );
-      default:
-        return true;
-    }
-  };
+  });
+  const sortedCases = sortCases(filteredCases, appliedSortKey);
 
   // 保存
   useEffect(() => {
@@ -183,24 +180,6 @@ export const CasesPage = () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [cases]);
-
-  // 検索・ソート
-  const [searchText, setSearchText] = useState("");
-  const [sortKey, setSortKey] = useState<SortKey | null>(null);
-  const [appliedSortKey, setAppliedSortKey] = useState<SortKey | null>(null);
-
-  const [currentTab, setCurrentTab] = useState<CaseStatus>("active"); // タブ切替
-
-  const visibleCases = cases.filter((caseItem) => {
-    return caseItem.status === currentTab && caseItem.deletedAt === null;
-  });
-  const filteredCases = visibleCases.filter((caseItem) => {
-    return (
-      doesCaseMatchSearch(caseItem, searchText) &&
-      matchesSummaryFilter(caseItem)
-    );
-  });
-  const sortedCases = sortCases(filteredCases, appliedSortKey);
 
   // カード追加
   const handleAddCase = () => {
@@ -310,6 +289,43 @@ export const CasesPage = () => {
     });
   };
 
+  // カードに対するアクション
+  const caseActions: CaseActions = {
+    onArchiveCase: handleArchiveCase,
+    // onUnarchiveCase: handleUnarchiveCase,
+    onDeleteCase: handleDeleteCase,
+    onDuplicateCase: handleDuplicateCase,
+    onUpdateCase: handleUpdatesCase,
+  };
+
+  // 集計
+  const summary = getCaseAlertSummary(cases);
+  const [summaryFilter, setSummaryFilter] = useState<SummaryFilter>(null);
+  const handleSummaryFilterChange = (filter: Exclude<SummaryFilter, null>) => {
+    setSummaryFilter((currentFilter) =>
+      currentFilter === filter ? null : filter,
+    );
+  };
+  const matchesSummaryFilter = (caseItem: Case) => {
+    if (!summaryFilter) return true;
+    if (caseItem.status !== "active" || caseItem.deletedAt !== null)
+      return false;
+    switch (summaryFilter) {
+      case "active":
+        return true;
+      case "delayed":
+        return caseItem.delayDays < 0;
+      case "urgent":
+        return isWithBusinessDays(caseItem.deadline, 3);
+      case "highRisk":
+        return (
+          caseItem.delayDays < 0 && isWithBusinessDays(caseItem.deadline, 3)
+        );
+      default:
+        return true;
+    }
+  };
+
   //デモリセット
   const [isResettingDemo, setIsResettingDemo] = useState(false);
   const handleResetDemoCases = async () => {
@@ -394,10 +410,7 @@ export const CasesPage = () => {
         cases={sortedCases}
         onAddCase={handleAddCase}
         onCasesChange={setCases}
-        onDuplicate={handleDuplicateCase}
-        onArchive={handleArchiveCase}
-        onDelete={handleDeleteCase}
-        onUpdate={handleUpdatesCase}
+        caseActions={caseActions}
       />
     </div>
   );

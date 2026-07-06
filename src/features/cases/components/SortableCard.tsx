@@ -1,6 +1,6 @@
 "use client";
 
-import type { Case } from "@/types/case";
+import type { Case, CaseActions } from "@/types/case";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { DragHandle } from "@/features/cases/components/DragHandle";
@@ -11,20 +11,10 @@ import clsx from "clsx";
 type Props = {
   caseItem: Case;
   activeId: string | null;
-  onDuplicate: (id: string) => void;
-  onArchive: (id: string) => void;
-  onDelete: (id: string) => void;
-  onUpdate: (id: string, updates: Partial<Case>) => void;
+  caseActions: CaseActions;
 };
 
-export const SortableCard = ({
-  caseItem,
-  activeId,
-  onDuplicate,
-  onArchive,
-  onDelete,
-  onUpdate,
-}: Props) => {
+export const SortableCard = ({ caseItem, activeId, caseActions }: Props) => {
   const {
     attributes,
     listeners,
@@ -59,13 +49,7 @@ export const SortableCard = ({
       )}
     >
       <DragHandle attributes={attributes} listeners={listeners} />
-      <Card
-        caseItem={caseItem}
-        onDuplicate={onDuplicate}
-        onArchive={onArchive}
-        onDelete={onDelete}
-        onUpdate={onUpdate}
-      />
+      <Card caseItem={caseItem} caseActions={caseActions} />
     </div>
   );
 };

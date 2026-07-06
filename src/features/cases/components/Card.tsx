@@ -1,5 +1,5 @@
 "use client";
-import type { Case } from "@/types/case";
+import type { Case, CaseActions } from "@/types/case";
 import clsx from "clsx";
 import { useState } from "react";
 
@@ -13,19 +13,10 @@ import { DeleteIcon } from "@/components/icons/DeleteIcon";
 
 type Props = {
   caseItem: Case;
-  onDuplicate: (id: string) => void;
-  onArchive: (id: string) => void;
-  onDelete: (id: string) => void;
-  onUpdate: (id: string, updates: Partial<Case>) => void;
+  caseActions: CaseActions;
 };
 
-export const Card = ({
-  caseItem,
-  onDuplicate,
-  onArchive,
-  onDelete,
-  onUpdate,
-}: Props) => {
+export const Card = ({ caseItem, caseActions }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -50,7 +41,7 @@ export const Card = ({
         caseItem={caseItem}
         isOpen={isOpen}
         onClick={() => setIsOpen((prev) => !prev)}
-        onUpdate={onUpdate}
+        onUpdate={caseActions.onUpdateCase}
       />
       <div
         className={clsx(
@@ -70,20 +61,20 @@ export const Card = ({
             deadline={caseItem.deadline}
             cause={caseItem.cause}
             supplier={caseItem.supplier}
-            onUpdate={onUpdate}
+            onUpdate={caseActions.onUpdateCase}
             caseId={caseItem.id}
           />
           <NoteSec
             caseId={caseItem.id}
             note={caseItem.note}
-            onUpdate={onUpdate}
+            onUpdate={caseActions.onUpdateCase}
           />
           <div
             className={clsx("flex", "flex-row", "gap-2", "justify-end", "py-2")}
           >
             <button
               type="button"
-              onClick={() => onDuplicate(caseItem.id)}
+              onClick={() => caseActions.onDuplicateCase(caseItem.id)}
               className={clsx(
                 // "ml-auto",
                 "w-fit",
@@ -125,7 +116,7 @@ export const Card = ({
             </button>
             <button
               type="button"
-              onClick={() => onArchive(caseItem.id)}
+              onClick={() => caseActions.onArchiveCase(caseItem.id)}
               className={clsx(
                 // "ml-auto",
                 "w-fit",
@@ -167,7 +158,7 @@ export const Card = ({
             </button>
             <button
               type="button"
-              onClick={() => onDelete(caseItem.id)}
+              onClick={() => caseActions.onDeleteCase(caseItem.id)}
               className={clsx(
                 // "ml-auto",
                 "w-fit",

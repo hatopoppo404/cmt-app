@@ -1,4 +1,4 @@
-import type { Case } from "@/types/case";
+import type { Case, CaseActions } from "@/types/case";
 import { Card } from "@/features/cases/components/Card";
 import { SortableCard } from "./SortableCard";
 import { DndContext, DragOverlay } from "@dnd-kit/core";
@@ -13,20 +13,14 @@ import clsx from "clsx";
 type Props = {
   cases: Case[];
   onCasesChange: (cases: Case[]) => void;
-  onDuplicate: (id: string) => void;
-  onArchive: (id: string) => void;
-  onDelete: (id: string) => void;
-  onUpdate: (id: string, updates: Partial<Case>) => void;
+  caseActions: CaseActions;
   className?: string;
 };
 
 export const CaseList = ({
   cases,
   onCasesChange,
-  onDuplicate,
-  onArchive,
-  onDelete,
-  onUpdate,
+  caseActions,
   className,
 }: Props) => {
   const [activeId, setActiveId] = useState<string | null>(null);
@@ -78,10 +72,7 @@ export const CaseList = ({
               key={caseItem.id}
               caseItem={caseItem}
               activeId={activeId}
-              onDuplicate={onDuplicate}
-              onArchive={onArchive}
-              onDelete={onDelete}
-              onUpdate={onUpdate}
+              caseActions={caseActions}
             />
           ))}
         </div>
@@ -89,13 +80,7 @@ export const CaseList = ({
       <DragOverlay>
         {activeCase ? (
           <div className="scale-105 overflow-auto shadow-2xl">
-            <Card
-              caseItem={activeCase}
-              onDuplicate={onDuplicate}
-              onArchive={onArchive}
-              onDelete={onDelete}
-              onUpdate={onUpdate}
-            />
+            <Card caseItem={activeCase} caseActions={caseActions} />
           </div>
         ) : null}
       </DragOverlay>

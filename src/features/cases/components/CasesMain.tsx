@@ -1,6 +1,6 @@
 import { AddCaseButton } from "@/features/cases/components/AddCaseButton";
 import { CaseList } from "@/features/cases/components/CaseList";
-import type { Case } from "@/types/case";
+import type { Case, CaseActions } from "@/types/case";
 
 import clsx from "clsx";
 
@@ -8,10 +8,7 @@ type Props = {
   cases: Case[];
   onAddCase: () => void;
   onCasesChange: (cases: Case[]) => void;
-  onDuplicate: (id: string) => void;
-  onArchive: (id: string) => void;
-  onDelete: (id: string) => void;
-  onUpdate: (id: string, updates: Partial<Case>) => void;
+  caseActions: CaseActions;
   className?: string;
 };
 
@@ -19,10 +16,7 @@ export const CasesMain = ({
   cases,
   onAddCase,
   onCasesChange,
-  onDuplicate,
-  onArchive,
-  onDelete,
-  onUpdate,
+  caseActions,
   className,
 }: Props) => {
   return (
@@ -45,10 +39,7 @@ export const CasesMain = ({
       <CaseList
         cases={cases}
         onCasesChange={onCasesChange}
-        onDuplicate={onDuplicate}
-        onArchive={onArchive}
-        onDelete={onDelete}
-        onUpdate={onUpdate}
+        caseActions={caseActions}
         className={clsx("w-full", "mx-auto", "p-8")}
       />
     </main>
