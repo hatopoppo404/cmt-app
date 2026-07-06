@@ -75,7 +75,8 @@ export const Card = ({ caseItem, onArchive, onDelete, onUpdate }: Props) => {
               type="button"
               onClick={() => onArchive(caseItem.id)}
               className={clsx(
-                "ml-auto",
+                // "ml-auto",
+                "w-fit",
                 "p-2",
                 "my-0",
                 "opacity-30",
@@ -115,7 +116,8 @@ export const Card = ({ caseItem, onArchive, onDelete, onUpdate }: Props) => {
               type="button"
               onClick={() => onArchive(caseItem.id)}
               className={clsx(
-                "ml-auto",
+                // "ml-auto",
+                "w-fit",
                 "p-2",
                 "my-0",
                 "opacity-30",
