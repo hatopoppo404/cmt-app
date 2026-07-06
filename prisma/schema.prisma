@@ -15,7 +15,6 @@ datasource db {
 enum CaseStatus {
   active
   archived
-  deleted
 }
 
 model Case {
