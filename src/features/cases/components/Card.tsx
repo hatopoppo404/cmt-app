@@ -88,6 +88,7 @@ export const Card = ({
                 "p-2",
                 "my-0",
                 "opacity-30",
+                "size-8",
 
                 "hover:text-(--blue-500)",
                 "hover:opacity-100",
@@ -128,6 +129,7 @@ export const Card = ({
                 "w-fit",
                 "p-2",
                 "my-0",
+                "size-8",
                 "opacity-30",
 
                 "hover:text-(--yellow-500)",
@@ -169,6 +171,7 @@ export const Card = ({
                 "w-fit",
                 "p-2",
                 "my-0",
+                "size-8",
                 "opacity-30",
 
                 "hover:text-(--red-500)",
