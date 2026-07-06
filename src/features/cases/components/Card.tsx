@@ -70,7 +70,7 @@ export const Card = ({ caseItem, onArchive, onDelete, onUpdate }: Props) => {
             note={caseItem.note}
             onUpdate={onUpdate}
           />
-          <div className={clsx("flex", "flex-row", "gap-2")}>
+          <div className={clsx("flex", "flex-row", "gap-2", "justify-end")}>
             <button
               type="button"
               onClick={() => onArchive(caseItem.id)}
