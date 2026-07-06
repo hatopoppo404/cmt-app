@@ -235,6 +235,10 @@ export const CasesPage = () => {
 
   // カード削除
   const handleDeleteCase = (id: string) => {
+    const isConfirmed = window.confirm("この案件を削除しますか？");
+
+    if (!isConfirmed) return;
+
     const now = new Date().toISOString();
     setCases((prev) => {
       return prev.map((caseItem) => {
@@ -278,6 +282,9 @@ export const CasesPage = () => {
   //デモリセット
   const [isResettingDemo, setIsResettingDemo] = useState(false);
   const handleResetDemoCases = async () => {
+    const isConfirmed = window.confirm("デモデータを復元しますか？");
+    if (!isConfirmed) return;
+
     try {
       setIsResettingDemo(true);
       await resetDemoCasesApi();
