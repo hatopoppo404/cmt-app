@@ -130,6 +130,34 @@ export const CasesPage = () => {
     initializeCases();
   }, []);
 
+  // 集計
+  const summary = getCaseAlertSummary(cases);
+  const [summaryFilter, setSummaryFilter] = useState<SummaryFilter>(null);
+  const handleSummaryFilterChange = (filter: Exclude<SummaryFilter, null>) => {
+    setSummaryFilter((currentFilter) =>
+      currentFilter === filter ? null : filter,
+    );
+  };
+  const matchesSummaryFilter = (caseItem: Case) => {
+    if (!summaryFilter) return true;
+    if (caseItem.status !== "active" || caseItem.deletedAt !== null)
+      return false;
+    switch (summaryFilter) {
+      case "active":
+        return true;
+      case "delayed":
+        return caseItem.delayDays < 0;
+      case "urgent":
+        return isWithBusinessDays(caseItem.deadline, 3);
+      case "highRisk":
+        return (
+          caseItem.delayDays < 0 && isWithBusinessDays(caseItem.deadline, 3)
+        );
+      default:
+        return true;
+    }
+  };
+
   // 検索・ソート
   const [searchText, setSearchText] = useState("");
   const [sortKey, setSortKey] = useState<SortKey | null>(null);
@@ -296,34 +324,6 @@ export const CasesPage = () => {
     onDeleteCase: handleDeleteCase,
     onDuplicateCase: handleDuplicateCase,
     onUpdateCase: handleUpdatesCase,
-  };
-
-  // 集計
-  const summary = getCaseAlertSummary(cases);
-  const [summaryFilter, setSummaryFilter] = useState<SummaryFilter>(null);
-  const handleSummaryFilterChange = (filter: Exclude<SummaryFilter, null>) => {
-    setSummaryFilter((currentFilter) =>
-      currentFilter === filter ? null : filter,
-    );
-  };
-  const matchesSummaryFilter = (caseItem: Case) => {
-    if (!summaryFilter) return true;
-    if (caseItem.status !== "active" || caseItem.deletedAt !== null)
-      return false;
-    switch (summaryFilter) {
-      case "active":
-        return true;
-      case "delayed":
-        return caseItem.delayDays < 0;
-      case "urgent":
-        return isWithBusinessDays(caseItem.deadline, 3);
-      case "highRisk":
-        return (
-          caseItem.delayDays < 0 && isWithBusinessDays(caseItem.deadline, 3)
-        );
-      default:
-        return true;
-    }
   };
 
   //デモリセット
