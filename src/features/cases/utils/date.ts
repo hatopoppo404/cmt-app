@@ -122,14 +122,14 @@ export const calculateBusinessDelayDays = ({
 }) => {
   if (!replyDate) return -99999;
   const baseDate = deadline || dueDate;
-  if (!baseDate) return -99999;
+  if (!baseDate) return -99998;
 
   const start = toDate(replyDate);
   const end = toDate(baseDate);
 
-  if (start === null || end === null) return -99999;
+  if (start === null || end === null) return -99997;
 
-  if (start.getTime() === end.getTime()) return -99999;
+  if (start.getTime() === end.getTime()) return 0;
   let count = 0;
   const direction = start < end ? 1 : -1;
   const current = new Date(start);
