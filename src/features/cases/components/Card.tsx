@@ -6,17 +6,18 @@ import { useState } from "react";
 import { CardSummary } from "@/features/cases/components/CardSummary";
 import { CardDetail } from "@/features/cases/components/CardDetail";
 import { NoteSec } from "@/features/cases/components/NoteSec";
-import { text } from "stream/consumers";
-import { m } from "framer-motion";
+
 import { ArchiveIcon } from "lucide-react";
+import { DeleteIcon } from "lucide-react";
 
 type Props = {
   caseItem: Case;
   onArchive: (id: string) => void;
+  onDelete: (id: string) => void;
   onUpdate: (id: string, updates: Partial<Case>) => void;
 };
 
-export const Card = ({ caseItem, onArchive, onUpdate }: Props) => {
+export const Card = ({ caseItem, onArchive, onDelete, onUpdate }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -89,6 +90,46 @@ export const Card = ({ caseItem, onArchive, onUpdate }: Props) => {
             )}
           >
             <ArchiveIcon className="size-[20px]" />
+            <span
+              className={clsx(
+                "text-[0.7em]",
+                "p-0",
+
+                "max-w-0",
+                "overflow-hidden",
+                "opacity-0",
+
+                "transition-all",
+                "duration-200",
+
+                "group-hover:max-w-fit",
+                "group-hover:opacity-100",
+                "group-hover:pr-1",
+              )}
+            >
+              Archive
+            </span>
+          </button>
+          <button
+            type="button"
+            onClick={() => onArchive(caseItem.id)}
+            className={clsx(
+              "ml-auto",
+              "p-2",
+              "my-0",
+              "opacity-30",
+
+              "hover:text-(--red-500)",
+              "hover:opacity-100",
+              "cursor-pointer",
+
+              "group",
+              "flex",
+              "items-center",
+              "gap-2",
+            )}
+          >
+            <DeleteIcon className="size-[20px]" />
             <span
               className={clsx(
                 "text-[0.7em]",

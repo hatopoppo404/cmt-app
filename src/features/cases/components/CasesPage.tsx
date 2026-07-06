@@ -122,6 +122,7 @@ export const CasesPage = () => {
 
     initializeCases();
   }, []);
+
   // 集計
   const summary = getCaseAlertSummary(cases);
   const [summaryFilter, setSummaryFilter] = useState<SummaryFilter>(null);
@@ -149,6 +150,7 @@ export const CasesPage = () => {
         return true;
     }
   };
+
   // 保存
   useEffect(() => {
     if (!isCasesLoaded) return;
@@ -214,6 +216,7 @@ export const CasesPage = () => {
       return reorderdCases;
     });
   };
+
   // カードアーカイブ
   const handleArchiveCase = (id: string) => {
     const now = new Date().toISOString();
@@ -227,6 +230,23 @@ export const CasesPage = () => {
           status: "archived",
           archivedAt: now,
           updatedAt: now,
+        };
+      });
+    });
+  };
+
+  const handleDeleteCase = (id: string) => {
+    const now = new Date().toISOString();
+    setCases((prev) => {
+      return prev.map((caseItem) => {
+        if (caseItem.id !== id) {
+          return caseItem;
+        }
+        return {
+          ...caseItem,
+          status: "deleted",
+          updatedAt: now,
+          deletedAt: now,
         };
       });
     });
@@ -339,6 +359,7 @@ export const CasesPage = () => {
         onAddCase={handleAddCase}
         onCasesChange={setCases}
         onArchive={handleArchiveCase}
+        onDelete={handleDeleteCase}
         onUpdate={handleUpdatesCase}
       />
     </div>

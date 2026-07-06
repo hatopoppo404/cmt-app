@@ -14,6 +14,7 @@ type Props = {
   cases: Case[];
   onCasesChange: (cases: Case[]) => void;
   onArchive: (id: string) => void;
+  onDelete: (id: string) => void;
   onUpdate: (id: string, updates: Partial<Case>) => void;
   className?: string;
 };
@@ -22,6 +23,7 @@ export const CaseList = ({
   cases,
   onCasesChange,
   onArchive,
+  onDelete,
   onUpdate,
   className,
 }: Props) => {
@@ -75,6 +77,7 @@ export const CaseList = ({
               caseItem={caseItem}
               activeId={activeId}
               onArchive={onArchive}
+              onDelete={onDelete}
               onUpdate={onUpdate}
             />
           ))}
@@ -86,6 +89,7 @@ export const CaseList = ({
             <Card
               caseItem={activeCase}
               onArchive={onArchive}
+              onDelete={onDelete}
               onUpdate={onUpdate}
             />
           </div>

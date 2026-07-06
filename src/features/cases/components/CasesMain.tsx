@@ -9,6 +9,7 @@ type Props = {
   onAddCase: () => void;
   onCasesChange: (cases: Case[]) => void;
   onArchive: (id: string) => void;
+  onDelete: (id: string) => void;
   onUpdate: (id: string, updates: Partial<Case>) => void;
   className?: string;
 };
@@ -18,6 +19,7 @@ export const CasesMain = ({
   onAddCase,
   onCasesChange,
   onArchive,
+  onDelete,
   onUpdate,
   className,
 }: Props) => {
@@ -42,6 +44,7 @@ export const CasesMain = ({
         cases={cases}
         onCasesChange={onCasesChange}
         onArchive={onArchive}
+        onDelete={onDelete}
         onUpdate={onUpdate}
         className={clsx("w-full", "mx-auto", "p-8")}
       />

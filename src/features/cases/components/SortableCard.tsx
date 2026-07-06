@@ -12,6 +12,7 @@ type Props = {
   caseItem: Case;
   activeId: string | null;
   onArchive: (id: string) => void;
+  onDelete: (id: string) => void;
   onUpdate: (id: string, updates: Partial<Case>) => void;
 };
 
@@ -19,6 +20,7 @@ export const SortableCard = ({
   caseItem,
   activeId,
   onArchive,
+  onDelete,
   onUpdate,
 }: Props) => {
   const {
@@ -55,7 +57,12 @@ export const SortableCard = ({
       )}
     >
       <DragHandle attributes={attributes} listeners={listeners} />
-      <Card caseItem={caseItem} onArchive={onArchive} onUpdate={onUpdate} />
+      <Card
+        caseItem={caseItem}
+        onArchive={onArchive}
+        onDelete={onDelete}
+        onUpdate={onUpdate}
+      />
     </div>
   );
 };
