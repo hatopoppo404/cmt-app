@@ -18,6 +18,19 @@ export const toastConfig = {
   },
 };
 
+export type ToastItem = {
+  id: string;
+  type: keyof typeof toastConfig;
+  message: string;
+  isVisible: boolean;
+};
+
+export type ToastTimerIds = {
+  show?: number;
+  hide?: number;
+  remove?: number;
+};
+
 type Props = {
   id: string;
   type: keyof typeof toastConfig;

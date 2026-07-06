@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 
 import type { Case, CaseStatus, SummaryFilter } from "@/types/case";
@@ -20,41 +20,78 @@ import { CasesAlertSummary } from "@/features/cases/components/CasesAlertSummary
 import { createEmptyCase } from "../utils/createEmptyCase";
 import { calculateBusinessDelayDays, isWithBusinessDays } from "../utils/date";
 import { CasesMain } from "./CasesMain";
-import { toastConfig, Toast } from "@/components/ui/Toast";
+import {
+  toastConfig,
+  ToastItem,
+  ToastTimerIds,
+  Toast,
+} from "@/components/ui/Toast";
 
 export const CasesPage = () => {
   // トースト表示
-  const [toasts, setToasts] = useState<
-    {
-      id: string;
-      type: keyof typeof toastConfig;
-      message: string;
-      isVisible: boolean;
-    }[]
-  >([]);
+  const [toasts, setToasts] = useState<ToastItem[]>([]);
+  const toastTimerRef = useRef<Map<string, ToastTimerIds>>(new Map());
 
-  const hideToast = (id: string) => {
-    setToasts((prev) =>
-      prev.map((toast) =>
-        toast.id === id ? { ...toast, isVisible: false } : toast,
-      ),
-    );
-    setTimeout(() => {
-      setToasts((prev) => prev.filter((toast) => toast.id !== id));
-    }, 300);
-  };
-  const showToast = (type: keyof typeof toastConfig, message: string) => {
-    const id = crypto.randomUUID();
-    setToasts((prev) => [...prev, { id, type, message, isVisible: false }]);
-    setTimeout(() => {
+  const clearToastTimers = useCallback((id: string) => {
+    const timers = toastTimerRef.current.get(id);
+    if (!timers) return;
+
+    if (timers.show) window.clearTimeout(timers.show);
+    if (timers.hide) window.clearTimeout(timers.hide);
+    if (timers.remove) window.clearTimeout(timers.remove);
+
+    toastTimerRef.current.delete(id);
+  }, []);
+
+  const hideToast = useCallback(
+    (id: string) => {
+      clearToastTimers(id);
+
       setToasts((prev) =>
         prev.map((toast) =>
-          toast.id === id ? { ...toast, isVisible: true } : toast,
+          toast.id === id ? { ...toast, isVisible: false } : toast,
         ),
       );
-    }, 0);
-    setTimeout(() => hideToast(id), 6000);
-  };
+      const removeTimerId = window.setTimeout(() => {
+        setToasts((prev) => prev.filter((toast) => toast.id !== id));
+        toastTimerRef.current.delete(id);
+      }, 300);
+      toastTimerRef.current.set(id, {
+        remove: removeTimerId,
+      });
+    },
+    [clearToastTimers],
+  );
+
+  const showToast = useCallback(
+    (type: keyof typeof toastConfig, message: string) => {
+      const id = crypto.randomUUID();
+      setToasts((prev) => [
+        ...prev,
+        {
+          id,
+          type,
+          message,
+          isVisible: false,
+        },
+      ]);
+
+      const showTimerId = window.setTimeout(() => {
+        setToasts((prev) =>
+          prev.map((toast) =>
+            toast.id === id ? { ...toast, isVisible: true } : toast,
+          ),
+        );
+      }, 10);
+      const hideTimerId = window.setTimeout(() => hideToast(id), 6000);
+
+      toastTimerRef.current.set(id, {
+        show: showTimerId,
+        hide: hideTimerId,
+      });
+    },
+    [clearToastTimers],
+  );
 
   // カード表示
   const [cases, setCases] = useState<Case[]>([]);
