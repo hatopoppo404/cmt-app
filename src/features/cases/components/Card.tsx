@@ -7,8 +7,8 @@ import { CardSummary } from "@/features/cases/components/CardSummary";
 import { CardDetail } from "@/features/cases/components/CardDetail";
 import { NoteSec } from "@/features/cases/components/NoteSec";
 
-import { ArchiveIcon } from "lucide-react";
-import { DeleteIcon } from "lucide-react";
+import { ArchiveIcon } from "@/components/icons/ArchiveIcon";
+import { DeleteIcon } from "@/components/icons/DeleteIcon";
 
 type Props = {
   caseItem: Case;
@@ -114,7 +114,7 @@ export const Card = ({ caseItem, onArchive, onDelete, onUpdate }: Props) => {
             </button>
             <button
               type="button"
-              onClick={() => onArchive(caseItem.id)}
+              onClick={() => onDelete(caseItem.id)}
               className={clsx(
                 // "ml-auto",
                 "w-fit",

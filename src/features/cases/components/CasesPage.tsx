@@ -222,9 +222,7 @@ export const CasesPage = () => {
     const now = new Date().toISOString();
     setCases((prev) => {
       return prev.map((caseItem) => {
-        if (caseItem.id !== id) {
-          return caseItem;
-        }
+        if (caseItem.id !== id) return caseItem;
         return {
           ...caseItem,
           status: "archived",
@@ -235,13 +233,13 @@ export const CasesPage = () => {
     });
   };
 
+  // カード削除
   const handleDeleteCase = (id: string) => {
     const now = new Date().toISOString();
     setCases((prev) => {
       return prev.map((caseItem) => {
-        if (caseItem.id !== id) {
-          return caseItem;
-        }
+        if (caseItem.id !== id) return caseItem;
+
         return {
           ...caseItem,
           status: "deleted",
