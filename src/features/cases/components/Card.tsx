@@ -70,86 +70,88 @@ export const Card = ({ caseItem, onArchive, onDelete, onUpdate }: Props) => {
             note={caseItem.note}
             onUpdate={onUpdate}
           />
-          <button
-            type="button"
-            onClick={() => onArchive(caseItem.id)}
-            className={clsx(
-              "ml-auto",
-              "p-2",
-              "my-0",
-              "opacity-30",
-
-              "hover:text-(--blue-500)",
-              "hover:opacity-100",
-              "cursor-pointer",
-
-              "group",
-              "flex",
-              "items-center",
-              "gap-2",
-            )}
-          >
-            <ArchiveIcon className="size-[20px]" />
-            <span
+          <div className={clsx("flex", "flex-row", "gap-2")}>
+            <button
+              type="button"
+              onClick={() => onArchive(caseItem.id)}
               className={clsx(
-                "text-[0.7em]",
-                "p-0",
+                "ml-auto",
+                "p-2",
+                "my-0",
+                "opacity-30",
 
-                "max-w-0",
-                "overflow-hidden",
-                "opacity-0",
+                "hover:text-(--blue-500)",
+                "hover:opacity-100",
+                "cursor-pointer",
 
-                "transition-all",
-                "duration-200",
-
-                "group-hover:max-w-fit",
-                "group-hover:opacity-100",
-                "group-hover:pr-1",
+                "group",
+                "flex",
+                "items-center",
+                "gap-2",
               )}
             >
-              Archive
-            </span>
-          </button>
-          <button
-            type="button"
-            onClick={() => onArchive(caseItem.id)}
-            className={clsx(
-              "ml-auto",
-              "p-2",
-              "my-0",
-              "opacity-30",
+              <ArchiveIcon className="size-[20px]" />
+              <span
+                className={clsx(
+                  "text-[0.7em]",
+                  "p-0",
 
-              "hover:text-(--red-500)",
-              "hover:opacity-100",
-              "cursor-pointer",
+                  "max-w-0",
+                  "overflow-hidden",
+                  "opacity-0",
 
-              "group",
-              "flex",
-              "items-center",
-              "gap-2",
-            )}
-          >
-            <DeleteIcon className="size-[20px]" />
-            <span
+                  "transition-all",
+                  "duration-200",
+
+                  "group-hover:max-w-fit",
+                  "group-hover:opacity-100",
+                  "group-hover:pr-1",
+                )}
+              >
+                Archive
+              </span>
+            </button>
+            <button
+              type="button"
+              onClick={() => onArchive(caseItem.id)}
               className={clsx(
-                "text-[0.7em]",
-                "p-0",
+                "ml-auto",
+                "p-2",
+                "my-0",
+                "opacity-30",
 
-                "max-w-0",
-                "overflow-hidden",
-                "opacity-0",
+                "hover:text-(--red-500)",
+                "hover:opacity-100",
+                "cursor-pointer",
 
-                "transition-all",
-                "duration-200",
-
-                "group-hover:max-w-fit",
-                "group-hover:opacity-100",
-                "group-hover:pr-1",
+                "group",
+                "flex",
+                "items-center",
+                "gap-2",
               )}
             >
-              Archive
-            </span>
-          </button>
+              <DeleteIcon className="size-[20px]" />
+              <span
+                className={clsx(
+                  "text-[0.7em]",
+                  "p-0",
+
+                  "max-w-0",
+                  "overflow-hidden",
+                  "opacity-0",
+
+                  "transition-all",
+                  "duration-200",
+
+                  "group-hover:max-w-fit",
+                  "group-hover:opacity-100",
+                  "group-hover:pr-1",
+                )}
+              >
+                Delete
+              </span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
