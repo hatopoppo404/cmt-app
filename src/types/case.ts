@@ -1,4 +1,4 @@
-export type CaseStatus = "active" | "archived" | "deleted";
+export type CaseStatus = "active" | "archived";
 
 export type Case = {
   id: string; //ID

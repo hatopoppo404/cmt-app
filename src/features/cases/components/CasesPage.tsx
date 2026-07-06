@@ -284,7 +284,8 @@ export const CasesPage = () => {
 
         return {
           ...caseItem,
-          status: "deleted",
+          status: "archived",
+          archivedAt: now,
           updatedAt: now,
           deletedAt: now,
         };
