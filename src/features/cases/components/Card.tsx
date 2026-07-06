@@ -78,7 +78,9 @@ export const Card = ({
             note={caseItem.note}
             onUpdate={onUpdate}
           />
-          <div className={clsx("flex", "flex-row", "gap-2", "justify-end")}>
+          <div
+            className={clsx("flex", "flex-row", "gap-2", "justify-end", "py-2")}
+          >
             <button
               type="button"
               onClick={() => onDuplicate(caseItem.id)}
