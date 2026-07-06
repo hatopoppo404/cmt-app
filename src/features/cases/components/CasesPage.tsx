@@ -217,6 +217,37 @@ export const CasesPage = () => {
     });
   };
 
+  // カード複製
+  const handleDuplicateCase = (id: string) => {
+    setCases((prev) => {
+      const targetIndex = prev.findIndex((caseItem) => caseItem.id === id);
+      if (targetIndex === -1) return prev;
+
+      const targetCase = prev[targetIndex];
+      const now = new Date().toISOString();
+
+      const duplicatedCase: Case = {
+        ...targetCase,
+        id: crypto.randomUUID(),
+        sortOrder: targetCase.sortOrder + 1,
+        createdAt: now,
+        updatedAt: now,
+        archivedAt: null,
+        deletedAt: null,
+      };
+      const nextCases = [
+        ...prev.slice(0, targetIndex + 1),
+        duplicatedCase,
+        ...prev.slice(targetIndex + 1),
+      ];
+
+      return nextCases.map((caseItem, index) => ({
+        ...caseItem,
+        sortOrder: index,
+      }));
+    });
+  };
+
   // カードアーカイブ
   const handleArchiveCase = (id: string) => {
     const now = new Date().toISOString();
@@ -363,6 +394,7 @@ export const CasesPage = () => {
         cases={sortedCases}
         onAddCase={handleAddCase}
         onCasesChange={setCases}
+        onDuplicate={handleDuplicateCase}
         onArchive={handleArchiveCase}
         onDelete={handleDeleteCase}
         onUpdate={handleUpdatesCase}

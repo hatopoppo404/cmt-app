@@ -11,6 +11,7 @@ import clsx from "clsx";
 type Props = {
   caseItem: Case;
   activeId: string | null;
+  onDuplicate: (id: string) => void;
   onArchive: (id: string) => void;
   onDelete: (id: string) => void;
   onUpdate: (id: string, updates: Partial<Case>) => void;
@@ -19,6 +20,7 @@ type Props = {
 export const SortableCard = ({
   caseItem,
   activeId,
+  onDuplicate,
   onArchive,
   onDelete,
   onUpdate,
@@ -59,6 +61,7 @@ export const SortableCard = ({
       <DragHandle attributes={attributes} listeners={listeners} />
       <Card
         caseItem={caseItem}
+        onDuplicate={onDuplicate}
         onArchive={onArchive}
         onDelete={onDelete}
         onUpdate={onUpdate}

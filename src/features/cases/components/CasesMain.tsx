@@ -8,6 +8,7 @@ type Props = {
   cases: Case[];
   onAddCase: () => void;
   onCasesChange: (cases: Case[]) => void;
+  onDuplicate: (id: string) => void;
   onArchive: (id: string) => void;
   onDelete: (id: string) => void;
   onUpdate: (id: string, updates: Partial<Case>) => void;
@@ -18,6 +19,7 @@ export const CasesMain = ({
   cases,
   onAddCase,
   onCasesChange,
+  onDuplicate,
   onArchive,
   onDelete,
   onUpdate,
@@ -43,6 +45,7 @@ export const CasesMain = ({
       <CaseList
         cases={cases}
         onCasesChange={onCasesChange}
+        onDuplicate={onDuplicate}
         onArchive={onArchive}
         onDelete={onDelete}
         onUpdate={onUpdate}

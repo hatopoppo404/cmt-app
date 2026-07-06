@@ -13,6 +13,7 @@ import clsx from "clsx";
 type Props = {
   cases: Case[];
   onCasesChange: (cases: Case[]) => void;
+  onDuplicate: (id: string) => void;
   onArchive: (id: string) => void;
   onDelete: (id: string) => void;
   onUpdate: (id: string, updates: Partial<Case>) => void;
@@ -22,6 +23,7 @@ type Props = {
 export const CaseList = ({
   cases,
   onCasesChange,
+  onDuplicate,
   onArchive,
   onDelete,
   onUpdate,
@@ -76,6 +78,7 @@ export const CaseList = ({
               key={caseItem.id}
               caseItem={caseItem}
               activeId={activeId}
+              onDuplicate={onDuplicate}
               onArchive={onArchive}
               onDelete={onDelete}
               onUpdate={onUpdate}
@@ -88,6 +91,7 @@ export const CaseList = ({
           <div className="scale-105 overflow-auto shadow-2xl">
             <Card
               caseItem={activeCase}
+              onDuplicate={onDuplicate}
               onArchive={onArchive}
               onDelete={onDelete}
               onUpdate={onUpdate}

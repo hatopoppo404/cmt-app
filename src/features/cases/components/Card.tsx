@@ -7,17 +7,25 @@ import { CardSummary } from "@/features/cases/components/CardSummary";
 import { CardDetail } from "@/features/cases/components/CardDetail";
 import { NoteSec } from "@/features/cases/components/NoteSec";
 
+import { CopyIcon } from "@/components/icons/CopyIcon";
 import { ArchiveIcon } from "@/components/icons/ArchiveIcon";
 import { DeleteIcon } from "@/components/icons/DeleteIcon";
 
 type Props = {
   caseItem: Case;
+  onDuplicate: (id: string) => void;
   onArchive: (id: string) => void;
   onDelete: (id: string) => void;
   onUpdate: (id: string, updates: Partial<Case>) => void;
 };
 
-export const Card = ({ caseItem, onArchive, onDelete, onUpdate }: Props) => {
+export const Card = ({
+  caseItem,
+  onDuplicate,
+  onArchive,
+  onDelete,
+  onUpdate,
+}: Props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -73,7 +81,7 @@ export const Card = ({ caseItem, onArchive, onDelete, onUpdate }: Props) => {
           <div className={clsx("flex", "flex-row", "gap-2", "justify-end")}>
             <button
               type="button"
-              onClick={() => onArchive(caseItem.id)}
+              onClick={() => onDuplicate(caseItem.id)}
               className={clsx(
                 // "ml-auto",
                 "w-fit",
@@ -82,6 +90,47 @@ export const Card = ({ caseItem, onArchive, onDelete, onUpdate }: Props) => {
                 "opacity-30",
 
                 "hover:text-(--blue-500)",
+                "hover:opacity-100",
+                "cursor-pointer",
+
+                "group",
+                "flex",
+                "items-center",
+                "gap-2",
+              )}
+            >
+              <CopyIcon className="size-[20px]" />
+              <span
+                className={clsx(
+                  "text-[0.7em]",
+                  "p-0",
+
+                  "max-w-0",
+                  "overflow-hidden",
+                  "opacity-0",
+
+                  "transition-all",
+                  "duration-200",
+
+                  "group-hover:max-w-fit",
+                  "group-hover:opacity-100",
+                  "group-hover:pr-1",
+                )}
+              >
+                Content Copy
+              </span>
+            </button>
+            <button
+              type="button"
+              onClick={() => onArchive(caseItem.id)}
+              className={clsx(
+                // "ml-auto",
+                "w-fit",
+                "p-2",
+                "my-0",
+                "opacity-30",
+
+                "hover:text-(--yellow-500)",
                 "hover:opacity-100",
                 "cursor-pointer",
 
