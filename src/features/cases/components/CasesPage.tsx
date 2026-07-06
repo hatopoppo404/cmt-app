@@ -32,6 +32,18 @@ export const CasesPage = () => {
   const [toasts, setToasts] = useState<ToastItem[]>([]);
   const toastTimerRef = useRef<Map<string, ToastTimerIds>>(new Map());
 
+  useEffect(() => {
+    return () => {
+      toastTimerRef.current.forEach((timers) => {
+        if (timers.show) window.clearTimeout(timers.show);
+        if (timers.hide) window.clearTimeout(timers.hide);
+        if (timers.remove) window.clearTimeout(timers.remove);
+
+        toastTimerRef.current.clear();
+      });
+    };
+  }, []);
+
   const clearToastTimers = useCallback((id: string) => {
     const timers = toastTimerRef.current.get(id);
     if (!timers) return;
