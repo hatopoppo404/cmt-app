@@ -9,7 +9,7 @@
 
   transition: all 500ms;
 
-  padding: 1rem 1.25rem 1rem 1rem;
+  padding: 0.5rem 0.75rem 0.5rem 0.5rem;
   box-shadow: var(--shadow-rest);
 
   &:disabled {
@@ -41,7 +41,7 @@
 }
 
 .button:active {
-  box-shadow: var(--shadow-hover);
+  box-shadow: var(--shadow-rest);
   transform: scale(0.99);
 }
 
