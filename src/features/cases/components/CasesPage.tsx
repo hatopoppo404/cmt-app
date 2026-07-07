@@ -410,6 +410,7 @@ export const CasesPage = () => {
         onAddCase={handleAddCase}
         onCasesChange={setCases}
         caseActions={caseActions}
+        onCreatorOpen={}
       />
     </div>
   );

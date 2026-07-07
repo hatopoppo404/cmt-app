@@ -2,6 +2,9 @@ import { AddCaseButton } from "@/features/cases/components/AddCaseButton";
 import { CaseList } from "@/features/cases/components/CaseList";
 import type { Case, CaseActions } from "@/types/case";
 
+import { Button } from "@/components/ui/Button/Button";
+import { AddCardIcon } from "@/components/icons/AddCardIcon";
+
 import clsx from "clsx";
 
 type Props = {
@@ -10,6 +13,7 @@ type Props = {
   onCasesChange: (cases: Case[]) => void;
   caseActions: CaseActions;
   className?: string;
+  onCreatorOpen: () => void;
 };
 
 export const CasesMain = ({
@@ -18,6 +22,7 @@ export const CasesMain = ({
   onCasesChange,
   caseActions,
   className,
+  onCreatorOpen,
 }: Props) => {
   return (
     <main
@@ -32,8 +37,15 @@ export const CasesMain = ({
         className,
       )}
     >
-      <div className={clsx("")}>
+      <div className={clsx("flex", "flex-row", "gap-4")}>
         <AddCaseButton onClick={onAddCase} />
+        <Button
+          variant="ghost"
+          size="sm"
+          icon={<AddCardIcon />}
+          text="Create a Card from Clipboard"
+          onClick={onCreatorOpen}
+        />
       </div>
 
       <CaseList
