@@ -105,26 +105,26 @@ export const Card = ({ caseItem, caseActions }: Props) => {
             <button
               type="button"
               onClick={() => caseActions.onDuplicateCase(caseItem.id)}
-              className={clsx(`${actionButtonClass}`)}
+              className={clsx(actionButtonClass)}
             >
               <CopyIcon className="size-[20px]" />
-              <span className={clsx(`${actionTextClass}`)}>Content Copy</span>
+              <span className={clsx(actionTextClass)}>Content Copy</span>
             </button>
             <button
               type="button"
               onClick={() => caseActions.onArchiveCase(caseItem.id)}
-              className={clsx(`${actionButtonClass}`)}
+              className={clsx(actionButtonClass)}
             >
               <ArchiveIcon className="size-[20px]" />
-              <span className={clsx(`${actionTextClass}`)}>Archive</span>
+              <span className={clsx(actionTextClass)}>Archive</span>
             </button>
             <button
               type="button"
               onClick={() => caseActions.onDeleteCase(caseItem.id)}
-              className={clsx(`${actionButtonClass}`)}
+              className={clsx(actionButtonClass)}
             >
               <DeleteIcon className="size-[20px]" />
-              <span className={clsx(`${actionTextClass}`)}>Delete</span>
+              <span className={clsx(actionTextClass)}>Delete</span>
             </button>
           </div>
         </div>
