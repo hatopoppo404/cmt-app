@@ -25,7 +25,6 @@ export const Card = ({ caseItem, caseActions }: Props) => {
     "size-8",
     "opacity-30",
 
-    "hover:text-(--yellow-500)",
     "hover:opacity-100",
     "cursor-pointer",
 
@@ -105,7 +104,7 @@ export const Card = ({ caseItem, caseActions }: Props) => {
             <button
               type="button"
               onClick={() => caseActions.onDuplicateCase(caseItem.id)}
-              className={clsx(actionButtonClass)}
+              className={clsx(actionButtonClass, "hover:text-(--blue-500)")}
             >
               <CopyIcon className="size-[20px]" />
               <span className={clsx(actionTextClass)}>Content Copy</span>
@@ -113,7 +112,7 @@ export const Card = ({ caseItem, caseActions }: Props) => {
             <button
               type="button"
               onClick={() => caseActions.onArchiveCase(caseItem.id)}
-              className={clsx(actionButtonClass)}
+              className={clsx(actionButtonClass, "hover:text-(--yellow-500)")}
             >
               <ArchiveIcon className="size-[20px]" />
               <span className={clsx(actionTextClass)}>Archive</span>
@@ -121,7 +120,7 @@ export const Card = ({ caseItem, caseActions }: Props) => {
             <button
               type="button"
               onClick={() => caseActions.onDeleteCase(caseItem.id)}
-              className={clsx(actionButtonClass)}
+              className={clsx(actionButtonClass, "hover:text-(--red-500)")}
             >
               <DeleteIcon className="size-[20px]" />
               <span className={clsx(actionTextClass)}>Delete</span>
