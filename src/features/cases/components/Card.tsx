@@ -18,7 +18,37 @@ type Props = {
 
 export const Card = ({ caseItem, caseActions }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
+  const actionButtonClass = [
+    "w-fit",
+    "p-2",
+    "my-0",
+    "size-8",
+    "opacity-30",
 
+    "hover:text-(--yellow-500)",
+    "hover:opacity-100",
+    "cursor-pointer",
+
+    "group",
+    "flex",
+    "items-center",
+    "gap-2",
+  ];
+  const actionTextClass = [
+    "text-[0.7em]",
+    "p-0",
+
+    "max-w-0",
+    "overflow-hidden",
+    "opacity-0",
+
+    "transition-all",
+    "duration-200",
+
+    "group-hover:max-w-fit",
+    "group-hover:opacity-100",
+    "group-hover:pr-1",
+  ];
   return (
     <div
       className={clsx(
@@ -33,7 +63,7 @@ export const Card = ({ caseItem, caseActions }: Props) => {
         "duration-300",
 
         "text-(--color-text)",
-        "border-10",
+        "border-[10px]",
         "border-(--color-border-card)",
       )}
     >
@@ -75,128 +105,26 @@ export const Card = ({ caseItem, caseActions }: Props) => {
             <button
               type="button"
               onClick={() => caseActions.onDuplicateCase(caseItem.id)}
-              className={clsx(
-                // "ml-auto",
-                "w-fit",
-                "p-2",
-                "my-0",
-                "opacity-30",
-                "size-8",
-
-                "hover:text-(--blue-500)",
-                "hover:opacity-100",
-                "cursor-pointer",
-
-                "group",
-                "flex",
-                "items-center",
-                "gap-2",
-              )}
+              className={clsx(`${actionButtonClass}`)}
             >
               <CopyIcon className="size-[20px]" />
-              <span
-                className={clsx(
-                  "text-[0.7em]",
-                  "p-0",
-
-                  "max-w-0",
-                  "overflow-hidden",
-                  "opacity-0",
-
-                  "transition-all",
-                  "duration-200",
-
-                  "group-hover:max-w-fit",
-                  "group-hover:opacity-100",
-                  "group-hover:pr-1",
-                )}
-              >
-                Content Copy
-              </span>
+              <span className={clsx(`${actionTextClass}`)}>Content Copy</span>
             </button>
             <button
               type="button"
               onClick={() => caseActions.onArchiveCase(caseItem.id)}
-              className={clsx(
-                // "ml-auto",
-                "w-fit",
-                "p-2",
-                "my-0",
-                "size-8",
-                "opacity-30",
-
-                "hover:text-(--yellow-500)",
-                "hover:opacity-100",
-                "cursor-pointer",
-
-                "group",
-                "flex",
-                "items-center",
-                "gap-2",
-              )}
+              className={clsx(`${actionButtonClass}`)}
             >
               <ArchiveIcon className="size-[20px]" />
-              <span
-                className={clsx(
-                  "text-[0.7em]",
-                  "p-0",
-
-                  "max-w-0",
-                  "overflow-hidden",
-                  "opacity-0",
-
-                  "transition-all",
-                  "duration-200",
-
-                  "group-hover:max-w-fit",
-                  "group-hover:opacity-100",
-                  "group-hover:pr-1",
-                )}
-              >
-                Archive
-              </span>
+              <span className={clsx(`${actionTextClass}`)}>Archive</span>
             </button>
             <button
               type="button"
               onClick={() => caseActions.onDeleteCase(caseItem.id)}
-              className={clsx(
-                // "ml-auto",
-                "w-fit",
-                "p-2",
-                "my-0",
-                "size-8",
-                "opacity-30",
-
-                "hover:text-(--red-500)",
-                "hover:opacity-100",
-                "cursor-pointer",
-
-                "group",
-                "flex",
-                "items-center",
-                "gap-2",
-              )}
+              className={clsx(`${actionButtonClass}`)}
             >
               <DeleteIcon className="size-[20px]" />
-              <span
-                className={clsx(
-                  "text-[0.7em]",
-                  "p-0",
-
-                  "max-w-0",
-                  "overflow-hidden",
-                  "opacity-0",
-
-                  "transition-all",
-                  "duration-200",
-
-                  "group-hover:max-w-fit",
-                  "group-hover:opacity-100",
-                  "group-hover:pr-1",
-                )}
-              >
-                Delete
-              </span>
+              <span className={clsx(`${actionTextClass}`)}>Delete</span>
             </button>
           </div>
         </div>
