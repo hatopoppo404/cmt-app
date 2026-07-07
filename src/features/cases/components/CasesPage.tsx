@@ -410,7 +410,7 @@ export const CasesPage = () => {
         onAddCase={handleAddCase}
         onCasesChange={setCases}
         caseActions={caseActions}
-        onCreatorOpen={}
+        onCreatorOpen={() => window.confirm("OK")}
       />
     </div>
   );
