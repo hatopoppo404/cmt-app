@@ -37,7 +37,15 @@ export const CasesMain = ({
         className,
       )}
     >
-      <div className={clsx("flex", "flex-row", "gap-4")}>
+      <div
+        className={clsx(
+          "flex",
+          "flex-row",
+          "gap-4",
+          "items-center",
+          "justify-center",
+        )}
+      >
         <AddCaseButton onClick={onAddCase} />
         <Button
           variant="ghost"
