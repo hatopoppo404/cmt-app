@@ -42,7 +42,7 @@
 
 .button:active {
   box-shadow: var(--shadow-rest);
-  transform: scale(0.99);
+  transform: scale(0.97);
 }
 
 .icon_container {
