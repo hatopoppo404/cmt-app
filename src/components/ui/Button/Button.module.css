@@ -40,6 +40,11 @@
   transform: scale(1.01);
 }
 
+.button:active {
+  box-shadow: var(--shadow-hover);
+  transform: scale(0.99);
+}
+
 .icon_container {
   height: fit-content;
   width: fit-content;
