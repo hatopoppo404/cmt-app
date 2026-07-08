@@ -9,8 +9,11 @@ type Props = {
   variant: Variant;
   size: Size;
   icon?: ReactNode;
+  iconClass?: string;
   text?: string;
+  textClass?: string;
   iconOnly?: boolean;
+  buttonClass?: string;
 
   disabled?: boolean;
   loading?: boolean;
@@ -22,7 +25,10 @@ export const Button = ({
   variant = "ghost",
   size = "md",
   icon,
+  iconClass,
   text = "送信",
+  textClass,
+  buttonClass,
   iconOnly = false,
   disabled = false,
   loading = false,
@@ -38,17 +44,18 @@ export const Button = ({
         iconOnly && styles.iconOnly,
         disabled && styles.disabled,
         loading && styles.loading,
+        buttonClass,
       ]
         .filter(Boolean)
         .join(" ")}
     >
-      <div className={[styles.icon_container].join(" ")}>{Icon}</div>
+      <div className={[styles.icon_container, iconClass].join(" ")}>{Icon}</div>
       {loading && (
         <span className={styles.spinner}>
           <Spinner size={size} />
         </span>
       )}
-      <span className={styles.text}>{text}</span>
+      <span className={[styles.text, textClass].join(" ")}>{text}</span>
     </button>
   );
 };
