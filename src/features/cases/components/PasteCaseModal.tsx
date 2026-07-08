@@ -19,6 +19,7 @@ export const PasteCaseModal = ({ onClose }: Props) => {
             icon={<CloseIcon />}
             onClick={onClose}
             buttonClass="border-none bg-inherit"
+            iconClass="size-[12px]"
           />
         </header>
         <textarea placeholder="エクセルでコピーした内容をここに貼り付け" />
