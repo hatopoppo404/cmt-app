@@ -33,6 +33,7 @@ import {
   ToastTimerIds,
   Toast,
 } from "@/components/ui/Toast";
+import { PasteCaseModal } from "./PasteCaseModal";
 
 export const CasesPage = () => {
   // トースト表示
@@ -414,6 +415,7 @@ export const CasesPage = () => {
           return window.confirm("OK？");
         }}
       />
+      <PasteCaseModal onClose={() => {}} />
     </div>
   );
 };
