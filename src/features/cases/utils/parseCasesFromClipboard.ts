@@ -14,6 +14,23 @@ export type ParsedCasePreview = {
   note: string; //備考
 };
 
+const caseFieldDefinitions = {
+  itemName: ["記述", "品名", "品目名"],
+  itemCode: ["品目", "品番", "品目コード"],
+  supplier: ["名前", "仕入先", "サプライヤ"],
+  replyDate: ["回答納期", "回答日"],
+  dueDate: ["希望納期", "必要日"],
+  orderCode: ["注文番号", "発注番号", "PO"],
+  quantity: ["計画数量", "数量", "必要数"],
+  warehouse: ["保管場所", "倉庫", "納品先"],
+  deadline: ["限界", "限界納期", "期限"],
+  cause: ["起因", "起因名", "原因"],
+  note: ["備考", "メモ", "コメント"],
+} as const;
+
+type CaseFieldKey = keyof typeof caseFieldDefinitions;
+type HeaderIndices = Record<CaseFieldKey, number>;
+
 // 文字を配列化する関数
 const parseTsv = (text: string): string[][] => {
   const rows: string[][] = [];
@@ -72,7 +89,28 @@ const normalizeHeader = (header: string): string => {
   return normalizedHeader;
 };
 
-// 5. findColumnIndex を書く
+// 列番号を取得する関数
+const findHeaderIndices = (data: string[][]): HeaderIndices => {
+  const keys = Object.keys(caseFieldDefinitions) as CaseFieldKey[];
+  const headerIndices = keys.reduce((acc, key) => {
+    acc[key] = -1;
+    return acc;
+  }, {} as HeaderIndices);
+
+  const keywords = Object.values(caseFieldDefinitions)
+    .flat()
+    .map((keyword) => normalizeHeader(keyword));
+
+  const headerRowIndex = data.slice(0, 30).findIndex((row) => {
+    const normalizedRow = row.map((cell) => normalizeHeader(cell));
+    const matchedKeywords = keywords.filter((keyword) =>
+      normalizedRow.some((cell) => cell.includes(keyword)),
+    );
+    return matchedKeywords.length > 3;
+  });
+
+  return headerIndices;
+};
 
 // 6. getValue を書く
 
