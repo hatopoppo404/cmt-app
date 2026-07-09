@@ -345,6 +345,9 @@ export const CasesPage = () => {
     }
   };
 
+  // ペーストカード作成機能
+  const [showPasteModal, setShowPasteModal] = useState(false);
+
   return (
     <div
       className={clsx(
@@ -412,10 +415,12 @@ export const CasesPage = () => {
         onCasesChange={setCases}
         caseActions={caseActions}
         onCreatorOpen={() => {
-          return window.confirm("OK？");
+          setShowPasteModal(true);
         }}
       />
-      <PasteCaseModal onClose={() => {}} />
+      {showPasteModal && (
+        <PasteCaseModal onClose={() => setShowPasteModal(false)} />
+      )}
     </div>
   );
 };

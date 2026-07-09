@@ -32,12 +32,13 @@ export const Button = ({
   iconOnly = false,
   disabled = false,
   loading = false,
+  onClick,
 }: Props) => {
   const Icon = icon;
   return (
     <button
       disabled={disabled || loading}
-      className={[
+      className={clsx(
         styles.button,
         styles[variant],
         styles[size],
@@ -45,17 +46,16 @@ export const Button = ({
         disabled && styles.disabled,
         loading && styles.loading,
         buttonClass,
-      ]
-        .filter(Boolean)
-        .join(" ")}
+      )}
+      onClick={onClick}
     >
-      <div className={[styles.icon_container, iconClass].join(" ")}>{Icon}</div>
+      <div className={clsx(styles.icon_container, iconClass)}>{Icon}</div>
       {loading && (
         <span className={styles.spinner}>
           <Spinner size={size} />
         </span>
       )}
-      <span className={[styles.text, textClass].join(" ")}>{text}</span>
+      <span className={clsx(styles.text, textClass)}>{text}</span>
     </button>
   );
 };

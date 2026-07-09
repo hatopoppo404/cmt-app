@@ -1,0 +1,76 @@
+// 1. ParsedCasePreview 型
+export type ParsedCasePreview = {
+  itemName: string; //品目英名
+  itemCode: string; //品目コード
+  supplier: string; //仕入先
+  replyDate: string; //回答納期
+  dueDate: string; //希望納期
+  delayDays: number; //遅延日数
+  orderCode: string; //注文番号
+  quantity: number; //数量
+  warehouse: string; //納品先
+  deadline: string; //限界納期
+  cause: string; //起因名
+  note: string; //備考
+};
+
+// 2. parseTsv の空関数を書く
+// 3. parseTsv の中で for文を書く
+const parseTsv = (text: string): string[][] => {
+  const rows: string[][] = [];
+  let currentRow: string[] = [];
+  let currentCell: string = "";
+  let isInQuotes: boolean = false;
+
+  for (let i = 0; i < text.length; i++) {
+    const char = text[i];
+    const nextChar = text[i + 1];
+
+    // クォートの処理
+    if (char === '"') {
+      if (isInQuotes && nextChar === '"') {
+        currentCell += '"';
+        i++;
+      } else {
+        isInQuotes = !isInQuotes;
+      }
+
+      continue;
+    }
+
+    // タブの処理
+    if (char === "\t" && !isInQuotes) {
+      currentRow.push(currentCell.trim());
+      currentCell = "";
+      continue;
+    }
+
+    // 改行の処理
+    if ((char === "\n" || char === "\r") && !isInQuotes) {
+      if (char === "\r" && nextChar === "\n") i++;
+      currentRow.push(currentCell.trim());
+      rows.push(currentRow);
+      currentRow = [];
+      currentCell = "";
+      continue;
+    }
+
+    currentCell += char;
+  }
+
+  return rows;
+};
+
+// 4. normalizeHeader を書く
+
+// 5. findColumnIndex を書く
+
+// 6. getValue を書く
+
+// 7. parseCasesFromClipboard でつなぐ
+// クリップボードから貼り付けたテキストを解析して、プレビュー用の配列に変換
+// export const parseCasesFromClipboard = (
+//   clipboardText: string,
+// ): ParsedCasePreview[] => {};
+
+// 8. console.logで確認
