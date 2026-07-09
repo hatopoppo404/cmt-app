@@ -1,4 +1,4 @@
-// 1. ParsedCasePreview 型
+// プレビュー用の型定義
 export type ParsedCasePreview = {
   itemName: string; //品目英名
   itemCode: string; //品目コード
@@ -14,8 +14,7 @@ export type ParsedCasePreview = {
   note: string; //備考
 };
 
-// 2. parseTsv の空関数を書く
-// 3. parseTsv の中で for文を書く
+// 文字を配列化する関数
 const parseTsv = (text: string): string[][] => {
   const rows: string[][] = [];
   let currentRow: string[] = [];
@@ -57,11 +56,21 @@ const parseTsv = (text: string): string[][] => {
 
     currentCell += char;
   }
-
-  return rows;
+  currentRow.push(currentCell.trim());
+  rows.push(currentRow);
+  return rows.filter((row) => row.some((cell) => cell !== ""));
 };
 
-// 4. normalizeHeader を書く
+// ヘッダーの表記揺れを吸収する関数
+const normalizeHeader = (header: string): string => {
+  const normalizedHeader = header
+    .normalize("NFKC")
+    .replace(/\s/g, "")
+    .replace(/[({\[「『【《〈〔〘〖〚]/g, "_")
+    .replace(/[)}\]」』】》〉〕〙〗〛]/g, "")
+    .toLowerCase();
+  return normalizedHeader;
+};
 
 // 5. findColumnIndex を書く
 
