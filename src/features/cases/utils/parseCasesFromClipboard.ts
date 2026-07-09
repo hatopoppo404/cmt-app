@@ -104,9 +104,7 @@ const findHeaderIndices = (data: string[][]): HeaderIndices => {
     ]),
   ) as Record<CaseFieldKey, string[]>;
 
-  const keywords = Object.values(normalizedCaseFieldDefinitions)
-    .flat()
-    .map((keyword) => normalizeHeader(keyword));
+  const keywords = Object.values(normalizedCaseFieldDefinitions).flat();
 
   const normalizedData = data.map((row) =>
     row.map((cell) => normalizeHeader(cell)),
@@ -136,7 +134,11 @@ const findHeaderIndices = (data: string[][]): HeaderIndices => {
   return headerIndices;
 };
 
-// 6. getValue を書く
+// 安全にセルの値を取り出す補助関数
+const getValue = (row: string[], index: number): string => {
+  if (index === -1) return "";
+  return row[index] ?? "";
+};
 
 // 7. parseCasesFromClipboard でつなぐ
 // クリップボードから貼り付けたテキストを解析して、プレビュー用の配列に変換
