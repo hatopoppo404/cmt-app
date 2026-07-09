@@ -97,17 +97,41 @@ const findHeaderIndices = (data: string[][]): HeaderIndices => {
     return acc;
   }, {} as HeaderIndices);
 
-  const keywords = Object.values(caseFieldDefinitions)
+  const normalizedCaseFieldDefinitions = Object.fromEntries(
+    Object.entries(caseFieldDefinitions).map(([key, keywords]) => [
+      key,
+      keywords.map((keyword) => normalizeHeader(keyword)),
+    ]),
+  ) as Record<CaseFieldKey, string[]>;
+
+  const keywords = Object.values(normalizedCaseFieldDefinitions)
     .flat()
     .map((keyword) => normalizeHeader(keyword));
 
-  const headerRowIndex = data.slice(0, 30).findIndex((row) => {
-    const normalizedRow = row.map((cell) => normalizeHeader(cell));
+  const normalizedData = data.map((row) =>
+    row.map((cell) => normalizeHeader(cell)),
+  );
+
+  const headerRowIndex = normalizedData.slice(0, 30).findIndex((row) => {
     const matchedKeywords = keywords.filter((keyword) =>
-      normalizedRow.some((cell) => cell.includes(keyword)),
+      row.some((cell) => cell.includes(keyword)),
     );
-    return matchedKeywords.length > 3;
+    return matchedKeywords.length >= 4;
   });
+
+  if (headerRowIndex === -1) return headerIndices;
+
+  for (const key of keys) {
+    const index = normalizedData[headerRowIndex].findIndex((cell) =>
+      //   for (const keyword of caseFieldDefinitions[key])
+      //     if (cell.includes(normalizeHeader(keyword))) return true;
+      //   return false;
+      normalizedCaseFieldDefinitions[key].some((keyword) =>
+        cell.includes(keyword),
+      ),
+    );
+    headerIndices[key] = index;
+  }
 
   return headerIndices;
 };
