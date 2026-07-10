@@ -96,7 +96,7 @@ const normalizeHeader = (header: string): string => {
 // 列番号を取得する関数
 const findHeaderIndices = (data: string[][]): HeaderIndices => {
   const keys = Object.keys(caseFieldDefinitions) as CaseFieldKey[];
-  const headerIndices = keys.reduce(
+  const headerIndices = keys.reduce<HeaderIndices>(
     (acc, key) => {
       acc.headerColumnsIndex[key] = -1;
       return acc;
