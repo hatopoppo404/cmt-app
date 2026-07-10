@@ -31,8 +31,8 @@ const caseFieldDefinitions = {
 type CaseFieldKey = keyof typeof caseFieldDefinitions;
 type HeaderIndex = Record<CaseFieldKey, number>;
 type HeaderIndices = {
-  HeaderRowIndex: number;
-  HeaderCloumnsIndex: HeaderIndex;
+  headerRowIndex: number;
+  headerColumnsIndex: HeaderIndex;
 };
 
 // 文字を配列化する関数
@@ -96,11 +96,16 @@ const normalizeHeader = (header: string): string => {
 // 列番号を取得する関数
 const findHeaderIndices = (data: string[][]): HeaderIndices => {
   const keys = Object.keys(caseFieldDefinitions) as CaseFieldKey[];
-  const headerIndices = keys.reduce((acc, key) => {
-    acc.HeaderRowIndex = -1;
-    acc.HeaderCloumnsIndex[key] = -1;
-    return acc;
-  }, {} as HeaderIndices);
+  const headerIndices = keys.reduce(
+    (acc, key) => {
+      acc.headerColumnsIndex[key] = -1;
+      return acc;
+    },
+    {
+      headerRowIndex: -1,
+      headerColumnsIndex: {} as HeaderIndex,
+    },
+  );
 
   const normalizedCaseFieldDefinitions = Object.fromEntries(
     Object.entries(caseFieldDefinitions).map(([key, keywords]) => [
@@ -121,7 +126,7 @@ const findHeaderIndices = (data: string[][]): HeaderIndices => {
     );
     return matchedKeywords.length >= 4;
   });
-  headerIndices.HeaderRowIndex = headerRowIndex;
+  headerIndices.headerRowIndex = headerRowIndex;
 
   if (headerRowIndex === -1) return headerIndices;
 
@@ -134,7 +139,7 @@ const findHeaderIndices = (data: string[][]): HeaderIndices => {
         cell.includes(keyword),
       ),
     );
-    headerIndices.HeaderCloumnsIndex[key] = index;
+    headerIndices.headerColumnsIndex[key] = index;
   }
 
   return headerIndices;
