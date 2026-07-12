@@ -15,7 +15,7 @@ type CardMode = "normal" | "preview";
 
 type Props = {
   caseItem: Case;
-  caseActions: CaseActions;
+  caseActions?: CaseActions;
   mode?: CardMode;
 };
 

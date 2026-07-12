@@ -1,4 +1,5 @@
 import { normalizeDateInput, calculateBusinessDelayDays } from "./date";
+import { Case } from "@/types/case";
 
 // プレビュー用の型定義
 export type ParsedCasePreview = {
@@ -199,5 +200,20 @@ export const parseCasesFromClipboard = (
 
   return parsedCases;
 };
+export const toPreviewCase = (
+  preview: ParsedCasePreview,
+  index: number,
+): Case => {
+  const now = new Date().toISOString();
 
-console.log();
+  return {
+    id: `preview-${index}`,
+    status: "active",
+    sortOrder: index,
+    createdAt: now,
+    updatedAt: now,
+    archivedAt: null,
+    deletedAt: null,
+    ...preview,
+  };
+};
