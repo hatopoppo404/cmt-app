@@ -1,4 +1,4 @@
-import { calculateBusinessDelayDays } from "./date";
+import { normalizeDateInput, calculateBusinessDelayDays } from "./date";
 
 // プレビュー用の型定義
 export type ParsedCasePreview = {
@@ -164,13 +164,18 @@ export const parseCasesFromClipboard = (
   if (headerInfo.headerRowIndex === -1) return [];
 
   const indices = headerInfo.headerColumnsIndex;
+  const normalizeDateForDisplay = (value: string): string => {
+    return normalizeDateInput(value) || value;
+  };
   const parsedCases: ParsedCasePreview[] = data
     .slice(headerInfo.headerRowIndex + 1)
     .filter((row) => getValue(row, indices.deadline) !== "")
     .map((row) => {
-      const replyDate = getValue(row, indices.replyDate);
-      const dueDate = getValue(row, indices.dueDate);
-      const deadline = getValue(row, indices.deadline);
+      const replyDate = normalizeDateForDisplay(
+        getValue(row, indices.replyDate),
+      );
+      const dueDate = normalizeDateForDisplay(getValue(row, indices.dueDate));
+      const deadline = normalizeDateForDisplay(getValue(row, indices.deadline));
       const delayDays = calculateBusinessDelayDays({
         dueDate,
         replyDate,

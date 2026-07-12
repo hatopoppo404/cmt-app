@@ -419,7 +419,10 @@ export const CasesPage = () => {
         }}
       />
       {showPasteModal && (
-        <PasteCaseModal onClose={() => setShowPasteModal(false)} />
+        <PasteCaseModal
+          onClose={() => setShowPasteModal(false)}
+          onShowToast={showToast}
+        />
       )}
     </div>
   );
