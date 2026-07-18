@@ -14,10 +14,7 @@ type CardHeaderProps = {
   dueDate: string;
   replyDate: string;
   caseId: string;
-  onUpdate: (
-    id: string,
-    updates: Partial<Case>,
-  ) => void;
+  onUpdate?: (id: string, updates: Partial<Case>) => void;
 };
 export const CardHeader = ({
   itemName,
@@ -33,22 +30,22 @@ export const CardHeader = ({
         <EditableText
           value={itemName}
           onSave={(nextValue) =>
-            onUpdate(caseId, {
+            onUpdate?.(caseId, {
               itemName: nextValue,
             })
           }
-          className="text-sm min-h-[1em] w-full"
+          className="min-h-[1em] w-full text-sm"
         />
         <EditableText
           value={itemCode}
           onSave={(nextValue) =>
-            onUpdate(caseId, {
+            onUpdate?.(caseId, {
               itemCode: normalizeItemCode(nextValue),
             })
           }
-          className="text-xl/5 font-bold min-h-[1em] w-full"
+          className="min-h-[1em] w-full text-xl/5 font-bold"
         />
-        <div className="flex flex-row gap-6 text-sm mt-2">
+        <div className="mt-2 flex flex-row gap-6 text-sm">
           <div className="flex flex-row items-center gap-2">
             <div className="flex flex-row items-center">
               <ReplyDateIcon className="size-[20px]" />
@@ -57,9 +54,10 @@ export const CardHeader = ({
             <EditableDate
               value={replyDate}
               onSave={(nextValue) =>
-                onUpdate(caseId, {
+                onUpdate?.(caseId, {
                   replyDate: nextValue,
-                })}
+                })
+              }
               className="max-w-[6em]"
             />
           </div>
@@ -71,9 +69,10 @@ export const CardHeader = ({
             <EditableDate
               value={dueDate}
               onSave={(nextValue) =>
-                onUpdate(caseId, {
+                onUpdate?.(caseId, {
                   dueDate: nextValue,
-                })}
+                })
+              }
               className="max-w-[6em]"
             />
           </div>

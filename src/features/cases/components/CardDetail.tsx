@@ -40,7 +40,7 @@ type Props = {
   cause: string; //起因名
   supplier: string; //仕入先
   caseId: string;
-  onUpdate: (id: string, updates: Partial<Case>) => void;
+  onUpdate?: (id: string, updates: Partial<Case>) => void;
 };
 export const CardDetail = ({
   orderCode,
@@ -61,7 +61,7 @@ export const CardDetail = ({
           value={supplier}
           options={supplierOptions}
           onSave={(nextValue) =>
-            onUpdate(caseId, {
+            onUpdate?.(caseId, {
               supplier: nextValue,
             })
           }
@@ -76,7 +76,7 @@ export const CardDetail = ({
         <EditableText
           value={orderCode}
           onSave={(nextValue) =>
-            onUpdate(caseId, {
+            onUpdate?.(caseId, {
               orderCode: nextValue,
             })
           }
@@ -92,7 +92,7 @@ export const CardDetail = ({
           <EditableQuentity
             value={quantity}
             onSave={(nextValue) =>
-              onUpdate(caseId, {
+              onUpdate?.(caseId, {
                 quantity: nextValue,
               })
             }
@@ -108,7 +108,7 @@ export const CardDetail = ({
         <EditableText
           value={warehouse}
           onSave={(nextValue) =>
-            onUpdate(caseId, {
+            onUpdate?.(caseId, {
               warehouse: nextValue,
             })
           }
@@ -123,7 +123,7 @@ export const CardDetail = ({
         <EditableDate
           value={deadline}
           onSave={(nextValue) =>
-            onUpdate(caseId, {
+            onUpdate?.(caseId, {
               deadline: nextValue,
             })
           }
@@ -138,7 +138,7 @@ export const CardDetail = ({
         <EditableText
           value={cause}
           onSave={(nextValue) =>
-            onUpdate(caseId, {
+            onUpdate?.(caseId, {
               cause: nextValue,
             })
           }

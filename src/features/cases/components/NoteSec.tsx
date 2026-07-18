@@ -11,13 +11,10 @@ import { Editabletextarea } from "./EditbleTextarea";
 type Props = {
   caseId: string;
   note: string; //備考
-  onUpdate: (
-    id: string,
-    updates: Partial<Case>,
-  ) => void;
+  onUpdate?: (id: string, updates: Partial<Case>) => void;
 };
 
-export const NoteSec = ({ caseId, note, onUpdate, }: Props) => {
+export const NoteSec = ({ caseId, note, onUpdate }: Props) => {
   return (
     <div
       className={clsx(
@@ -42,13 +39,11 @@ export const NoteSec = ({ caseId, note, onUpdate, }: Props) => {
         <Editabletextarea
           value={note}
           onSave={(nextValue) =>
-            onUpdate(caseId, {
+            onUpdate?.(caseId, {
               note: nextValue,
             })
           }
-          className={clsx(
-            "flex items-center text-sm min-h-[1.5em] w-full",
-          )}
+          className={clsx("flex min-h-[1.5em] w-full items-center text-sm")}
         />
       </div>
     </div>

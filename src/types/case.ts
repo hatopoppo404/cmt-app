@@ -26,9 +26,9 @@ export type Case = {
 export type SummaryFilter = "highRisk" | "urgent" | "delayed" | "active" | null;
 
 export type CaseActions = {
-  onArchiveCase: (id: string) => void;
-  // onUnarchiveCase: (id: string) => void;
-  onDeleteCase: (id: string) => void;
-  onDuplicateCase: (id: string) => void;
-  onUpdateCase: (id: string, updates: Partial<Case>) => void;
+  onArchiveCase?: (id: string) => void;
+  onUnarchiveCase?: (id: string) => void;
+  onDeleteCase?: (id: string) => void;
+  onDuplicateCase?: (id: string) => void;
+  onUpdateCase?: (id: string, updates: Partial<Case>) => void;
 };

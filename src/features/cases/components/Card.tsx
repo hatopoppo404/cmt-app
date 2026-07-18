@@ -15,7 +15,7 @@ type CardMode = "normal" | "preview";
 
 type Props = {
   caseItem: Case;
-  caseActions?: CaseActions;
+  caseActions: CaseActions;
   mode?: CardMode;
 };
 
@@ -113,7 +113,7 @@ export const Card = ({ caseItem, caseActions, mode = "normal" }: Props) => {
             >
               <button
                 type="button"
-                onClick={() => caseActions.onDuplicateCase(caseItem.id)}
+                onClick={() => caseActions?.onDuplicateCase?.(caseItem.id)}
                 className={clsx(actionButtonClass, "hover:text-(--blue-500)")}
               >
                 <CopyIcon className="size-[20px]" />
@@ -121,7 +121,7 @@ export const Card = ({ caseItem, caseActions, mode = "normal" }: Props) => {
               </button>
               <button
                 type="button"
-                onClick={() => caseActions.onArchiveCase(caseItem.id)}
+                onClick={() => caseActions?.onArchiveCase?.(caseItem.id)}
                 className={clsx(actionButtonClass, "hover:text-(--yellow-500)")}
               >
                 <ArchiveIcon className="size-[20px]" />
@@ -129,7 +129,7 @@ export const Card = ({ caseItem, caseActions, mode = "normal" }: Props) => {
               </button>
               <button
                 type="button"
-                onClick={() => caseActions.onDeleteCase(caseItem.id)}
+                onClick={() => caseActions?.onDeleteCase?.(caseItem.id)}
                 className={clsx(actionButtonClass, "hover:text-(--red-500)")}
               >
                 <DeleteIcon className="size-[20px]" />

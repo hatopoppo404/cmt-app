@@ -10,18 +10,10 @@ type Props = {
   caseItem: Case;
   isOpen: boolean;
   onClick: () => void;
-  onUpdate: (
-    id: string,
-    updates: Partial<Case>,
-  ) => void;
+  onUpdate?: (id: string, updates: Partial<Case>) => void;
 };
 
-export const CardSummary = ({
-  caseItem,
-  isOpen,
-  onClick,
-  onUpdate,
-}: Props) => {
+export const CardSummary = ({ caseItem, isOpen, onClick, onUpdate }: Props) => {
   return (
     <div
       className={clsx(
