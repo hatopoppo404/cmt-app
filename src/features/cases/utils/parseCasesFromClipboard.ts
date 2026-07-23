@@ -1,3 +1,6 @@
+import { normalizeDateInput, calculateBusinessDelayDays } from "./date";
+import { Case } from "@/types/case";
+
 // プレビュー用の型定義
 export type ParsedCasePreview = {
   itemName: string; //品目英名
@@ -153,8 +156,64 @@ const getValue = (row: string[], index: number): string => {
 
 // 7. parseCasesFromClipboard でつなぐ
 // クリップボードから貼り付けたテキストを解析して、プレビュー用の配列に変換
-// export const parseCasesFromClipboard = (
-//   clipboardText: string,
-// ): ParsedCasePreview[] => {};
+export const parseCasesFromClipboard = (
+  clipboardText: string,
+): ParsedCasePreview[] => {
+  const data = parseTsv(clipboardText);
+  const headerInfo = findHeaderIndices(data);
 
-// 8. console.logで確認
+  if (headerInfo.headerRowIndex === -1) return [];
+
+  const indices = headerInfo.headerColumnsIndex;
+  const normalizeDateForDisplay = (value: string): string => {
+    return normalizeDateInput(value) || value;
+  };
+  const parsedCases: ParsedCasePreview[] = data
+    .slice(headerInfo.headerRowIndex + 1)
+    .filter((row) => getValue(row, indices.deadline) !== "")
+    .map((row) => {
+      const replyDate = normalizeDateForDisplay(
+        getValue(row, indices.replyDate),
+      );
+      const dueDate = normalizeDateForDisplay(getValue(row, indices.dueDate));
+      const deadline = normalizeDateForDisplay(getValue(row, indices.deadline));
+      const delayDays = calculateBusinessDelayDays({
+        dueDate,
+        replyDate,
+        deadline,
+      });
+      return {
+        itemName: getValue(row, indices.itemName),
+        itemCode: getValue(row, indices.itemCode),
+        supplier: getValue(row, indices.supplier),
+        replyDate: replyDate,
+        dueDate: dueDate,
+        delayDays: delayDays,
+        orderCode: getValue(row, indices.orderCode),
+        quantity: Number(getValue(row, indices.quantity)) || 0,
+        warehouse: getValue(row, indices.warehouse),
+        deadline: deadline,
+        cause: getValue(row, indices.cause),
+        note: getValue(row, indices.note),
+      };
+    });
+
+  return parsedCases;
+};
+export const toPreviewCase = (
+  preview: ParsedCasePreview,
+  index: number,
+): Case => {
+  const now = new Date().toISOString();
+
+  return {
+    id: `preview-${index}`,
+    status: "active",
+    sortOrder: index,
+    createdAt: now,
+    updatedAt: now,
+    archivedAt: null,
+    deletedAt: null,
+    ...preview,
+  };
+};

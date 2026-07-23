@@ -43,6 +43,7 @@
   --color-bg-casestabs: var(--white-sub);
   --color-bg-panel: var(--white);
   --color-bg-card: var(--white-sub);
+  --color-bg-preview: var(--gray-500);
   --color-bg-input: var(--white);
   --color-bg-activetab: var(--color-primary);
   --color-bg-openbutton: var(--white);

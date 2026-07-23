@@ -21,7 +21,7 @@ export const DragHandle = ({ attributes, listeners }: Props) => {
         "w-30",
         "h-1",
         "outline",
-        "border-(--border-default)",
+        "border-default",
         "bg-(--color-border)",
         "opacity-10",
         "mx-4",
