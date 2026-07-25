@@ -10,6 +10,7 @@ import { AddCardIcon } from "@/components/icons/AddCardIcon";
 import { useState } from "react";
 import { toastConfig } from "@/components/ui/Toast";
 import { Card } from "./Card";
+import { Case, CaseActions } from "@/types/case";
 
 type Props = {
   onClose: () => void;
@@ -36,6 +37,12 @@ export const PasteCaseModal = ({ onClose, onShowToast }: Props) => {
     } else {
       onShowToast("error", "解析できる案件がありませんでした");
     }
+  };
+  const handleUpdatePreviewCase = (id: string, updates: Partial<Case>) => {};
+  const handleRemovePreviewCase = (id: string) => {};
+  const previewCaseActions: CaseActions = {
+    onUpdateCase: handleUpdatePreviewCase,
+    onDeleteCase: handleRemovePreviewCase,
   };
   return (
     <div
@@ -112,6 +119,7 @@ export const PasteCaseModal = ({ onClose, onShowToast }: Props) => {
                 <Card
                   key={`${caseItem.itemCode}-${caseItem.orderCode}`}
                   caseItem={toPreviewCase(caseItem, index)}
+                  caseActions={previewCaseActions}
                   mode="preview"
                 />
               ))}
