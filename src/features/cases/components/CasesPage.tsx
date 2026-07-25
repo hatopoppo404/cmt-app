@@ -224,6 +224,14 @@ export const CasesPage = () => {
       return reorderdCases;
     });
   };
+  const handleAddCases = (newCases: Case[]) => {
+    setCases((prev) => {
+      return [...newCases, ...prev].map((caseItem, index) => ({
+        ...caseItem,
+        sortOrder: index,
+      }));
+    });
+  };
 
   // カード複製
   const handleDuplicateCase = (id: string) => {
@@ -422,6 +430,7 @@ export const CasesPage = () => {
         <PasteCaseModal
           onClose={() => setShowPasteModal(false)}
           onShowToast={showToast}
+          onAddCases={handleAddCases}
         />
       )}
     </div>

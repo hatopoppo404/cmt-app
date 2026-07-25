@@ -11,24 +11,36 @@ import { useState } from "react";
 import { toastConfig } from "@/components/ui/Toast";
 import { Card } from "./Card";
 import { Case, CaseActions } from "@/types/case";
+import { ArrowIcon } from "@/components/icons/ArrowIcon";
+import { createEmptyCase } from "../utils/createEmptyCase";
 
 type Props = {
   onClose: () => void;
   onShowToast: (type: keyof typeof toastConfig, message: string) => void;
+  onAddCases: (newCases: Case[]) => void;
 };
 
-export const PasteCaseModal = ({ onClose, onShowToast }: Props) => {
+export const PasteCaseModal = ({ onClose, onShowToast, onAddCases }: Props) => {
+  // クリップボードテキスト
   const [clipboardText, setClipboardText] = useState("");
+
+  // クリップボードから文字列取得
   const handlePasteFromClipboard = async () => {
     const text = await navigator.clipboard.readText();
     setClipboardText(text);
   };
+  // インプットとプレビュー
   const [mode, setMode] = useState<"input" | "preview">("input");
+
+  // インプットに戻る
   const handleBackToInput = () => {
     setMode("input");
   };
 
+  // プレビューカード一覧
   const [previewCases, setPreviewCases] = useState<ParsedCasePreview[]>([]);
+
+  // プレビュー取得
   const handlePreviewCases = () => {
     const parsedCases = parseCasesFromClipboard(clipboardText);
     setPreviewCases(parsedCases);
@@ -39,12 +51,43 @@ export const PasteCaseModal = ({ onClose, onShowToast }: Props) => {
       onShowToast("error", "解析できる案件がありませんでした");
     }
   };
-  const handleUpdatePreviewCase = (id: string, updates: Partial<Case>) => {};
-  const handleRemovePreviewCase = (id: string) => {};
+
+  // プレビューカードの内容更新
+  const handleUpdatePreviewCase = (id: string, updates: Partial<Case>) => {
+    const targetIndex = Number(id.replace("preview-", ""));
+
+    setPreviewCases((prev) =>
+      prev.map((caseItem, index) =>
+        index === targetIndex ? { ...caseItem, ...updates } : caseItem,
+      ),
+    );
+  };
+
+  // プレビューカードを削除
+  const handleRemovePreviewCase = (id: string) => {
+    const targetIndex = Number(id.replace("preview-", ""));
+
+    setPreviewCases((prev) => prev.filter((_, index) => index !== targetIndex));
+  };
+
+  // プレビューカードへの個別アクションを登録
   const previewCaseActions: CaseActions = {
     onUpdateCase: handleUpdatePreviewCase,
     onDeleteCase: handleRemovePreviewCase,
   };
+
+  // カード追加を確定
+  const handleCreateCases = () => {
+    const newCases = previewCases.map((preview, index) => ({
+      ...createEmptyCase(index),
+      ...preview,
+    }));
+
+    onAddCases(newCases);
+    onShowToast("success", `${newCases.length}件の案件を追加しました`);
+    onClose();
+  };
+
   return (
     <div
       className={clsx(
@@ -115,7 +158,22 @@ export const PasteCaseModal = ({ onClose, onShowToast }: Props) => {
               onChange={(event) => setClipboardText(event.target.value)}
             />
           ) : (
-            <div>
+            <div
+              className={clsx(
+                "overflow-y-auto",
+                "flex",
+                "flex-col",
+                "gap-4",
+                "bg-(--color-bg-input)/70",
+                "items-center",
+                "p-4",
+                "h-full",
+                "w-full",
+                "resize-none",
+                "border-default",
+                "rounded-(--radius-md)",
+              )}
+            >
               {previewCases.map((caseItem, index) => (
                 <Card
                   key={`${caseItem.itemCode}-${caseItem.orderCode}`}
@@ -128,7 +186,7 @@ export const PasteCaseModal = ({ onClose, onShowToast }: Props) => {
           )}
           <button
             className={clsx(
-              "bg-inherit",
+              "bg-(--color-bg-page)/70",
               "text-(--color-text)",
               "text-sm",
               "cursor-pointer",
@@ -143,10 +201,21 @@ export const PasteCaseModal = ({ onClose, onShowToast }: Props) => {
               "right-4",
               "border-default",
             )}
-            onClick={handlePasteFromClipboard}
+            onClick={
+              mode === "input" ? handlePasteFromClipboard : handleBackToInput
+            }
           >
-            <CopyIcon className="size-6" />
-            <span>クリップボードをペースト</span>
+            {mode === "input" ? (
+              <>
+                <CopyIcon className="size-6" />
+                <span>クリップボードをペースト</span>
+              </>
+            ) : (
+              <>
+                <ArrowIcon className="size-4 rotate-90" />
+                <span>貼り付け内容を修正</span>
+              </>
+            )}
           </button>
         </div>
         <button
@@ -164,10 +233,12 @@ export const PasteCaseModal = ({ onClose, onShowToast }: Props) => {
             "justify-center",
             "gap-4",
           )}
-          onClick={handlePreviewCases}
+          onClick={mode === "input" ? handlePreviewCases : handleCreateCases}
         >
           <AddCardIcon className="size-8" />
-          <span>プレビューを確認する</span>
+          <span>
+            {mode === "input" ? "プレビューを確認する" : "案件を追加する"}
+          </span>
         </button>
       </section>
     </div>

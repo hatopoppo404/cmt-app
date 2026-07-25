@@ -58,7 +58,7 @@ export const Card = ({ caseItem, caseActions, mode = "normal" }: Props) => {
         "grid",
         "grid-rows-[auto_auto_auto]",
         "rounded-lg",
-        mode === "preview" ? "bg-(--color-bg-preview)" : "bg-(--color-bg-card)",
+        "bg-(--color-bg-card)",
         "shadow-md",
         "transition-shadow",
         "hover:shadow-lg",
@@ -101,42 +101,42 @@ export const Card = ({ caseItem, caseActions, mode = "normal" }: Props) => {
             note={caseItem.note}
             onUpdate={caseActions.onUpdateCase}
           />
-          {mode === "normal" && (
-            <div
-              className={clsx(
-                "flex",
-                "flex-row",
-                "gap-2",
-                "justify-end",
-                "py-2",
-              )}
+          <div
+            className={clsx("flex", "flex-row", "gap-2", "justify-end", "py-2")}
+          >
+            {mode === "normal" && (
+              <>
+                <button
+                  type="button"
+                  onClick={() => caseActions?.onDuplicateCase?.(caseItem.id)}
+                  className={clsx(actionButtonClass, "hover:text-(--blue-500)")}
+                >
+                  <CopyIcon className="size-[20px]" />
+                  <span className={clsx(actionTextClass)}>Content Copy</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => caseActions?.onArchiveCase?.(caseItem.id)}
+                  className={clsx(
+                    actionButtonClass,
+                    "hover:text-(--yellow-500)",
+                  )}
+                >
+                  <ArchiveIcon className="size-[20px]" />
+                  <span className={clsx(actionTextClass)}>Archive</span>
+                </button>
+              </>
+            )}
+            <button
+              type="button"
+              onClick={() => caseActions?.onDeleteCase?.(caseItem.id)}
+              className={clsx(actionButtonClass, "hover:text-(--red-500)")}
             >
-              <button
-                type="button"
-                onClick={() => caseActions?.onDuplicateCase?.(caseItem.id)}
-                className={clsx(actionButtonClass, "hover:text-(--blue-500)")}
-              >
-                <CopyIcon className="size-[20px]" />
-                <span className={clsx(actionTextClass)}>Content Copy</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => caseActions?.onArchiveCase?.(caseItem.id)}
-                className={clsx(actionButtonClass, "hover:text-(--yellow-500)")}
-              >
-                <ArchiveIcon className="size-[20px]" />
-                <span className={clsx(actionTextClass)}>Archive</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => caseActions?.onDeleteCase?.(caseItem.id)}
-                className={clsx(actionButtonClass, "hover:text-(--red-500)")}
-              >
-                <DeleteIcon className="size-[20px]" />
-                <span className={clsx(actionTextClass)}>Delete</span>
-              </button>
-            </div>
-          )}
+              <DeleteIcon className="size-[20px]" />
+              <span className={clsx(actionTextClass)}>Delete</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
