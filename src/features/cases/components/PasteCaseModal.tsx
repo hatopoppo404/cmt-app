@@ -16,15 +16,16 @@ type Props = {
   onClose: () => void;
   onShowToast: (type: keyof typeof toastConfig, message: string) => void;
 };
-const [mode, setMode] = useState<"input" | "preview">("input");
-const handleBackToInput = () => {
-  setMode("input");
-};
+
 export const PasteCaseModal = ({ onClose, onShowToast }: Props) => {
   const [clipboardText, setClipboardText] = useState("");
   const handlePasteFromClipboard = async () => {
     const text = await navigator.clipboard.readText();
     setClipboardText(text);
+  };
+  const [mode, setMode] = useState<"input" | "preview">("input");
+  const handleBackToInput = () => {
+    setMode("input");
   };
 
   const [previewCases, setPreviewCases] = useState<ParsedCasePreview[]>([]);
