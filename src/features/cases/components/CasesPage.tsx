@@ -228,12 +228,36 @@ export const CasesPage = () => {
         showToast("error", "データの保存に失敗しました");
       }
     };
-
     window.addEventListener("keydown", handleKeyDown);
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [cases]);
+
+  useEffect(() => {
+    const handleKeyDown = async (event: KeyboardEvent) => {
+      const isUndoShortcut =
+        (event.ctrlKey || event.metaKey) &&
+        !event.shiftKey &&
+        event.key.toLowerCase() === "z";
+      if (!isUndoShortcut || event.repeat || history.length === 0) return;
+      const target = event.target;
+
+      const isEditing =
+        target instanceof HTMLInputElement ||
+        target instanceof HTMLTextAreaElement ||
+        (target instanceof HTMLElement && target.isContentEditable);
+      if (isEditing) return;
+
+      event.preventDefault();
+      handleUndo();
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [history]);
 
   // カード追加
   const handleAddCase = () => {
@@ -447,7 +471,9 @@ export const CasesPage = () => {
       <CasesMain
         cases={sortedCases}
         onAddCase={handleAddCase}
-        onCasesChange={setCases}
+        onCasesChange={(nextCases) => {
+          updateCasesWithHistory(() => nextCases);
+        }}
         caseActions={caseActions}
         onCreatorOpen={() => {
           setShowPasteModal(true);
