@@ -36,6 +36,31 @@ import {
 import { PasteCaseModal } from "./PasteCaseModal";
 
 export const CasesPage = () => {
+  // undo用
+  const HISTORY_LIMIT = 50;
+  const [history, setHistory] = useState<Case[][]>([]);
+
+  const updateCasesWithHistory = (updater: (prevCases: Case[]) => Case[]) => {
+    setCases((prevCases) => {
+      const nextCases = updater(prevCases);
+      setHistory((prevHistory) =>
+        [...prevHistory, prevCases].slice(-HISTORY_LIMIT),
+      );
+      return nextCases;
+    });
+  };
+
+  const handleUndo = () => {
+    setHistory((prevHistory) => {
+      const previousCases = prevHistory.at(-1);
+
+      if (!previousCases) return prevHistory;
+
+      setCases(previousCases);
+
+      return prevHistory.slice(0, -1);
+    });
+  };
   // トースト表示
   const [toasts, setToasts] = useState<ToastItem[]>([]);
   const toastTimerRef = useRef<Map<string, ToastTimerIds>>(new Map());
@@ -212,7 +237,7 @@ export const CasesPage = () => {
 
   // カード追加
   const handleAddCase = () => {
-    setCases((prev) => {
+    updateCasesWithHistory((prev) => {
       const newCase = createEmptyCase(0);
       const reorderdCases = [newCase, ...prev].map((caseItem, index) => {
         return {
@@ -225,7 +250,7 @@ export const CasesPage = () => {
     });
   };
   const handleAddCases = (newCases: Case[]) => {
-    setCases((prev) => {
+    updateCasesWithHistory((prev) => {
       return [...newCases, ...prev].map((caseItem, index) => ({
         ...caseItem,
         sortOrder: index,
@@ -235,7 +260,7 @@ export const CasesPage = () => {
 
   // カード複製
   const handleDuplicateCase = (id: string) => {
-    setCases((prev) => {
+    updateCasesWithHistory((prev) => {
       const targetIndex = prev.findIndex((caseItem) => caseItem.id === id);
       if (targetIndex === -1) return prev;
 
@@ -267,7 +292,7 @@ export const CasesPage = () => {
   // カードアーカイブ
   const handleArchiveCase = (id: string) => {
     const now = new Date().toISOString();
-    setCases((prev) => {
+    updateCasesWithHistory((prev) => {
       return prev.map((caseItem) => {
         if (caseItem.id !== id) return caseItem;
         return {
@@ -287,7 +312,7 @@ export const CasesPage = () => {
     if (!isConfirmed) return;
 
     const now = new Date().toISOString();
-    setCases((prev) => {
+    updateCasesWithHistory((prev) => {
       return prev.map((caseItem) => {
         if (caseItem.id !== id) return caseItem;
 
@@ -303,7 +328,7 @@ export const CasesPage = () => {
   // 編集
   const handleUpdatesCase = (id: string, updates: Partial<Case>) => {
     const now = new Date().toISOString();
-    setCases((prev) => {
+    updateCasesWithHistory((prev) => {
       return prev.map((caseItem) => {
         if (caseItem.id !== id) return caseItem;
         const updatedCase = {
@@ -337,7 +362,9 @@ export const CasesPage = () => {
   //デモリセット
   const [isResettingDemo, setIsResettingDemo] = useState(false);
   const handleResetDemoCases = async () => {
-    const isConfirmed = window.confirm("デモデータを復元しますか？");
+    const isConfirmed = window.confirm(
+      "この操作は取り消しができません。デモデータを復元しますか？",
+    );
     if (!isConfirmed) return;
 
     try {
