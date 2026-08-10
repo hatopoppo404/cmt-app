@@ -9,11 +9,9 @@
     "dev:electron": "wait-on http://localhost:3000 && NODE_OPTIONS=\"--import tsx\" electron ./electron/main.ts",
     "electron:dev": "concurrently \"npm:dev:web\" \"npm:dev:electron\"",
     "build": "next build",
-    "start": "electron-forge start",
+    "start": "next start",
     "lint": "eslint",
-    "postinstall": "prisma generate",
-    "package": "electron-forge package",
-    "make": "electron-forge make"
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
@@ -49,7 +47,6 @@
     "tailwindcss": "^4",
     "tsx": "^4.23.12",
     "typescript": "^5",
-    "wait-on": "^9.1.0",
-    "electron-prebuilt-compile": "43.3.0"
+    "wait-on": "^9.1.0"
   }
 }
