@@ -5,6 +5,9 @@
   "main": "electron/main.ts",
   "scripts": {
     "dev": "next dev",
+    "dev:web": "next dev",
+    "dev:electron": "wait-on http://localhost:3000 && NODE_OPTIONS=\"--import tsx\" electron ./electron/main.ts",
+    "electron:dev": "concurrently \"npm:dev:web\" \"npm:dev:electron\"",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
