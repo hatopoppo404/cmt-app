@@ -34,6 +34,7 @@ import {
   Toast,
 } from "@/components/ui/Toast";
 import { PasteCaseModal } from "./PasteCaseModal";
+import { Button } from "@/components/ui/Button/Button";
 
 export const CasesPage = () => {
   // undo用
@@ -477,6 +478,14 @@ export const CasesPage = () => {
         summaryFilter={summaryFilter}
         onSummaryFilterChange={handleSummaryFilterChange}
       />
+      <button
+        onClick={async () => {
+          const filePath = await window.electronAPI.openFile();
+          console.log("Selected file path:", filePath);
+        }}
+      >
+        ファイルを開く
+      </button>
       <CasesMain
         cases={sortedCases}
         onAddCase={handleAddCase}
