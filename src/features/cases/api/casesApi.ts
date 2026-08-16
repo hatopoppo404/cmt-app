@@ -1,71 +1,48 @@
-import { mockCases } from "@/features/cases/data/mockCases";
+import {
+  getLocalStorageCases,
+  saveLocalStorageCases,
+  resetLocalStorageCases,
+} from "./casesLocalStorage";
+import { getWebCases, saveWebCases, resetWebCases } from "./casesWebApi";
+import {
+  getElectronCases,
+  saveElectronCases,
+  resetElectronCases,
+} from "./casesElectronApi";
 import type { Case } from "@/types/case";
 
-const APP_MODE = process.env.NEXT_PUBLIC_APP_MODE;
-const DEMO_STORAGE_KEY = "cmt-app-demo-cases";
+type AppMode = "localStorage" | "web" | "electron";
+const APP_MODE = process.env.NEXT_PUBLIC_APP_MODE as AppMode;
 
-const isDemoMode = APP_MODE === "demo";
-
-const getDemoCases = (): Case[] => {
-  if (typeof window === "undefined") return mockCases;
-
-  const savedCases = window.localStorage.getItem(DEMO_STORAGE_KEY);
-
-  if (!savedCases) {
-    window.localStorage.setItem(DEMO_STORAGE_KEY, JSON.stringify(mockCases));
-    return mockCases;
+export const getCases = async (): Promise<Case[]> => {
+  switch (APP_MODE) {
+    case "localStorage":
+      return getLocalStorageCases();
+    case "web":
+      return getWebCases();
+    case "electron":
+      return getElectronCases();
   }
-
-  return JSON.parse(savedCases) as Case[];
-};
-
-const saveDemoCases = (cases: Case[]): void => {
-  if (typeof window === "undefined") return;
-
-  window.localStorage.setItem(DEMO_STORAGE_KEY, JSON.stringify(cases));
-};
-
-export const getCases = async (): Promise<Case[] | null> => {
-  if (isDemoMode) return getDemoCases();
-
-  const response = await fetch("/api/cases");
-
-  if (!response.ok) {
-    throw new Error("案件データの取得に失敗しました");
-  }
-
-  return response.json();
 };
 
 export const saveCasesApi = async (cases: Case[]): Promise<void> => {
-  if (isDemoMode) {
-    saveDemoCases(cases);
-    return;
-  }
-
-  const response = await fetch("/api/cases", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(cases),
-  });
-  if (!response.ok) {
-    throw new Error("案件データの保存に失敗しました");
+  switch (APP_MODE) {
+    case "localStorage":
+      return saveLocalStorageCases(cases);
+    case "web":
+      return saveWebCases(cases);
+    case "electron":
+      return saveElectronCases(cases);
   }
 };
 
 export const resetDemoCasesApi = async (): Promise<void> => {
-  if (isDemoMode) {
-    saveDemoCases(mockCases);
-    return;
-  }
-
-  const response = await fetch("/api/cases/demo/reset", {
-    method: "POST",
-  });
-
-  if (!response.ok) {
-    throw new Error("デモデータのリセットに失敗しました");
+  switch (APP_MODE) {
+    case "localStorage":
+      return resetLocalStorageCases();
+    case "web":
+      return resetWebCases();
+    case "electron":
+      return resetElectronCases();
   }
 };
