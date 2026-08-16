@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "module": "nodenext",
+    "outDir": "./dist/electron",
+    "rootDir": "./electron",
+    "target": "es2022"
+  },
+  "include": ["electron/**/*.ts"]
+}
