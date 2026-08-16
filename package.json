@@ -9,6 +9,7 @@
     "dev:electron": "wait-on http://localhost:3000 && NODE_OPTIONS=\"--import tsx\" electron ./electron/main.ts",
     "electron:dev": "concurrently \"npm:dev:web\" \"npm:dev:electron\"",
     "build": "next build",
+    "build:electron": "tsc -p tsconfig.electron.json",
     "start": "electron-forge start",
     "lint": "eslint",
     "postinstall": "prisma generate",

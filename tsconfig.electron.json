@@ -3,6 +3,7 @@
   "compilerOptions": {
     "noEmit": false,
     "module": "nodenext",
+    "moduleResolution": "nodenext",
     "outDir": "./dist/electron",
     "rootDir": "./electron",
     "target": "es2022"
