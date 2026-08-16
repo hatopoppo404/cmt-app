@@ -1,4 +1,5 @@
 import { app, BrowserWindow, screen } from "electron";
+import path from "node:path";
 
 app.whenReady().then(() => {
   // windowサイズの設定
@@ -17,6 +18,10 @@ app.whenReady().then(() => {
     minWidth: minWidth,
     title: "cmt-app",
     titleBarStyle: "hidden",
+
+    webPreferences: {
+      preload: path.join(__dirname, "preload.js"),
+    },
   });
   mainWindow.loadURL("http://localhost:3000");
 });
