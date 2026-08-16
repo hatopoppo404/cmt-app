@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "dev:web": "next dev",
-    "dev:electron": "wait-on http://localhost:3000 && NODE_OPTIONS=\"--import tsx\" electron ./electron/main.ts",
+    "dev:electron": "npm run build:electron && wait-on http://localhost:3000 && electron ./dist/electron/main.js",
     "electron:dev": "concurrently \"npm:dev:web\" \"npm:dev:electron\"",
     "build": "next build",
     "build:electron": "tsc -p tsconfig.electron.json",

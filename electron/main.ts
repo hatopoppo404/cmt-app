@@ -1,5 +1,10 @@
-import { app, BrowserWindow, screen } from "electron";
+import { app, BrowserWindow, screen, ipcMain } from "electron";
 import path from "node:path";
+
+// IPCハンドラの設定
+ipcMain.handle("ping", () => {
+  return "pong";
+});
 
 app.whenReady().then(() => {
   // windowサイズの設定

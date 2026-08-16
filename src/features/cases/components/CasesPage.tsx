@@ -407,6 +407,15 @@ export const CasesPage = () => {
   // ペーストカード作成機能
   const [showPasteModal, setShowPasteModal] = useState(false);
 
+  // electron Preload APIの疎通確認
+  useEffect(() => {
+    const checkElectron = async () => {
+      const response = await window.electronAPI.ping();
+      console.log(response);
+    };
+
+    checkElectron();
+  }, []);
   return (
     <div
       className={clsx(
